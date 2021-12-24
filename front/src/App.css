@@ -1,0 +1,12 @@
+.app-wrapper {
+    max-width: 1500px;
+    margin: 0 auto;
+}
+
+.content-wrapper {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+
+

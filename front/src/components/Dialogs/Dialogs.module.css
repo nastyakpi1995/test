@@ -1,0 +1,23 @@
+.dialogs {
+    display: flex;
+    flex-direction: row;
+    background: burlywood;
+    width: 100%;
+}
+
+.dialogsArray {
+    display: flex;
+}
+
+.dialogsItems {
+
+}
+.dialog {
+
+}
+.messages {
+    margin-left: 70px;
+}
+.message {
+
+}

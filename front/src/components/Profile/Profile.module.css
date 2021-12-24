@@ -1,0 +1,29 @@
+/*// content*/
+.content {
+
+}
+
+
+.contentImg_wrap {
+    width: 100%;
+}
+.contentImg {
+    display: block;
+    object-fit: cover;
+    height: 100%;
+    max-width: 100%;
+}
+.posts {
+
+}
+.item {
+
+}
+.avatar {
+    width: 300px;
+
+}
+.avatar img {
+    width: 100%;
+    object-fit: cover;
+}

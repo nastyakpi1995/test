@@ -1,0 +1,14 @@
+
+/*// nav*/
+.nav {
+    background: aqua;
+    width: 10%;
+}
+.item a {
+    text-decoration: initial;
+}
+.active {
+    color: red;
+    background: antiquewhite;
+    text-decoration: underline;
+}

@@ -1,0 +1,13 @@
+.image {
+    width: 100px;
+}
+.image img {
+    object-fit: cover;
+    width: 100%;
+}
+.pagination {
+    display: flex;
+}
+.paginationItem {
+    font-size: 20px;
+}

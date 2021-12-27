@@ -1,44 +1,52 @@
-const SET_AUTH_USER_DATE = 'SET_AUTH_USER_DATE';
-const TOGGLE_AUTH = 'TOGGLE_AUTH'
+const SET_MESSAGE_DATA = 'SET_MESSAGE_DATA';
+const SET_MESSAGE_DATA_DEFAULT = 'SET_MESSAGE_DATA_DEFAULT';
 
 const initState = {
-    isAuth: true,
-    authData: {
-        userId: 0,
-        login: '',
-        email: ''
+    token: '',
+    messageData: {
+        isVisible: false,
+        message: '',
+        type: 'success'
     }
-
 }
 
 const authReducer = (state= initState, action) => {
     switch (action.type) {
-        case SET_AUTH_USER_DATE: {
+        case SET_MESSAGE_DATA: {
+            const {message, success} = action.messageData
             return {
                 ...state,
-                authData: action.authData,
-                isAuth: true
+                messageData: {
+                    isVisible: true,
+                    message,
+                    type:  success ? 'success' : 'error'
+                }
             }
         }
-        case TOGGLE_AUTH: {
+        case SET_MESSAGE_DATA_DEFAULT: {
             return {
                 ...state,
-                isAuth: !state.isAuth
+                messageData: {
+                    isVisible: false,
+                    message: '',
+                    type: action.typeData
+                }
             }
         }
+
         default: {
             return state
         }
     }
+}
 
-}
-export const setAuthUserCreator = (authData) => ({
-    type: SET_AUTH_USER_DATE,
-    authData
+export const setMessageDataCreator = (messageData) => ({
+    type: SET_MESSAGE_DATA,
+    messageData,
 })
-export const toggleAuthCreator = () => {
-    return {
-        type: TOGGLE_AUTH
-    }
-}
+export const setMessageDataDefaultCreator = (typeData) => ({
+    type: SET_MESSAGE_DATA_DEFAULT,
+    typeData
+})
+
 export default authReducer

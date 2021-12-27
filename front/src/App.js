@@ -1,24 +1,32 @@
 import './App.css';
-import Navbar from "./components/Navbar/Navbar";
-import Profile from "./components/Profile/Profile";
-import {Routes, Route, BrowserRouter} from "react-router-dom";
-import NotFoundRoute from "./components/NotFoundRoute";
-import DialogsContainer from "./components/Dialogs/DialogsContainer";
-import UsersContainer from "./components/Users/UsersContainer";
-import HeaderContainer from "./components/Header/HeaderContainer";
+import {Routes, Route, BrowserRouter, Navigate} from "react-router-dom";
 import Login from "./components/Auth/Login";
-import {Provider} from "react-redux";
+import {Provider, useSelector} from "react-redux";
 import store from "./redux/store";
-import React from "react";
+import React, {useEffect} from "react";
+import Registration from "./components/Auth/Registration";
+import MessageBox from "./components/common/MessageBox";
+import {getMessageBoxSelect, getTokenSelect} from "./redux/selects/auth";
 
 const  App = () => {
+    const messageBoxData = useSelector(state => getMessageBoxSelect(state))
+    const token = useSelector(state => getTokenSelect(state))
+    useEffect(() => {
+        if (!token) {
+            return <Navigate to={'/registration'} />
+        }
+    }, [])
+
   return (
-      <Routes>
-          <Route path="/login" element={<Login />} />
-      </Routes>
+      <div>
+          <MessageBox messageBoxData={messageBoxData} />
+          <Routes>
+              <Route path="/registration" element={<Registration />} />
+              <Route path="/login" element={<Login />} />
+          </Routes>
+      </div>
   );
 }
-
 
 const MainApp = () => {
     return (

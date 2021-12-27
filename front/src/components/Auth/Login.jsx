@@ -1,53 +1,62 @@
 import React from "react";
-import {Field, reduxForm} from "redux-form";
-import {Input} from "../common/controlsForm/TextArea";
-import {required} from "../../utils/validators";
-import {setAuthUserCreator} from "../../redux/authReducer";
-import {connect} from "react-redux";
-import {Navigate} from "react-router-dom";
-import {getIsAuthSelect} from "../../redux/selects/auth";
+import {Button, Form, Input} from "antd";
+import {loginAxiosRequest} from "../../api/usersApi";
+import {NavLink} from "react-router-dom";
 
-let Login = ({setAuthUser, isAuth}) => {
-    const onSubmit = (values) => {
-        setAuthUser(values)
-    }
-    if (isAuth) {
-        return <Navigate to={'/profile/1'} />
-    }
+let Login = () => {
+    const onFinish = (values) => {
+        loginAxiosRequest(values)
+        console.log('Success:', values);
+    };
+
+    const onFinishFailed = (errorInfo) => {
+        console.log('Failed:', errorInfo);
+    };
+
+
     return (
-        <div>
-            <div>
-                Login
+        <div style={{paddingTop: 100}}>
+            <div style={{textAlign: 'center', marginBottom:15}}>
+                <div style={{fontSize: 20, marginBottom:15}}>Login</div>
+                <NavLink style={{ fontSize: 20}} to='/registration'>You don't have account? Registration</NavLink>
             </div>
-            <LoginReduxForm onSubmit={onSubmit} />
+
+            <Form
+            name="basic"
+            labelCol={{ span: 8 }}
+            wrapperCol={{ span: 4 }}
+            initialValues={{ remember: true }}
+            onFinish={onFinish}
+            onFinishFailed={onFinishFailed}
+            autoComplete="off"
+            style={{paddingTop: 100}}
+        >
+            <Form.Item
+                label="email"
+                name="email"
+                rules={[{ required: true, message: 'Please input your username!' }]}
+            >
+                <Input />
+            </Form.Item>
+
+            <Form.Item
+                label="Password"
+                name="password"
+                rules={[{ required: true, message: 'Please input your password!' }]}
+            >
+                <Input.Password />
+            </Form.Item>
+
+            <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
+                <Button type="primary" htmlType="submit">
+                    Submit
+                </Button>
+            </Form.Item>
+        </Form>
         </div>
     )
 }
 
 
-let LoginForm = (props) => {
-    return (
-        <form onSubmit={props.handleSubmit}>
-            <div>
-                <Field name="loginField" component={Input} validate={[required]} type={"text"} placeholder={'login'} />
-            </div>
-            <div>
-                <Field name="password" type="text" component={Input} validate={[required]} placeholder={'password'} />
-            </div>
-            <div>
-                <Field name="rememberMe" type="checkbox" validate={[required]} component={Input} />
-            </div>
-            <button>submit</button>
-        </form>
-    )
-}
 
-const LoginReduxForm = reduxForm({
-    form: 'login'
-})(LoginForm)
-
-const mapStateToProps = (state) => ({
-    isAuth: getIsAuthSelect(state)
-})
-
-export default connect(mapStateToProps, {setAuthUser: setAuthUserCreator})(Login)
+export default Login

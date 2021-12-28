@@ -2,7 +2,6 @@ const SET_MESSAGE_DATA = 'SET_MESSAGE_DATA';
 const SET_MESSAGE_DATA_DEFAULT = 'SET_MESSAGE_DATA_DEFAULT';
 
 const initState = {
-    token: '',
     messageData: {
         isVisible: false,
         message: '',

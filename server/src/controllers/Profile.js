@@ -1,12 +1,11 @@
 const db = require('../config/db');
 
 class Profile {
-    async getProfiles(profile, res) {
+    async getProfiles(res) {
         const results = await db.query('SELECT * from profiles').catch(console.log)
-
-        return results.rows
+        return res.status(200).send({data: results.rows})
     }
-    async createProfile(profile, res) {
+    async createProfile(profile, res, userId) {
         const dataProfileCurrentName = await db.query(`select name FROM profiles where name=$1`, [profile.name])
         if(dataProfileCurrentName.rows.length > 0) {
             return res.status(400).send({
@@ -14,8 +13,7 @@ class Profile {
                 message: 'User exist'
             })
         }
-
-        await db.query(`insert into profiles (name, city, gender, birthdate) values ($1, $2, $3, $4)`, [profile.name, profile.city, profile.gender, profile.birthdate])
+        await db.query(`insert into profiles (name, city, gender, birthdate, user_id) values ($1, $2, $3, $4, $5)`, [profile.name, profile.city, profile.gender, profile.birthdate, userId])
 
         return res.status(200).send({
             success: true,

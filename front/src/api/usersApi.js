@@ -1,6 +1,16 @@
 import axios from "axios";
 import {TOKEN} from "../utils/constants";
-const baseUrl = 'http://localhost:4002/api'
+const baseUrl = 'http://localhost:4002'
+
+const getHeaders = () => {
+    return {
+        "auth-token": localStorage.getItem(TOKEN),
+        "Content-Type": "application/json",
+        Accept: "application/json",
+    }
+}
+
+
 
 export const registerAxiosRequest = (values) => {
     return axios.post(`${baseUrl}/user/register`, {...values}).then(({data}) => {
@@ -9,7 +19,7 @@ export const registerAxiosRequest = (values) => {
 }
 
 export const loginAxiosRequest = (body) => {
-   return axios.post(`${baseUrl}/user/login`, {...body}).then(data => {
+   return axios.post(`${baseUrl}/api/user/login`, {...body}).then(data => {
        if (data.data.token) {
            localStorage.setItem(TOKEN, data.data.token)
        }
@@ -18,7 +28,13 @@ export const loginAxiosRequest = (body) => {
 }
 
 export const createProfilesAxiosRequest = (body) => {
-   return axios.post(`${baseUrl}/profiles`, {...body}).then(data => {
+   return axios.post(`${baseUrl}/private/profile/create`, {...body}, {headers: getHeaders()}).then(data => {
        return data.data
    }).catch(({response}) =>  response.data)
+}
+export const getProfilesAxiosRequest = () => {
+    return axios.get(`${baseUrl}/private/profiles`,  {headers: getHeaders()}).then(data => {
+        debugger
+        return data.data
+    }).catch((error) => console.log(error))
 }

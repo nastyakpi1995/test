@@ -1,11 +1,8 @@
-import React from "react";
-
-import React from "react";
-import UserMainWrapper from "../common/UserMainWrapper";
+import React, {useEffect} from "react";
 import {Card} from "antd";
+import {TOKEN} from "../../utils/constants";
 
-const Profiles = () => {
-
+const Profile = () => {
     return (
             <Card style={{ width: 300 }}>
                 <p>Card content</p>
@@ -15,4 +12,4 @@ const Profiles = () => {
     )
 }
 
-export default Profiles
+export default Profile

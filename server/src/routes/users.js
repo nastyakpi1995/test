@@ -8,21 +8,21 @@ router.get(baseUrl, async (req, res) => {
     let users = await new User().getUsers()
 })
 
-router.post(`${baseUrl}/user/register`, async (req, res) => {
+router.post(`/user/register`, async (req, res) => {
     let body = req.body
     return new User().createUser(body, res)
 })
-router.post(`${baseUrl}/user/login`, async (req, res) => {
+router.post(`/user/login`, async (req, res) => {
     let body = req.body
 
     return new User().loginUser(body, res)
 })
 
-router.put(`${baseUrl}/users/:userId`, async (req, res) => {
+router.put(`/users/:userId`, async (req, res) => {
 
 })
 
-router.delete(`${baseUrl}/users/:userId`, async (req, res) => {
+router.delete(`/users/:userId`, async (req, res) => {
 
 })
 

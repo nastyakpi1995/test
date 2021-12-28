@@ -23,6 +23,7 @@ const EditModalProfile = () => {
         setConfirmLoading(true)
         createProfilesAxiosRequest(prepareValues).then(data => {
             dispatch(setMessageDataCreator(data))
+
             if (data.success) {
                 dispatch(toggleEditModalCreator())
             }

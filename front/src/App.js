@@ -6,14 +6,15 @@ import store from "./redux/store";
 import React, {useEffect} from "react";
 import Registration from "./components/Auth/Registration";
 import MessageBox from "./components/common/MessageBox";
-import {getMessageBoxSelect, getTokenSelect} from "./redux/selects/auth";
+import {getMessageBoxSelect} from "./redux/selects/auth";
 import Profiles from "./components/Profiles";
 import EditModalProfile from "./components/common/EditModalProfile";
+import {TOKEN} from "./utils/constants";
 
 const  App = () => {
     const messageBoxData = useSelector(state => getMessageBoxSelect(state))
-    const token = useSelector(state => getTokenSelect(state))
     useEffect(() => {
+        const token = localStorage.getItem(TOKEN)
         if (!token) {
             return <Navigate to={'/registration'} />
         }

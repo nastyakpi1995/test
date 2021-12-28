@@ -5,6 +5,7 @@ import {getIsShowModal} from "../../redux/selects/showModal";
 import {toggleEditModalCreator} from "../../redux/reducers/modalReducer";
 import {createProfilesAxiosRequest} from "../../api/usersApi";
 import {setMessageDataCreator} from "../../redux/reducers/authReducer";
+import {createdProfileLoaderCreator} from "../../redux/reducers/profileReducer";
 
 const EditModalProfile = () => {
     const [confirmLoading, setConfirmLoading] = useState(false)
@@ -25,6 +26,7 @@ const EditModalProfile = () => {
             dispatch(setMessageDataCreator(data))
 
             if (data.success) {
+                dispatch(createdProfileLoaderCreator(true))
                 dispatch(toggleEditModalCreator())
             }
             setConfirmLoading(false)

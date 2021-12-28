@@ -10,8 +10,6 @@ const getHeaders = () => {
     }
 }
 
-
-
 export const registerAxiosRequest = (values) => {
     return axios.post(`${baseUrl}/user/register`, {...values}).then(({data}) => {
         return data
@@ -34,7 +32,7 @@ export const createProfilesAxiosRequest = (body) => {
 }
 export const getProfilesAxiosRequest = () => {
     return axios.get(`${baseUrl}/private/profiles`,  {headers: getHeaders()}).then(data => {
-        debugger
+
         return data.data
     }).catch((error) => console.log(error))
 }

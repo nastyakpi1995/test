@@ -1,12 +1,14 @@
 import React, {useEffect} from "react";
 import {Card} from "antd";
-import {TOKEN} from "../../utils/constants";
 
-const Profile = () => {
+const Profile = (props) => {
+    const { name, gender } = props.profile;
+
+    debugger
     return (
             <Card style={{ width: 300 }}>
-                <p>Card content</p>
-                <p>Card content</p>
+                <p>{name}</p>
+                <p>{gender}</p>
                 <p>Card content</p>
             </Card>
     )

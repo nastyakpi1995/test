@@ -3,14 +3,12 @@ import {Card} from "antd";
 import {
     PlusCircleOutlined
 } from '@ant-design/icons';
-import {toggleEditModalCreator} from "../../redux/reducers/modalReducer";
-import {useDispatch} from "react-redux";
 
-const NewProfile = () => {
-    const dispatch = useDispatch()
+const NewProfile = ({setIsVisible}) => {
     const showModal = () => {
-        dispatch(toggleEditModalCreator())
+        setIsVisible(true)
     }
+
     return (
         <Card style={{
             width: 300,

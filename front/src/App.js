@@ -8,7 +8,6 @@ import Registration from "./components/Auth/Registration";
 import MessageBox from "./components/common/MessageBox";
 import {getMessageBoxSelect} from "./redux/selects/auth";
 import Profiles from "./components/Profiles";
-import EditModalProfile from "./components/common/EditModalProfile";
 import {TOKEN} from "./utils/constants";
 
 const  App = () => {
@@ -23,7 +22,6 @@ const  App = () => {
   return (
       <div>
           <MessageBox messageBoxData={messageBoxData} />
-          <EditModalProfile />
           <Routes>
               <Route path="/registration" element={<Registration />} />
               <Route path="/login" element={<Login />} />

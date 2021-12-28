@@ -1,36 +1,47 @@
-import React, {useEffect} from "react";
+import React, {useEffect, useState} from "react";
 import UserMainWrapper from "../common/UserMainWrapper";
 import NewProfile from "./NewProfile";
 import Profile from "./Profile";
 import {getProfilesAxiosRequest} from "../../api/usersApi";
-import {createdProfileLoaderCreator, getProfilesCreator} from "../../redux/reducers/profileReducer";
+import {getProfilesCreator} from "../../redux/reducers/profileReducer";
 import {useDispatch, useSelector} from "react-redux";
-import {getProfileLoading, getProfiles} from "../../redux/selects/profile";
+import {getProfiles} from "../../redux/selects/profile";
+import EditModalProfile from "../common/EditModalProfile";
 
 const Profiles = () => {
     const dispatch = useDispatch();
-    const isLoader = useSelector(state => getProfileLoading(state))
+    const [isLoader, setIsLoader] = useState(false)
+    const [isVisible, setIsVisible] = useState(false)
+
+    const [activeProfile, setActiveProfile] = useState({
+        name: '',
+        gender: 'male',
+        city: '',
+        birthdate: ''
+    })
+
     const profiles = useSelector(state => getProfiles(state))
 
     useEffect(() => {
         if (profiles.length <= 0 || isLoader) {
             getProfilesAxiosRequest().then(({data}) => {
-
                 dispatch(getProfilesCreator(data))
-                dispatch(createdProfileLoaderCreator(false))
+               setIsLoader(false)
             })
         }
-
     }, [isLoader])
+
     return (
         <UserMainWrapper>
-            <div>
+            <EditModalProfile activeProfile={activeProfile}
+                              setIsLoader={setIsLoader}
+                              isVisible={isVisible}
+                              setIsVisible={setIsVisible}/>
+            <div style={{display: 'flex', flexWrap: 'wrap'}}>
                 {profiles.length >= 0 ? profiles.map((profile, idx) => (
-                    <div>
-                        <Profile key={idx} profile={profile} />
-                    </div>
+                    <Profile key={idx} profile={profile} setActiveProfile={setActiveProfile} setIsVisible={setIsVisible} />
                 )) : null}
-                <NewProfile />
+                <NewProfile setIsVisible={setIsVisible} />
             </div>
         </UserMainWrapper>
     )

@@ -1,15 +1,26 @@
-import React, {useEffect} from "react";
+import React from "react";
 import {Card} from "antd";
+import {DeleteOutlined, EditOutlined} from "@ant-design/icons";
 
-const Profile = (props) => {
-    const { name, gender } = props.profile;
+const Profile = ({profile, setActiveProfile, setIsVisible}) => {
+    const { name, gender, city, birthdate } = profile;
 
-    debugger
+    const OnEditProfile = () => {
+        setIsVisible(true)
+        setActiveProfile({name, gender, city, birthdate: ''})
+    }
+
     return (
-            <Card style={{ width: 300 }}>
+            <Card
+                actions={[
+                    <EditOutlined onClick={OnEditProfile} key="edit" />,
+                    <DeleteOutlined  key="delete" />,
+                ]}
+                hoverable style={{ width: 300, margin: 60, justifyContent: 'center', textAlign: 'center' }}>
                 <p>{name}</p>
                 <p>{gender}</p>
-                <p>Card content</p>
+                <p>{city}</p>
+
             </Card>
     )
 }

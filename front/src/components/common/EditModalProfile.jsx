@@ -1,20 +1,22 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {DatePicker, Form, Input, Modal, Radio} from "antd";
-import {useDispatch, useSelector} from "react-redux";
-import {getIsShowModal} from "../../redux/selects/showModal";
-import {toggleEditModalCreator} from "../../redux/reducers/modalReducer";
+import {useDispatch} from "react-redux";
 import {createProfilesAxiosRequest} from "../../api/usersApi";
 import {setMessageDataCreator} from "../../redux/reducers/authReducer";
-import {createdProfileLoaderCreator} from "../../redux/reducers/profileReducer";
 
-const EditModalProfile = () => {
+const EditModalProfile = ({id, setIsLoader, activeProfile, isVisible, setIsVisible}) => {
     const [confirmLoading, setConfirmLoading] = useState(false)
-    const isVisible = useSelector(state => getIsShowModal(state))
-    const dispatch = useDispatch()
+
     const [form] = Form.useForm()
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        form.setFieldsValue({name: activeProfile.name, gender: activeProfile.gender, city: activeProfile.city, birthdate: activeProfile.birthdate})
+    }, [activeProfile])
+
     const handleCancel = () => {
-        form.resetFields()
-        dispatch(toggleEditModalCreator())
+        form.setFieldsValue({name: '', gender: 'male', city: '', birthdate: ''})
+        setIsVisible(false)
     }
     const onFinish = (values) => {
         const prepareValues = {
@@ -22,30 +24,42 @@ const EditModalProfile = () => {
             birthdate: values.birthdate._d
         }
         setConfirmLoading(true)
-        createProfilesAxiosRequest(prepareValues).then(data => {
-            dispatch(setMessageDataCreator(data))
+        if (!id) {
+            createProfilesAxiosRequest(prepareValues).then(data => {
+                dispatch(setMessageDataCreator(data))
 
-            if (data.success) {
-                dispatch(createdProfileLoaderCreator(true))
-                dispatch(toggleEditModalCreator())
-            }
-            setConfirmLoading(false)
-        })
+                if (data.success) {
+                    setIsLoader(true)
+                    setIsVisible(false)
+                    form.setFieldsValue({name: '', gender: 'male', city: '', birthdate: ''})
+                }
+                setConfirmLoading(false)
+            })
+        }
+    }
+
+    const onOk = () => {
+        form.submit()
     }
 
     return (
-        <Modal confirmLoading={confirmLoading} visible={isVisible} onOk={form.submit} onCancel={handleCancel}>
+        <Modal confirmLoading={confirmLoading} visible={isVisible} onOk={onOk} onCancel={handleCancel}>
             <Form labelCol={{ span: 8 }}
                   form={form}
                   wrapperCol={{ span: 16 }}
-                  initialValues={{gender: 'female'}}
+                  initialValues={activeProfile}
                   onFinish={onFinish}>
                 <Form.Item
                     label="Name"
                     name="name"
                     rules={[{ required: true, message: 'Please input your name!' }]}
                 >
-                    <Input />
+                    <Input value={'54dfdf'} onChange={(e) => {
+                        const value = e.target.value;
+                        form.setFieldsValue({
+                            'name': value
+                        })
+                    }} />
                 </Form.Item>
 
                 <Form.Item label='gender' name={'gender'}>
@@ -57,17 +71,17 @@ const EditModalProfile = () => {
                 <Form.Item
                     label="City"
                     name="city"
-                    rules={[{ required: true, message: 'Please input your name!' }]}
+                    rules={[{ required: true, message: 'Please input your city!' }]}
                 >
                     <Input />
                 </Form.Item>
-                <Form.Item
-                    label="Birthday"
-                    name="birthdate"
-                    rules={[{ required: false, message: 'Please input your name!' }]}
-                >
-                    <DatePicker />
-                </Form.Item>
+                {/*<Form.Item*/}
+                {/*    label="Birthday"*/}
+                {/*    name="birthdate"*/}
+                {/*    rules={[{ required: true, message: 'Please input your birthdate!' }]}*/}
+                {/*>*/}
+                {/*    <DatePicker />*/}
+                {/*</Form.Item>*/}
             </Form>
         </Modal>
     )

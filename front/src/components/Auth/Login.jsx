@@ -1,16 +1,21 @@
 import React from "react";
 import {Button, Form, Input} from "antd";
 import {loginAxiosRequest} from "../../api/usersApi";
-import {NavLink} from "react-router-dom";
+import {NavLink, useNavigate} from "react-router-dom";
+import {useDispatch} from "react-redux";
+import {setMessageDataCreator} from "../../redux/reducers/authReducer";
 
 let Login = () => {
-    const onFinish = (values) => {
-        loginAxiosRequest(values)
-        console.log('Success:', values);
-    };
+    const dispatch = useDispatch()
+    const navigate = useNavigate()
 
-    const onFinishFailed = (errorInfo) => {
-        console.log('Failed:', errorInfo);
+    const onFinish = (values) => {
+        loginAxiosRequest(values).then(data => {
+            dispatch(setMessageDataCreator(data))
+            if (data.success) {
+                navigate('/profiles')
+            }
+        })
     };
 
 
@@ -25,9 +30,7 @@ let Login = () => {
             name="basic"
             labelCol={{ span: 8 }}
             wrapperCol={{ span: 4 }}
-            initialValues={{ remember: true }}
             onFinish={onFinish}
-            onFinishFailed={onFinishFailed}
             autoComplete="off"
             style={{paddingTop: 100}}
         >

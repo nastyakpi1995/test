@@ -1,0 +1,1 @@
+export const getIsShowModal = (state) => state.editModal.isShowModal;

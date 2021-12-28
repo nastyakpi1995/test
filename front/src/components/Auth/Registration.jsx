@@ -1,34 +1,22 @@
-import React, {useState} from "react";
+import React from "react";
 import {Button, Form, Checkbox, Input} from "antd";
 import {registerAxiosRequest} from "../../api/usersApi";
 import {NavLink} from "react-router-dom";
 import {useNavigate} from 'react-router-dom'
 import {useDispatch} from "react-redux";
-import {setMessageDataCreator} from "../../redux/authReducer";
+import {setMessageDataCreator} from "../../redux/reducers/authReducer";
 
 let Registration = () => {
     const dispatch = useDispatch()
     const navigate = useNavigate()
-    const onFinish = async (values) => {
-        const prepareValues = {
-            ...values,
-            isadmin: values.isadmin || false
-        }
 
-        registerAxiosRequest(prepareValues).then(({data}) => {
+    const onFinish = async (values) => {
+        registerAxiosRequest(values).then((data) => {
             dispatch(setMessageDataCreator(data))
             if (data.success) {
                 navigate('/login')
             }
-        }).catch(({response}) => {
-            if (response.data) {
-                dispatch(setMessageDataCreator(response.data))
-            }
         })
-    };
-
-    const onFinishFailed = (errorInfo) => {
-        console.log('Failed:', errorInfo);
     };
 
     return (
@@ -41,9 +29,8 @@ let Registration = () => {
             name="registration"
             labelCol={{ span: 8 }}
             wrapperCol={{ span: 4 }}
-            initialValues={{ remember: true }}
+            initialValues={{ isadmin: false }}
             onFinish={onFinish}
-            onFinishFailed={onFinishFailed}
             autoComplete="off"
         >
             <Form.Item label='userName' name={'username'}  rules={[{ required: true, message: 'Please input your username!' }]}>

@@ -31,13 +31,15 @@ class User {
 
    async loginUser(user, res) {
         const data = await db.query('select email, id, password FROM users where email=$1', [user.email])
-     const validPassword = await bcrypt.compare(user.password, data.rows[0].password)
 
-       if (!validPassword) return res.status(400).send({
-           success: false,
-           message: "Incorrect password"
-       });
        if (data.rows.length > 0) {
+           const validPassword = await bcrypt.compare(user.password, data.rows[0].password)
+
+           if (!validPassword) return res.status(400).send({
+               success: false,
+               message: "Incorrect password"
+           });
+
            const token = jwt.sign({id: data.rows[0].id}, process.env.TOKEN_SECRET)
            return res.status(200).send({
                success: true,
@@ -50,7 +52,6 @@ class User {
                message: 'User not exist'
            })
        }
-        console.log(user, 'user')
    }
 
 }

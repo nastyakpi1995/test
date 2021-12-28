@@ -7,6 +7,8 @@ import React, {useEffect} from "react";
 import Registration from "./components/Auth/Registration";
 import MessageBox from "./components/common/MessageBox";
 import {getMessageBoxSelect, getTokenSelect} from "./redux/selects/auth";
+import Profiles from "./components/Profiles";
+import EditModalProfile from "./components/common/EditModalProfile";
 
 const  App = () => {
     const messageBoxData = useSelector(state => getMessageBoxSelect(state))
@@ -20,9 +22,11 @@ const  App = () => {
   return (
       <div>
           <MessageBox messageBoxData={messageBoxData} />
+          <EditModalProfile />
           <Routes>
               <Route path="/registration" element={<Registration />} />
               <Route path="/login" element={<Login />} />
+              <Route path="/profiles" element={<Profiles />} />
           </Routes>
       </div>
   );

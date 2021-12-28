@@ -1,13 +1,11 @@
 const express = require('express');
 const router = express.Router();
 const User = require('../controllers/User');
-
-const baseUrl = '/api'
+const baseUrl = require('./constants');
 
 router.get(baseUrl, async (req, res) => {
     res.send('eeeee')
     let users = await new User().getUsers()
-    console.log('jjjjj',users)
 })
 
 router.post(`${baseUrl}/user/register`, async (req, res) => {

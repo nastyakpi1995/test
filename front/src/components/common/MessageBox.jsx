@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import {Alert} from "antd";
 import {useDispatch} from "react-redux";
-import {setMessageDataDefaultCreator} from "../../redux/authReducer";
+import {setMessageDataDefaultCreator} from "../../redux/reducers/authReducer";
 
 
 const SLIDING_TIMEOUT = 5000;

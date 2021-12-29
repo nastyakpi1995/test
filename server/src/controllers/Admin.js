@@ -1,7 +1,7 @@
 const User = require('../models/User')
 const Profile = require('../models/Profile');
 const {use} = require("express/lib/router");
-
+const db = require('../config/db')
 
 class Admin {
     async getDashboard(res) {
@@ -25,6 +25,14 @@ class Admin {
             users: users.rows,
             message: '',
             success: true
+        })
+    }
+    async updateUser(user, id, res) {
+        await db.query(`update users set username=$1, isadmin=$2 where id=$3`, [user.username,  user.isadmin, id])
+
+        res.status(200).send({
+            success: true,
+            message: 'User was update successfully'
         })
     }
 }

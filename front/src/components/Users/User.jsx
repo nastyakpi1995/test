@@ -4,12 +4,12 @@ import {DeleteOutlined, EditOutlined} from "@ant-design/icons";
 import {useDispatch} from "react-redux";
 
 const User = ({user, setActiveUser, setIsVisible}) => {
-    const { username, id } = user;
+    const { username, id, isadmin } = user;
     const dispatch = useDispatch()
 
     const OnEditProfile = () => {
         setIsVisible(true)
-        setActiveUser({username, id})
+        setActiveUser({username, id, isadmin})
     }
 
     const onDeleteProfile = () => {

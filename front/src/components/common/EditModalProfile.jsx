@@ -62,12 +62,12 @@ const EditModalProfile = ({setIsLoader, activeProfile, isVisible, setIsVisible})
                     name="name"
                     rules={[{ required: true, message: 'Please input your name!' }]}
                 >
-                    <Input value={'54dfdf'} onChange={(e) => {
-                        const value = e.target.value;
-                        form.setFieldsValue({
-                            'name': value
-                        })
-                    }} />
+                    <Input
+                        onChange={(e) => {
+                            const value = e.target.value;
+                            form.setFieldsValue({'name': value})
+                        }}
+                    />
                 </Form.Item>
 
                 <Form.Item label='gender' name={'gender'}>

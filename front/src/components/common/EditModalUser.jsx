@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import {DatePicker, Form, Input, Modal, Radio} from "antd";
+import {Checkbox, DatePicker, Form, Input, Modal, Radio} from "antd";
 import {useDispatch} from "react-redux";
 import {createProfilesAxiosRequest, editProfileAxiosRequest, editUserAxiosRequest} from "../../api/usersApi";
 import {setMessageDataCreator} from "../../redux/reducers/authReducer";
@@ -13,24 +13,25 @@ const EditModalUser = ({activeUser, isVisible, setIsVisible}) => {
         dispatch(setMessageDataCreator(data))
         if (data.success) {
             setIsVisible(false)
-            form.setFieldsValue({username: '', id: null})
+            form.setFieldsValue({username: '', id: null, isadmin: false})
         }
     }
     useEffect(() => {
-        form.setFieldsValue({username: activeUser.username})
+        form.setFieldsValue({username: activeUser.username, isadmin: activeUser.isadmin, id: activeUser.id})
     }, [activeUser])
 
     const handleCancel = () => {
-        form.setFieldsValue({name: '', id: null})
+        form.setFieldsValue({name: '', id: null, isadmin: false})
         setIsVisible(false)
     }
 
     const onFinish = (values) => {
         setConfirmLoading(true)
 
-        editUserAxiosRequest(values, values.id).then(data => {
-                onDataSuccess(data)
-            })
+        editUserAxiosRequest(values, activeUser.id).then(data => {
+            onDataSuccess(data.data)
+            setConfirmLoading(false)
+        })
     }
 
     const onOk = () => {
@@ -41,6 +42,7 @@ const EditModalUser = ({activeUser, isVisible, setIsVisible}) => {
         <Modal confirmLoading={confirmLoading} visible={isVisible} onOk={onOk} onCancel={handleCancel}>
             <Form labelCol={{ span: 8 }}
                   name={'user'}
+                  initialValues={activeUser}
                   form={form}
                   wrapperCol={{ span: 16 }}
                   onFinish={onFinish}>
@@ -55,6 +57,14 @@ const EditModalUser = ({activeUser, isVisible, setIsVisible}) => {
                             'name': value
                         })
                     }} />
+                </Form.Item>
+                <Form.Item
+                    label="Add permitions to admin"
+                    name="isadmin"
+                    valuePropName="checked"
+                    rules={[{ required: false }]}
+                >
+                    <Checkbox />
                 </Form.Item>
             </Form>
         </Modal>

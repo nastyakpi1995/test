@@ -9,7 +9,7 @@ import EditModalUser from "../common/EditModalUser";
 const Users = () => {
     const [users, setUsers] = useState(null);
     const [isVisible, setIsVisible] = useState(false)
-    const [activeUser, setActiveUser] = useState({username: '', id: null});
+    const [activeUser, setActiveUser] = useState({username: '', id: null, isadmin: false});
     const dispatch = useDispatch()
 
     useEffect(() => {

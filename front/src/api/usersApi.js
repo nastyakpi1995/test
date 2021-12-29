@@ -12,9 +12,6 @@ const getHeaders = () => {
 
 export const registerAxiosRequest = (values) => {
     return axios.post(`${baseUrl}/api/user/register`, {...values}).then(({data}) => {
-        if (data.success) {
-            localStorage.setItem(savedUser, JSON.stringify(values))
-        }
         return data
     }).catch(({response}) => response.data)
 }
@@ -22,6 +19,8 @@ export const registerAxiosRequest = (values) => {
 export const loginAxiosRequest = (body) => {
    return axios.post(`${baseUrl}/api/user/login`, {...body}).then(data => {
        if (data.data.token) {
+           localStorage.setItem(savedUser, JSON.stringify(data.data.user))
+
            localStorage.setItem(authToken, data.data.token)
        }
        return data.data

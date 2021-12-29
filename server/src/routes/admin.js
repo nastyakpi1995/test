@@ -9,7 +9,7 @@ router.get(`/dashboard`, adminVerify, async (req, res) => {
 })
 router.get(`/users`, adminVerify, async (req, res) => {
     const {id} = req.user
-    return AdminController.getUsers(res)
+    return AdminController.getUsers(res, id)
 })
 router.put(`/user/:profileId`, adminVerify, async (req, res) => {
     const body = req.body

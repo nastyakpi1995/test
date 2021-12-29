@@ -18,8 +18,8 @@ class AdminController {
             }
         })
     }
-    async getUsers(res) {
-        const users = await UserModel.getUsers()
+    async getUsers(res, adminId) {
+        const users = await UserModel.getUsersNotCurrentAdmin(adminId)
         res.status(200).send({
             users: users.rows,
             message: '',

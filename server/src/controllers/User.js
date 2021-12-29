@@ -7,7 +7,6 @@ class UserController {
     async getUsers() {
 
         let results = await UserModel.getUsers()
-        console.log('results', results, 'eeeeee')
         return results.rows
     }
 
@@ -30,7 +29,7 @@ class UserController {
    }
 
    async loginUser(user, res) {
-        const data = await db.query('select email, id, password FROM users where email=$1', [user.email])
+        const data = await db.query('select email, id, username, isadmin, password FROM users where email=$1', [user.email])
 
        if (data.rows.length > 0) {
            const validPassword = await bcrypt.compare(user.password, data.rows[0].password)
@@ -44,7 +43,8 @@ class UserController {
            return res.status(200).send({
                success: true,
                message: 'User is login success',
-               token: token
+               token: token,
+               user: data.rows[0]
            })
        } else {
            res.status(400).send({

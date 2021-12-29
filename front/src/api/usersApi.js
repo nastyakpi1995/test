@@ -51,3 +51,6 @@ export const deleteProfileAxiosRequest = (id) => {
         return data.data
     }).catch(({response}) =>  response.data)
 }
+export const adminDashboardAxiosRequest = (id) => {
+    return axios.get(`${baseUrl}/admin/dashboard`, {headers: getHeaders()})
+}

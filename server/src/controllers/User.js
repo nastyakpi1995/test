@@ -1,12 +1,12 @@
 const db = require('../config/db');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+const UserModel = require('../models/User');
 
 class User {
     async getUsers() {
-        console.log('getUsers', )
 
-        let results = await db.query(`SELECT * FROM users`).catch(console.log)
+        let results = await new UserModel().getUsers()
         console.log('results', results, 'eeeeee')
         return results.rows
     }

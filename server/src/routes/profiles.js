@@ -19,7 +19,7 @@ router.put(`/profile/edit/:profileId`, verify, async (req, res) => {
     const body = req.body
     const {id} = req.user
     let {profileId} = req.params
-    console.log('body', body)
+
     return new Profile().updateProfile(body, res, profileId)
 })
 

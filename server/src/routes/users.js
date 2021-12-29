@@ -3,9 +3,8 @@ const router = express.Router();
 const User = require('../controllers/User');
 const baseUrl = require('./constants');
 
-router.get(baseUrl, async (req, res) => {
-    res.send('eeeee')
-    let users = await new User().getUsers()
+router.get('/', async (req, res) => {
+    return  await new User().getUsers()
 })
 
 router.post(`/user/register`, async (req, res) => {

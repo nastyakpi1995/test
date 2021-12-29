@@ -1,11 +1,11 @@
 import React from "react";
 import {Card} from "antd";
 
-const Information = () => {
+const Information = ({name, counts}) => {
     return (
         <Card hoverable style={{ width: 300, height: 300, margin: 60, justifyContent: 'center', textAlign: 'center' }}>
-            <div>users:</div>
-            <div>3</div>
+            <div>{name}</div>
+            <div>{counts}</div>
         </Card>
     )
 }

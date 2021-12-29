@@ -1,10 +1,11 @@
 const db = require('../config/db');
-
+const ProfileModel = require('../models/Profile')
 class Profile {
     async getProfiles(res, userId) {
-        const results = await db.query('SELECT * from profiles where user_id=$1', [userId]).catch(console.log)
+        const results = await new ProfileModel.getProfileByUserId(userId).catch(console.log)
         return res.status(200).send({data: results.rows})
     }
+
     async createProfile(profile, res, userId) {
         const dataProfileCurrentName = await db.query(`select name FROM profiles where name=$1`, [profile.name])
         if(dataProfileCurrentName.rows.length > 0) {

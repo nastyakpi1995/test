@@ -1,10 +1,10 @@
 import axios from "axios";
-import {TOKEN} from "../utils/constants";
+import {authToken, savedUser} from "../utils/constants";
 const baseUrl = 'http://localhost:4002'
 
 const getHeaders = () => {
     return {
-        "auth-token": localStorage.getItem(TOKEN),
+        "auth-token": localStorage.getItem(authToken),
         "Content-Type": "application/json",
         Accept: "application/json",
     }
@@ -12,6 +12,9 @@ const getHeaders = () => {
 
 export const registerAxiosRequest = (values) => {
     return axios.post(`${baseUrl}/api/user/register`, {...values}).then(({data}) => {
+        if (data.success) {
+            localStorage.setItem(savedUser, JSON.stringify(values))
+        }
         return data
     }).catch(({response}) => response.data)
 }
@@ -19,7 +22,7 @@ export const registerAxiosRequest = (values) => {
 export const loginAxiosRequest = (body) => {
    return axios.post(`${baseUrl}/api/user/login`, {...body}).then(data => {
        if (data.data.token) {
-           localStorage.setItem(TOKEN, data.data.token)
+           localStorage.setItem(authToken, data.data.token)
        }
        return data.data
    }).catch(({response}) =>  response.data)

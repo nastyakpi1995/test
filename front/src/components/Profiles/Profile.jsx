@@ -12,6 +12,7 @@ const Profile = ({profile, setActiveProfile, setIsVisible, setIsLoader}) => {
         setIsVisible(true)
         setActiveProfile({name, gender, city, birthdate: '', id })
     }
+
     const onDeleteProfile = () => {
         deleteProfileAxiosRequest(id).then(data => {
             dispatch(setMessageDataCreator(data))

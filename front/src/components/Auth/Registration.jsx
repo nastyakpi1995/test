@@ -13,6 +13,7 @@ let Registration = () => {
     const onFinish = async (values) => {
         registerAxiosRequest(values).then((data) => {
             dispatch(setMessageDataCreator(data))
+
             if (data.success) {
                 navigate('/login')
             }

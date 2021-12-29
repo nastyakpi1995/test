@@ -23,13 +23,19 @@ const Profiles = () => {
     const profiles = useSelector(state => getProfiles(state))
 
     useEffect(() => {
-        if (profiles.length <= 0 || isLoader) {
+        if (isLoader) {
             getProfilesAxiosRequest().then(({data}) => {
                 dispatch(getProfilesCreator(data))
                setIsLoader(false)
             })
         }
     }, [isLoader])
+    useEffect(() => {
+        getProfilesAxiosRequest().then(({data}) => {
+            dispatch(getProfilesCreator(data))
+            setIsLoader(false)
+        })
+    }, [])
 
     return (
         <UserMainWrapper>

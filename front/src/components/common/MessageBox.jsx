@@ -4,7 +4,7 @@ import {useDispatch} from "react-redux";
 import {setMessageDataDefaultCreator} from "../../redux/reducers/authReducer";
 
 
-const SLIDING_TIMEOUT = 5000;
+const SLIDING_TIMEOUT = 8000;
 
 const MessageBox = ({messageBoxData: {type, message, isVisible}}) => {
     const [isTop, setIsTop] = useState(false)

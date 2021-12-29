@@ -9,6 +9,8 @@ import MessageBox from "./components/common/MessageBox";
 import {getMessageBoxSelect} from "./redux/selects/auth";
 import Profiles from "./components/Profiles";
 import PrivatRouter from "./components/common/PrivatRouter";
+import AdminRouter from "./components/common/AdminRouter";
+import Dashboard from "./components/Dashboard";
 
 const  App = () => {
     const messageBoxData = useSelector(state => getMessageBoxSelect(state))
@@ -20,6 +22,7 @@ const  App = () => {
               <Route path="/registration" element={<Registration />} />
               <Route path="/login" element={<Login />} />
               <Route path="/profiles" element={<PrivatRouter><Profiles /></PrivatRouter>} />
+              <Route path="/dashboard" element={<AdminRouter><Dashboard /></AdminRouter>} />
           </Routes>
       </div>
   );

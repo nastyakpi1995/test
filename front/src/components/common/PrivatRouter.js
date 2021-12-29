@@ -1,9 +1,9 @@
 import React from "react";
 import {Navigate} from "react-router-dom";
-import {TOKEN} from "../../utils/constants";
+import {authToken} from "../../utils/constants";
 
 const PrivatRouter = ({children}) => {
-    const isAuth = localStorage.getItem(TOKEN)
+    const isAuth = localStorage.getItem(authToken)
     return isAuth ? children : <Navigate to={'/login'} />
 }
 

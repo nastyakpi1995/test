@@ -19,7 +19,7 @@ module.exports = async function  (req, res, next) {
         if(data.rows[0].isadmin <= 0) {
             return res.status(401).send({
                 success: false,
-                message: 'User is not admin'
+                message: 'CurrentUser is not admin'
             })
         }
 

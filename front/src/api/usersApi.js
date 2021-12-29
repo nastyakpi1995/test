@@ -35,11 +35,9 @@ export const createProfilesAxiosRequest = (body) => {
 
 export const getProfilesAxiosRequest = () => {
     return axios.get(`${baseUrl}/private/profiles`,  {headers: getHeaders()}).then(data => {
-        debugger
         return data.data
     }).catch(data => {
-        debugger
-
+        console.log(data)
     })
 }
 

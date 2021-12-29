@@ -24,15 +24,15 @@ const Profiles = () => {
 
     useEffect(() => {
         if (isLoader) {
-            getProfilesAxiosRequest().then(({data}) => {
-                dispatch(getProfilesCreator(data))
+            getProfilesAxiosRequest().then((data) => {
+                dispatch(getProfilesCreator(data?.data))
                setIsLoader(false)
             })
         }
     }, [isLoader])
     useEffect(() => {
-        getProfilesAxiosRequest().then(({data}) => {
-            dispatch(getProfilesCreator(data))
+        getProfilesAxiosRequest().then((data) => {
+            dispatch(getProfilesCreator(data?.data))
         })
     }, [])
 

@@ -15,7 +15,7 @@ class UserController {
         if(data.rows.length > 0) {
            return res.status(400).send({
                 success: false,
-                message: 'User exist'
+                message: 'CurrentUser exist'
             })
         }
        const salt = await bcrypt.genSalt(10)
@@ -24,7 +24,7 @@ class UserController {
        await db.query("INSERT INTO users (email, password, username, isadmin) VALUES ($1, $2, $3, $4)", [user.email, hashPassword, user.username, user.isadmin])
        return res.status(200).send({
            success: true,
-           message: 'User register success'
+           message: 'CurrentUser register success'
        })
    }
 
@@ -42,14 +42,14 @@ class UserController {
            const token = jwt.sign({id: data.rows[0].id}, process.env.TOKEN_SECRET)
            return res.status(200).send({
                success: true,
-               message: 'User is login success',
+               message: 'CurrentUser is login success',
                token: token,
                user: data.rows[0]
            })
        } else {
            res.status(400).send({
                success: false,
-               message: 'User not exist'
+               message: 'CurrentUser not exist'
            })
        }
    }

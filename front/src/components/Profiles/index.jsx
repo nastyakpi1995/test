@@ -33,7 +33,6 @@ const Profiles = () => {
     useEffect(() => {
         getProfilesAxiosRequest().then(({data}) => {
             dispatch(getProfilesCreator(data))
-            setIsLoader(false)
         })
     }, [])
 

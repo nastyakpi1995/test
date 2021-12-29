@@ -36,9 +36,12 @@ export const createProfilesAxiosRequest = (body) => {
 
 export const getProfilesAxiosRequest = () => {
     return axios.get(`${baseUrl}/private/profiles`,  {headers: getHeaders()}).then(data => {
-
+        debugger
         return data.data
-    }).catch((error) => console.log(error))
+    }).catch(data => {
+        debugger
+
+    })
 }
 
 export const editProfileAxiosRequest = (body, id) => {
@@ -59,4 +62,9 @@ export const usersAxiosRequest = () => {
 }
 export const editUserAxiosRequest = (values, id) => {
     return axios.put(`${baseUrl}/admin/user/${id}`,  {...values}, {headers: getHeaders()})
+}
+export const deleteUserAxiosRequest = (id) => {
+    return axios.delete(`${baseUrl}/admin/user/${id}`, {headers: getHeaders()}).then(data => {
+        return data.data
+    }).catch(({response}) =>  response.data)
 }

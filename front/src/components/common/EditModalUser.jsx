@@ -4,7 +4,7 @@ import {useDispatch} from "react-redux";
 import {createProfilesAxiosRequest, editProfileAxiosRequest, editUserAxiosRequest} from "../../api/usersApi";
 import {setMessageDataCreator} from "../../redux/reducers/authReducer";
 
-const EditModalUser = ({activeUser, isVisible, setIsVisible}) => {
+const EditModalUser = ({activeUser, isVisible, setIsVisible, setIsLoader}) => {
     const [confirmLoading, setConfirmLoading] = useState(false)
     const [form] = Form.useForm()
     const dispatch = useDispatch();
@@ -12,6 +12,7 @@ const EditModalUser = ({activeUser, isVisible, setIsVisible}) => {
     const onDataSuccess = (data) => {
         dispatch(setMessageDataCreator(data))
         if (data.success) {
+            setIsLoader(true)
             setIsVisible(false)
             form.setFieldsValue({username: '', id: null, isadmin: false})
         }

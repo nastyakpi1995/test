@@ -2,8 +2,10 @@ import React from "react";
 import {Card} from "antd";
 import {DeleteOutlined, EditOutlined} from "@ant-design/icons";
 import {useDispatch} from "react-redux";
+import {deleteUserAxiosRequest} from "../../api/usersApi";
+import {setMessageDataCreator} from "../../redux/reducers/authReducer";
 
-const User = ({user, setActiveUser, setIsVisible}) => {
+const User = ({user, setActiveUser, setIsVisible, setIsLoader}) => {
     const { username, id, isadmin } = user;
     const dispatch = useDispatch()
 
@@ -13,7 +15,12 @@ const User = ({user, setActiveUser, setIsVisible}) => {
     }
 
     const onDeleteProfile = () => {
-
+        deleteUserAxiosRequest(id).then(data => {
+            if (data.success) {
+                setIsLoader(true)
+            }
+            dispatch(setMessageDataCreator(data))
+        })
     }
 
     return (

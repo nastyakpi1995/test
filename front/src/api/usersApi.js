@@ -54,3 +54,9 @@ export const deleteProfileAxiosRequest = (id) => {
 export const adminDashboardAxiosRequest = (id) => {
     return axios.get(`${baseUrl}/admin/dashboard`, {headers: getHeaders()})
 }
+export const usersAxiosRequest = () => {
+    return axios.get(`${baseUrl}/admin/users`, {headers: getHeaders()})
+}
+export const editUserAxiosRequest = (values, id) => {
+    return axios.put(`${baseUrl}/admin/user/${id}`,  {values}, {headers: getHeaders()})
+}

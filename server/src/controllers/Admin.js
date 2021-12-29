@@ -1,5 +1,6 @@
 const User = require('../models/User')
 const Profile = require('../models/Profile');
+const {use} = require("express/lib/router");
 
 
 class Admin {
@@ -16,6 +17,14 @@ class Admin {
                 profiles: profiles.rows.length,
                 profileKiev: profileKiev.length
             }
+        })
+    }
+    async getUsers(res) {
+        const users = await new User().getUsers()
+        res.status(200).send({
+            users: users.rows,
+            message: '',
+            success: true
         })
     }
 }

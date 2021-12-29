@@ -11,6 +11,7 @@ import Profiles from "./components/Profiles";
 import PrivatRouter from "./components/common/PrivatRouter";
 import AdminRouter from "./components/common/AdminRouter";
 import Dashboard from "./components/Dashboard";
+import Users from "./components/Users";
 
 const  App = () => {
     const messageBoxData = useSelector(state => getMessageBoxSelect(state))
@@ -23,6 +24,7 @@ const  App = () => {
               <Route path="/login" element={<Login />} />
               <Route path="/profiles" element={<PrivatRouter><Profiles /></PrivatRouter>} />
               <Route path="/dashboard" element={<AdminRouter><Dashboard /></AdminRouter>} />
+              <Route path="/users" element={<AdminRouter><Users /></AdminRouter>} />
           </Routes>
       </div>
   );

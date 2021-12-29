@@ -63,7 +63,7 @@ const HeaderContainer = () => {
                             <Menu theme="dark" mode="horizontal" defaultSelectedKeys={['2']} >
                                 <Menu.Item key="1" icon={<KeyOutlined />}><NavLink to={'/profiles'} >Profiles</NavLink></Menu.Item>
                                 <Menu.Item key="2" icon={<AreaChartOutlined />}><NavLink to={'/dashboard'}>DashBoard</NavLink></Menu.Item>
-                                <Menu.Item key="3" icon={<UsergroupDeleteOutlined />}>Users</Menu.Item>
+                                <Menu.Item key="3" icon={<UsergroupDeleteOutlined />}><NavLink to={'/users'}>Users</NavLink> </Menu.Item>
                             </Menu>
                         ) : null}
 

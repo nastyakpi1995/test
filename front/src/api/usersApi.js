@@ -11,7 +11,7 @@ const getHeaders = () => {
 }
 
 export const registerAxiosRequest = (values) => {
-    return axios.post(`${baseUrl}/user/register`, {...values}).then(({data}) => {
+    return axios.post(`${baseUrl}/api/user/register`, {...values}).then(({data}) => {
         return data
     }).catch(({response}) => response.data)
 }
@@ -30,9 +30,21 @@ export const createProfilesAxiosRequest = (body) => {
        return data.data
    }).catch(({response}) =>  response.data)
 }
+
 export const getProfilesAxiosRequest = () => {
     return axios.get(`${baseUrl}/private/profiles`,  {headers: getHeaders()}).then(data => {
 
         return data.data
     }).catch((error) => console.log(error))
+}
+
+export const editProfileAxiosRequest = (body, id) => {
+    return axios.put(`${baseUrl}/private/profile/edit/${id}`, {...body}, {headers: getHeaders()}).then(data => {
+        return data.data
+    }).catch(({response}) =>  response.data)
+}
+export const deleteProfileAxiosRequest = (id) => {
+    return axios.delete(`${baseUrl}/private/profile/delete/${id}`, {headers: getHeaders()}).then(data => {
+        return data.data
+    }).catch(({response}) =>  response.data)
 }

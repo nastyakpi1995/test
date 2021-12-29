@@ -12,12 +12,12 @@ const Profiles = () => {
     const dispatch = useDispatch();
     const [isLoader, setIsLoader] = useState(false)
     const [isVisible, setIsVisible] = useState(false)
-
     const [activeProfile, setActiveProfile] = useState({
         name: '',
         gender: 'male',
         city: '',
-        birthdate: ''
+        birthdate: '',
+        id: null
     })
 
     const profiles = useSelector(state => getProfiles(state))
@@ -39,7 +39,7 @@ const Profiles = () => {
                               setIsVisible={setIsVisible}/>
             <div style={{display: 'flex', flexWrap: 'wrap'}}>
                 {profiles.length >= 0 ? profiles.map((profile, idx) => (
-                    <Profile key={idx} profile={profile} setActiveProfile={setActiveProfile} setIsVisible={setIsVisible} />
+                    <Profile key={idx} profile={profile} setActiveProfile={setActiveProfile} setIsVisible={setIsVisible} setIsLoader={setIsLoader} />
                 )) : null}
                 <NewProfile setIsVisible={setIsVisible} />
             </div>

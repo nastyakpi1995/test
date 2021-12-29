@@ -21,7 +21,6 @@ const NewProfile = ({setIsVisible}) => {
                 <PlusCircleOutlined style={{ fontSize: '46px', color: '#08c', marginBottom: 10 }} />
                 <p>Create New Profile</p>
             </div>
-
         </Card>
     )
 }

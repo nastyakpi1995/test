@@ -1,8 +1,8 @@
 const db = require('../config/db');
 
 class Profile {
-    async getProfiles(res) {
-        const results = await db.query('SELECT * from profiles').catch(console.log)
+    async getProfiles(res, userId) {
+        const results = await db.query('SELECT * from profiles where user_id=$1', [userId]).catch(console.log)
         return res.status(200).send({data: results.rows})
     }
     async createProfile(profile, res, userId) {
@@ -17,9 +17,23 @@ class Profile {
 
         return res.status(200).send({
             success: true,
-            message: 'Profile was create success'
+            message: 'Profile was create successfully'
         })
+    }
+    async updateProfile(profile, res, profileId) {
+        await db.query(`update profiles set name=$1, city=$2, gender=$3 where id=$4`, [profile.name, profile.city, profile.gender, profileId])
+        return res.status(200).send({
+            success: true,
+            message: 'Profile was update successfully'
+        })
+    }
+    async deleteProfile(res, profileId) {
+        await db.query(`delete from profiles where id=$1`, [profileId])
 
+        return res.status(200).send({
+            success: true,
+            message: 'Profile was delete successfully'
+        })
     }
 }
 

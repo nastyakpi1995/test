@@ -1,15 +1,8 @@
 import React from "react";
-import {Layout, Menu} from "antd";
-import {
-    UsergroupDeleteOutlined,
-    AreaChartOutlined,
-    KeyOutlined,
-    PlusCircleOutlined
-} from '@ant-design/icons';
-import {NavLink} from "react-router-dom";
+import {Layout} from "antd";
 import HeaderContainer from "./Header";
 
-const {Header, Content} = Layout
+const {Content} = Layout
 const UserMainWrapper = ({children}) => {
     return (
      <div>

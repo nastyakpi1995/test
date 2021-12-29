@@ -1,39 +1,47 @@
 import React, {useEffect, useState} from "react";
 import {DatePicker, Form, Input, Modal, Radio} from "antd";
 import {useDispatch} from "react-redux";
-import {createProfilesAxiosRequest} from "../../api/usersApi";
+import {createProfilesAxiosRequest, editProfileAxiosRequest} from "../../api/usersApi";
 import {setMessageDataCreator} from "../../redux/reducers/authReducer";
 
-const EditModalProfile = ({id, setIsLoader, activeProfile, isVisible, setIsVisible}) => {
+const EditModalProfile = ({setIsLoader, activeProfile, isVisible, setIsVisible}) => {
     const [confirmLoading, setConfirmLoading] = useState(false)
 
     const [form] = Form.useForm()
     const dispatch = useDispatch();
 
+    const onDataSuccess = (data) => {
+        dispatch(setMessageDataCreator(data))
+        if (data.success) {
+            setIsLoader(true)
+            setIsVisible(false)
+            form.setFieldsValue({name: '', gender: 'male', city: '', birthdate: '', id: null})
+        }
+        setConfirmLoading(false)
+    }
     useEffect(() => {
         form.setFieldsValue({name: activeProfile.name, gender: activeProfile.gender, city: activeProfile.city, birthdate: activeProfile.birthdate})
     }, [activeProfile])
 
     const handleCancel = () => {
-        form.setFieldsValue({name: '', gender: 'male', city: '', birthdate: ''})
+        form.setFieldsValue({name: '', gender: 'male', city: '', birthdate: '', id: null})
         setIsVisible(false)
     }
+
     const onFinish = (values) => {
         const prepareValues = {
             ...values,
-            birthdate: values.birthdate._d
+            // birthdate: values.birthdate._d
         }
         setConfirmLoading(true)
-        if (!id) {
-            createProfilesAxiosRequest(prepareValues).then(data => {
-                dispatch(setMessageDataCreator(data))
 
-                if (data.success) {
-                    setIsLoader(true)
-                    setIsVisible(false)
-                    form.setFieldsValue({name: '', gender: 'male', city: '', birthdate: ''})
-                }
-                setConfirmLoading(false)
+        if (!activeProfile.id) {
+            createProfilesAxiosRequest(prepareValues).then(data => {
+                onDataSuccess(data)
+            })
+        } else {
+            editProfileAxiosRequest(prepareValues, activeProfile.id).then(data => {
+                onDataSuccess(data)
             })
         }
     }

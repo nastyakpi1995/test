@@ -8,16 +8,10 @@ import Registration from "./components/Auth/Registration";
 import MessageBox from "./components/common/MessageBox";
 import {getMessageBoxSelect} from "./redux/selects/auth";
 import Profiles from "./components/Profiles";
-import {TOKEN} from "./utils/constants";
+import PrivatRouter from "./components/common/PrivatRouter";
 
 const  App = () => {
     const messageBoxData = useSelector(state => getMessageBoxSelect(state))
-    useEffect(() => {
-        const token = localStorage.getItem(TOKEN)
-        if (!token) {
-            return <Navigate to={'/registration'} />
-        }
-    }, [])
 
   return (
       <div>
@@ -25,7 +19,7 @@ const  App = () => {
           <Routes>
               <Route path="/registration" element={<Registration />} />
               <Route path="/login" element={<Login />} />
-              <Route path="/profiles" element={<Profiles />} />
+              <Route path="/profiles" element={<PrivatRouter><Profiles /></PrivatRouter>} />
           </Routes>
       </div>
   );

@@ -1,12 +1,11 @@
-const User = require('../models/User')
-const Profile = require('../models/Profile');
-const {use} = require("express/lib/router");
+const UserModel = require('../models/User')
+const ProfileModel = require('../models/Profile');
 const db = require('../config/db')
 
-class Admin {
+class AdminController {
     async getDashboard(res) {
-        const users = await new User().getUsersId()
-        const profiles = await new Profile().getProfilesCity()
+        const users = await UserModel.getUsersId()
+        const profiles = await ProfileModel.getProfilesCity()
         const profileKiev = profiles.rows.filter(el => el.city.toLowerCase() === 'kiev')
 
         res.status(200).send({
@@ -20,7 +19,7 @@ class Admin {
         })
     }
     async getUsers(res) {
-        const users = await new User().getUsers()
+        const users = await UserModel.getUsers()
         res.status(200).send({
             users: users.rows,
             message: '',
@@ -37,4 +36,4 @@ class Admin {
     }
 }
 
-module.exports = Admin
+module.exports = new AdminController

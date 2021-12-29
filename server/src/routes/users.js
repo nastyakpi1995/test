@@ -1,20 +1,19 @@
 const express = require('express');
 const router = express.Router();
-const User = require('../controllers/User');
-const baseUrl = require('./constants');
+const UserController = require('../controllers/User');
 
 router.get('/', async (req, res) => {
-    return  await new User().getUsers()
+    return UserController.getUsers()
 })
 
 router.post(`/user/register`, async (req, res) => {
     let body = req.body
-    return new User().createUser(body, res)
+    return UserController.createUser(body, res)
 })
 router.post(`/user/login`, async (req, res) => {
     let body = req.body
 
-    return new User().loginUser(body, res)
+    return UserController.loginUser(body, res)
 })
 
 router.put(`/users/:userId`, async (req, res) => {

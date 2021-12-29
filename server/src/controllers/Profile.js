@@ -1,17 +1,18 @@
 const db = require('../config/db');
 const ProfileModel = require('../models/Profile')
-class Profile {
+class ProfileController {
     async getProfiles(res, userId) {
-        const results = await new ProfileModel.getProfileByUserId(userId).catch(console.log)
+        const results = await ProfileModel.getProfileByUserId(userId).catch(console.log)
+
         return res.status(200).send({data: results.rows})
     }
 
     async createProfile(profile, res, userId) {
-        const dataProfileCurrentName = await db.query(`select name FROM profiles where name=$1`, [profile.name])
+        const dataProfileCurrentName = await db.query(`select name FROM profiles where name=$1 and user_id=$2`, [profile.name, userId])
         if(dataProfileCurrentName.rows.length > 0) {
             return res.status(400).send({
                 success: false,
-                message: 'User exist'
+                message: 'profile name is exist'
             })
         }
         await db.query(`insert into profiles (name, city, gender, birthdate, user_id) values ($1, $2, $3, $4, $5)`, [profile.name, profile.city, profile.gender, profile.birthdate, userId])
@@ -38,4 +39,4 @@ class Profile {
     }
 }
 
-module.exports = Profile
+module.exports = new ProfileController

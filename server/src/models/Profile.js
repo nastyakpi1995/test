@@ -9,4 +9,4 @@ class ProfileModel {
     }
 }
 
-module.exports = ProfileModel
+module.exports = new ProfileModel

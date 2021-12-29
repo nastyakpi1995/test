@@ -3,10 +3,10 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const UserModel = require('../models/User');
 
-class User {
+class UserController {
     async getUsers() {
 
-        let results = await new UserModel().getUsers()
+        let results = await UserModel.getUsers()
         console.log('results', results, 'eeeeee')
         return results.rows
     }
@@ -56,4 +56,4 @@ class User {
 
 }
 
-module.exports = User
+module.exports = new UserController

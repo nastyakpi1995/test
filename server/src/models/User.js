@@ -1,6 +1,6 @@
 const db = require('../config/db')
 
-class User {
+class UserModel {
     getUsersId() {
        return db.query(`SELECT (id) FROM users`).catch(console.log)
     }
@@ -9,4 +9,4 @@ class User {
     }
 }
 
-module.exports = User
+module.exports = new UserModel

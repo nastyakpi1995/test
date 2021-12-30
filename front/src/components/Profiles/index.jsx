@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {useCallback, useEffect, useState} from "react";
 import UserMainWrapper from "../common/UserMainWrapper";
 import NewProfile from "./NewProfile";
 import Profile from "./Profile";
@@ -6,7 +6,7 @@ import {getProfilesAxiosRequest} from "../../api/usersApi";
 import {getProfilesCreator} from "../../redux/reducers/profileReducer";
 import {useDispatch, useSelector} from "react-redux";
 import {getProfiles} from "../../redux/selects/profile";
-import UserProfileModal from "../common/UserProfileModal";
+import UserProfileModal from "./UserProfileModal";
 import {initialUserValues} from "../../utils/helpers";
 
 const Profiles = () => {
@@ -16,7 +16,7 @@ const Profiles = () => {
     const [activeProfile, setActiveProfile] = useState(initialUserValues)
 
     const profiles = useSelector(state => getProfiles(state))
-
+    const showModal = useCallback(() => setIsVisible(true), [])
     useEffect(() => {
         if (isLoader) {
             getProfilesAxiosRequest().then((data) => {
@@ -40,9 +40,13 @@ const Profiles = () => {
                               setIsVisible={setIsVisible}/>
             <div style={{display: 'flex', flexWrap: 'wrap'}}>
                 {profiles.length >= 0 ? profiles.map((profile, idx) => (
-                    <Profile key={idx} profile={profile} setActiveProfile={setActiveProfile} setIsVisible={setIsVisible} setIsLoader={setIsLoader} />
+                    <Profile key={idx}
+                             profile={profile}
+                             setActiveProfile={setActiveProfile}
+                             showModal={showModal}
+                             setIsLoader={setIsLoader} />
                 )) : null}
-                <NewProfile setIsVisible={setIsVisible} />
+                <NewProfile showModal={showModal} />
             </div>
         </UserMainWrapper>
     )

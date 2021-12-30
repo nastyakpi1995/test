@@ -1,26 +1,27 @@
-import React from "react";
+import React, {useCallback} from "react";
 import {Card} from "antd";
 import {DeleteOutlined, EditOutlined} from "@ant-design/icons";
 import {deleteProfileAxiosRequest} from "../../api/usersApi";
 import {setMessageDataCreator} from "../../redux/reducers/authReducer";
 import {useDispatch} from "react-redux";
 
-const Profile = ({profile, setActiveProfile, setIsVisible, setIsLoader}) => {
+const Profile = ({profile, setActiveProfile, showModal, setIsLoader}) => {
     const { name, gender, city, birthdate, id } = profile;
     const dispatch = useDispatch()
-    const OnEditProfile = () => {
-        setIsVisible(true)
-        setActiveProfile({name, gender, city, birthdate: '', id })
-    }
 
-    const onDeleteProfile = () => {
+    const OnEditProfile = useCallback(() => {
+        showModal()
+        setActiveProfile({name, gender, city, birthdate, id })
+    }, [])
+
+    const onDeleteProfile = useCallback(()  => {
         deleteProfileAxiosRequest(id).then(data => {
             dispatch(setMessageDataCreator(data))
             if (data.success) {
                 setIsLoader(true)
             }
         })
-    }
+    }, [])
 
     return (
             <Card

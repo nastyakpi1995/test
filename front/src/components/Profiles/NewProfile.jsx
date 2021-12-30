@@ -2,11 +2,7 @@ import React from "react";
 import {Card} from "antd";
 import {PlusCircleOutlined} from '@ant-design/icons';
 
-const NewProfile = ({setIsVisible}) => {
-    const showModal = () => {
-        setIsVisible(true)
-    }
-
+const NewProfile = ({showModal}) => {
     return (
         <Card style={{
             width: 300,

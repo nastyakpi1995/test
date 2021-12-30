@@ -4,7 +4,7 @@ import { usersAxiosRequest} from "../../api/usersApi";
 import {setMessageDataCreator} from "../../redux/reducers/authReducer";
 import {useDispatch} from "react-redux";
 import User from "./User";
-import EditModalUser from "../common/EditModalUser";
+import EditModalUser from "./EditModalUser";
 
 const Users = () => {
     const [users, setUsers] = useState(null);

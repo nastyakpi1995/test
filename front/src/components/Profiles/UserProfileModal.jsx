@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {useCallback, useEffect, useState} from "react";
 import {DatePicker, Form, Input, Modal, Radio} from "antd";
 import {useDispatch} from "react-redux";
 import {createProfilesAxiosRequest, editProfileAxiosRequest} from "../../api/usersApi";
@@ -11,7 +11,7 @@ const UserProfileModal = ({setIsLoader, activeProfile, isVisible, setIsVisible, 
     const [form] = Form.useForm()
     const dispatch = useDispatch();
 
-    const onDataSuccess = (data) => {
+    const onDataSuccess = useCallback((data) => {
         dispatch(setMessageDataCreator(data))
         if (data.success) {
             setIsLoader(true)
@@ -20,16 +20,17 @@ const UserProfileModal = ({setIsLoader, activeProfile, isVisible, setIsVisible, 
             form.setFieldsValue({initialUserValues})
         }
         setConfirmLoading(false)
-    }
+    }, [])
+
     useEffect(() => {
         form.setFieldsValue(activeProfile)
     }, [activeProfile])
 
-    const handleCancel = () => {
+    const handleCancel = useCallback(() => {
         setActiveProfile(initialUserValues)
         form.setFieldsValue(initialUserValues)
         setIsVisible(false)
-    }
+    }, [])
 
     const onFinish = (values) => {
         const prepareValues = {

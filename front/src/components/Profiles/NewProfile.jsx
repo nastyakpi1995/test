@@ -1,8 +1,6 @@
 import React from "react";
 import {Card} from "antd";
-import {
-    PlusCircleOutlined
-} from '@ant-design/icons';
+import {PlusCircleOutlined} from '@ant-design/icons';
 
 const NewProfile = ({setIsVisible}) => {
     const showModal = () => {

@@ -6,19 +6,14 @@ import {getProfilesAxiosRequest} from "../../api/usersApi";
 import {getProfilesCreator} from "../../redux/reducers/profileReducer";
 import {useDispatch, useSelector} from "react-redux";
 import {getProfiles} from "../../redux/selects/profile";
-import EditModalProfile from "../common/EditModalProfile";
+import UserProfileModal from "../common/UserProfileModal";
+import {initialUserValues} from "../../utils/helpers";
 
 const Profiles = () => {
     const dispatch = useDispatch();
     const [isLoader, setIsLoader] = useState(false)
     const [isVisible, setIsVisible] = useState(false)
-    const [activeProfile, setActiveProfile] = useState({
-        name: '',
-        gender: 'male',
-        city: '',
-        birthdate: '',
-        id: null
-    })
+    const [activeProfile, setActiveProfile] = useState(initialUserValues)
 
     const profiles = useSelector(state => getProfiles(state))
 
@@ -38,9 +33,10 @@ const Profiles = () => {
 
     return (
         <UserMainWrapper>
-            <EditModalProfile activeProfile={activeProfile}
+            <UserProfileModal activeProfile={activeProfile}
                               setIsLoader={setIsLoader}
                               isVisible={isVisible}
+                              setActiveProfile={setActiveProfile}
                               setIsVisible={setIsVisible}/>
             <div style={{display: 'flex', flexWrap: 'wrap'}}>
                 {profiles.length >= 0 ? profiles.map((profile, idx) => (

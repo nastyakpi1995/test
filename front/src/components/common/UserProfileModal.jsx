@@ -3,8 +3,9 @@ import {DatePicker, Form, Input, Modal, Radio} from "antd";
 import {useDispatch} from "react-redux";
 import {createProfilesAxiosRequest, editProfileAxiosRequest} from "../../api/usersApi";
 import {setMessageDataCreator} from "../../redux/reducers/authReducer";
+import {initialUserValues} from "../../utils/helpers";
 
-const EditModalProfile = ({setIsLoader, activeProfile, isVisible, setIsVisible}) => {
+const UserProfileModal = ({setIsLoader, activeProfile, isVisible, setIsVisible, setActiveProfile}) => {
     const [confirmLoading, setConfirmLoading] = useState(false)
 
     const [form] = Form.useForm()
@@ -15,16 +16,18 @@ const EditModalProfile = ({setIsLoader, activeProfile, isVisible, setIsVisible})
         if (data.success) {
             setIsLoader(true)
             setIsVisible(false)
-            form.setFieldsValue({name: '', gender: 'male', city: '', birthdate: '', id: null})
+            setActiveProfile(initialUserValues)
+            form.setFieldsValue({initialUserValues})
         }
         setConfirmLoading(false)
     }
     useEffect(() => {
-        form.setFieldsValue({name: activeProfile.name, gender: activeProfile.gender, city: activeProfile.city, birthdate: activeProfile.birthdate})
+        form.setFieldsValue(activeProfile)
     }, [activeProfile])
 
     const handleCancel = () => {
-        form.setFieldsValue({name: '', gender: 'male', city: '', birthdate: '', id: null})
+        setActiveProfile(initialUserValues)
+        form.setFieldsValue(initialUserValues)
         setIsVisible(false)
     }
 
@@ -83,15 +86,15 @@ const EditModalProfile = ({setIsLoader, activeProfile, isVisible, setIsVisible})
                 >
                     <Input />
                 </Form.Item>
-                {/*<Form.Item*/}
-                {/*    label="Birthday"*/}
-                {/*    name="birthdate"*/}
-                {/*    rules={[{ required: true, message: 'Please input your birthdate!' }]}*/}
-                {/*>*/}
-                {/*    <DatePicker />*/}
-                {/*</Form.Item>*/}
+                <Form.Item
+                    label="Birthday"
+                    name="birthdate"
+                    rules={[{ required: true, message: 'Please input your birthdate!' }]}
+                >
+                    <DatePicker />
+                </Form.Item>
             </Form>
         </Modal>
     )
 }
-export default EditModalProfile
+export default UserProfileModal

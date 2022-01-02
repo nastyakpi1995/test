@@ -5,6 +5,7 @@ import {setMessageDataCreator} from "../../redux/reducers/authReducer";
 import {useDispatch} from "react-redux";
 import User from "./User";
 import EditModalUser from "./EditModalUser";
+import CurrentUserProfiles from "./CurrentUserProfiles";
 
 const Users = () => {
     const [users, setUsers] = useState(null);
@@ -33,11 +34,14 @@ const Users = () => {
     }, [])
 
     return <UserMainWrapper>
-        <div style={{display: 'flex', height: '100vh'}}>
-            <EditModalUser setIsLoader={setIsLoader} isVisible={isVisible} setIsVisible={setIsVisible} activeUser={activeUser}/>
-            {users ? users.map(user => (
-                <User setIsLoader={setIsLoader} setIsVisible={setIsVisible} setActiveUser={setActiveUser} user={user} />
-            )) : null}
+        <div  style={{display: 'flex', height: '100vh', maxWidth: '1800px', justifyContent: 'space-between'}}>
+            <div style={{display: 'flex'}}>
+                <EditModalUser setIsLoader={setIsLoader} isVisible={isVisible} setIsVisible={setIsVisible} activeUser={activeUser}/>
+                {users ? users.map(user => (
+                    <User setIsLoader={setIsLoader} setIsVisible={setIsVisible} setActiveUser={setActiveUser} user={user} />
+                )) : null}
+            </div>
+            <CurrentUserProfiles />
         </div>
     </UserMainWrapper>
 

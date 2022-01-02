@@ -31,6 +31,7 @@ const Profiles = () => {
         })
     }, [])
 
+    if (isLoader) return <div>loader</div>
     return (
         <UserMainWrapper>
             <UserProfileModal activeProfile={activeProfile}

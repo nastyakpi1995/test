@@ -16,7 +16,7 @@ module.exports = async function  (req, res, next) {
         const {id} = req.user
         const data = await db.query(`select isadmin FROM users where id=$1`, [id])
 
-        if(data.rows[0].isadmin <= 0) {
+        if(!data.rows[0].isadmin) {
             return res.status(401).send({
                 success: false,
                 message: 'CurrentUser is not admin'

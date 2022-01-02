@@ -13,7 +13,14 @@ const getHeaders = () => {
 export const registerAxiosRequest = (values) => {
     return axios.post(`${baseUrl}/api/user/register`, {...values}).then(({data}) => {
         return data
-    }).catch(({response}) => response.data)
+    }).catch((data) => {
+        const prepareData = {
+            data,
+            success: false,
+            message: 'Yo can not login, server did not run'
+        }
+        return prepareData
+    })
 }
 
 export const loginAxiosRequest = (body) => {
@@ -24,7 +31,14 @@ export const loginAxiosRequest = (body) => {
            localStorage.setItem(authToken, data.data.token)
        }
        return data.data
-   }).catch(({response}) =>  response.data)
+   }).catch((data) => {
+       const prepareData = {
+           data,
+           success: false,
+           message: 'Yo can not login, server did not run'
+       }
+       return prepareData
+   })
 }
 
 export const createProfilesAxiosRequest = (body) => {

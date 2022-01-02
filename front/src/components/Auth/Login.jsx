@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import {Button, Form, Input} from "antd";
 import {loginAxiosRequest} from "../../api/usersApi";
 import {NavLink, useNavigate} from "react-router-dom";
@@ -8,11 +8,15 @@ import {setMessageDataCreator} from "../../redux/reducers/authReducer";
 let Login = () => {
     const dispatch = useDispatch()
     const navigate = useNavigate()
+    const [isLoader, setIsLoader] = useState(false)
 
     const onFinish = (values) => {
+        setIsLoader(true)
         loginAxiosRequest(values).then(data => {
+            setIsLoader(false)
             dispatch(setMessageDataCreator(data))
-            if (data.success) {
+
+            if (data?.success) {
                 navigate('/profiles')
             }
         })
@@ -51,7 +55,7 @@ let Login = () => {
             </Form.Item>
 
             <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
-                <Button type="primary" htmlType="submit">
+                <Button loading={isLoader} type="primary" htmlType="submit" >
                     Submit
                 </Button>
             </Form.Item>

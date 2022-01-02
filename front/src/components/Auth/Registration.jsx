@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import {Button, Form, Checkbox, Input} from "antd";
 import {registerAxiosRequest} from "../../api/usersApi";
 import {NavLink} from "react-router-dom";
@@ -9,11 +9,13 @@ import {setMessageDataCreator} from "../../redux/reducers/authReducer";
 let Registration = () => {
     const dispatch = useDispatch()
     const navigate = useNavigate()
+    const [isLoader, setIsLoader] = useState(false)
 
     const onFinish = async (values) => {
+        setIsLoader(true)
         registerAxiosRequest(values).then((data) => {
             dispatch(setMessageDataCreator(data))
-
+            setIsLoader(false)
             if (data.success) {
                 navigate('/login')
             }
@@ -59,7 +61,7 @@ let Registration = () => {
             </Form.Item>
 
             <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
-                <Button type="primary" htmlType="submit">
+                <Button type="primary" htmlType="submit" loading={isLoader}>
                     Submit
                 </Button>
             </Form.Item>

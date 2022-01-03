@@ -4,6 +4,7 @@ import {loginAxiosRequest} from "../../api/usersApi";
 import {NavLink, useNavigate} from "react-router-dom";
 import {useDispatch} from "react-redux";
 import {setMessageDataCreator} from "../../redux/reducers/authReducer";
+import {setUserCreator} from "../../redux/reducers/userReducer";
 
 let Login = () => {
     const dispatch = useDispatch()
@@ -15,8 +16,8 @@ let Login = () => {
         loginAxiosRequest(values).then(data => {
             setIsLoader(false)
             dispatch(setMessageDataCreator(data))
-
             if (data?.success) {
+                dispatch(setUserCreator(data.user))
                 navigate('/profiles')
             }
         })

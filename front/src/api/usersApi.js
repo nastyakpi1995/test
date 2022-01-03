@@ -27,8 +27,8 @@ export const loginAxiosRequest = (body) => {
    return axios.post(`${baseUrl}/api/user/login`, {...body}).then(data => {
        if (data.data.token) {
            localStorage.setItem(savedUser, JSON.stringify(data.data.user))
-
            localStorage.setItem(authToken, data.data.token)
+
        }
        return data.data
    }).catch((data) => {

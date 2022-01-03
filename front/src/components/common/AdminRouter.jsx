@@ -1,12 +1,20 @@
 import React, {useEffect, useState} from "react";
 import {Navigate} from "react-router-dom";
 import {authToken, savedUser} from "../../utils/constants";
+import {useSelector} from "react-redux";
 
 const AdminRouter = ({children}) => {
     const isAuth = localStorage.getItem(authToken)
-    const values = JSON.parse(localStorage.getItem(savedUser))
+    const currentUser = useSelector(state => state.user.user)
 
-    return isAuth && values.isadmin ? children : <Navigate to={'/login'} />
+    if (isAuth && currentUser.isadmin) {
+        return children
+    }
+    if (isAuth) {
+        return <Navigate to={'/login'} />
+    } else {
+        return <Navigate to={'/profiles'} />
+    }
 }
 
 export default AdminRouter

@@ -8,7 +8,7 @@ import {
 import {NavLink, useNavigate} from "react-router-dom";
 import {authToken, savedUser} from "../../utils/constants";
 import {setMessageDataCreator} from "../../redux/reducers/authReducer";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 
 const {Header} = Layout
 
@@ -17,9 +17,9 @@ const HeaderContainer = () => {
     const dispatch = useDispatch()
     const [user, setUser] = useState(null)
 
+    const currentUser = useSelector(state => state.user.user)
     useEffect(() => {
-        const user = JSON.parse(localStorage.getItem(savedUser))
-        if (user) {
+        if (currentUser) {
             setUser(user)
         }
     }, [])

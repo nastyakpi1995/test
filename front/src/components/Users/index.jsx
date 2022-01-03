@@ -41,7 +41,7 @@ const Users = () => {
                     <User setIsLoader={setIsLoader} setIsVisible={setIsVisible} setActiveUser={setActiveUser} user={user} />
                 )) : null}
             </div>
-            <CurrentUserProfiles />
+            <CurrentUserProfiles  />
         </div>
     </UserMainWrapper>
 

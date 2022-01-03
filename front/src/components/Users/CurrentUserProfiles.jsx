@@ -1,30 +1,34 @@
 import React, { useState, useEffect } from 'react';
 import { List, message, Avatar, Skeleton, Divider } from 'antd';
 import InfiniteScroll from 'react-infinite-scroll-component';
+import {getUserProfilesAxiosRequest} from "../../api/usersApi";
+import {useSelector} from "react-redux";
 
 const CurrentUserProfiles = () => {
     const [loading, setLoading] = useState(false);
-    const [data, setData] = useState([]);
+    const [userProfiles, setUserProfiles] = useState([]);
+
+    const currentUserId = useSelector(state => state.profile.selectedByAdminUserId)
 
     const loadMoreData = () => {
         if (loading) {
             return;
         }
         setLoading(true);
-        fetch('https://randomuser.me/api/?results=10&inc=name,gender,email,nat,picture&noinfo')
-            .then(res => res.json())
-            .then(body => {
-                setData([...data, ...body.results]);
-                setLoading(false);
-            })
-            .catch(() => {
-                setLoading(false);
-            });
+
+        getUserProfilesAxiosRequest(currentUserId).then(data => {
+            if (data.success) {
+                setUserProfiles(data.userProfiles)
+            }
+            setLoading(false);
+        })
     };
 
     useEffect(() => {
-        loadMoreData();
-    }, []);
+        if (currentUserId) {
+            loadMoreData();
+        }
+    }, [currentUserId]);
 
     return (
         <div
@@ -39,23 +43,23 @@ const CurrentUserProfiles = () => {
         >
             <h1>User profiles:</h1>
             <InfiniteScroll
-                dataLength={data.length}
+                dataLength={userProfiles.length}
                 next={loadMoreData}
-                hasMore={data.length < 50}
-                loader={<Skeleton avatar paragraph={{ rows: 1 }} active />}
-                endMessage={<Divider plain>It is all, nothing more 🤐</Divider>}
+                hasMore={userProfiles.length > 50}
+                loader={<Skeleton avatar paragraph={{ rows: 1 }} active={loading} />}
+                endMessage={<Divider plain><div >Add profile +</div></Divider>}
                 scrollableTarget="scrollableDiv"
             >
                 <List
-                    dataSource={data}
+                    dataSource={userProfiles}
                     renderItem={item => (
                         <List.Item key={item.id}>
                             <List.Item.Meta
-                                avatar={<Avatar src={item.picture.large} />}
-                                title={<a href="https://ant.design">{item.name.last}</a>}
-                                description={item.email}
+                                description={item.name}
                             />
-                            <div>Content</div>
+                            <div>{item.gender}</div>
+                            <div>{item.city}</div>
+
                         </List.Item>
                     )}
                 />

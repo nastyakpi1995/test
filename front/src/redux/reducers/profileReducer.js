@@ -1,8 +1,9 @@
 const GET_PROFILES = 'ADD_PROFILE'
-const CREATE_PROFILE_LOADER = 'CREATE_PROFILE_LOADER'
+const SELECTED_BY_ADMIN_USER_ID = 'SELECTED_BY_ADMIN_USER'
 
 const initialState = {
-    profiles: []
+    profiles: [],
+    selectedByAdminUserId: ''
 }
 
 const profileReducer = (state= initialState, action) => {
@@ -13,10 +14,10 @@ const profileReducer = (state= initialState, action) => {
                 profiles: action.profiles,
             }
         }
-        case CREATE_PROFILE_LOADER: {
+        case SELECTED_BY_ADMIN_USER_ID: {
             return {
                 ...state,
-                isLoading: action.isLoading
+                selectedByAdminUserId: action.payload
             }
         }
         default: {
@@ -28,6 +29,10 @@ const profileReducer = (state= initialState, action) => {
 export const getProfilesCreator = (profiles) => ({
     type: GET_PROFILES,
     profiles
+})
+export const setSelectedByAdminUserIdCreator = (id) => ({
+    type: SELECTED_BY_ADMIN_USER_ID,
+    payload: id
 })
 
 export default profileReducer

@@ -17,4 +17,9 @@ router.put(`/user/:profileId`, adminVerify, async (req, res) => {
 
     return AdminController.updateUser(body, profileId, res)
 })
+router.get(`/user/profiles/:userId`, adminVerify, async (req, res) => {
+    let {userId} = req.params
+
+    return AdminController.getUserProfiles(userId, res)
+})
 module.exports = router

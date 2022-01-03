@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {useCallback, useEffect, useState} from "react";
 import UserMainWrapper from "../common/UserMainWrapper";
 import { usersAxiosRequest} from "../../api/usersApi";
 import {setMessageDataCreator} from "../../redux/reducers/authReducer";
@@ -6,6 +6,7 @@ import {useDispatch} from "react-redux";
 import User from "./User";
 import EditModalUser from "./EditModalUser";
 import CurrentUserProfiles from "./CurrentUserProfiles";
+import {toggleIsOpenModalCreator} from "../../redux/reducers/profileReducer";
 
 const Users = () => {
     const [users, setUsers] = useState(null);
@@ -13,6 +14,7 @@ const Users = () => {
     const [isVisible, setIsVisible] = useState(false)
     const [activeUser, setActiveUser] = useState({username: '', id: null, isadmin: false});
     const dispatch = useDispatch()
+    const showModal = useCallback(() => dispatch(toggleIsOpenModalCreator()), [])
 
     useEffect(() => {
         if (isLoader) {
@@ -41,7 +43,7 @@ const Users = () => {
                     <User setIsLoader={setIsLoader} setIsVisible={setIsVisible} setActiveUser={setActiveUser} user={user} />
                 )) : null}
             </div>
-            <CurrentUserProfiles  />
+            <CurrentUserProfiles showModal={showModal} />
         </div>
     </UserMainWrapper>
 

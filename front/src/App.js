@@ -12,13 +12,14 @@ import PrivatRouter from "./components/common/PrivatRouter";
 import AdminRouter from "./components/common/AdminRouter";
 import Dashboard from "./components/Dashboard";
 import Users from "./components/Users";
+import UserProfileModal from "./components/common/UserProfileModal";
 
 const  App = () => {
     const messageBoxData = useSelector(state => getMessageBoxSelect(state))
-
   return (
       <div>
           <MessageBox messageBoxData={messageBoxData} />
+          <UserProfileModal />
           <Routes>
               <Route path="/registration" element={<Registration />} />
               <Route path="/login" element={<Login />} />

@@ -1,12 +1,19 @@
 import React, {useCallback, useEffect, useState} from "react";
 import {DatePicker, Form, Input, Modal, Radio} from "antd";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {createProfilesAxiosRequest, editProfileAxiosRequest} from "../../api/usersApi";
 import {setMessageDataCreator} from "../../redux/reducers/authReducer";
 import {initialUserValues} from "../../utils/helpers";
+import {
+    setActiveProfileCreator,
+    toggleIsOpenModalCreator,
+    toggleLoaderProfileCreator
+} from "../../redux/reducers/profileReducer";
 
-const UserProfileModal = ({setIsLoader, activeProfile, isVisible, setIsVisible, setActiveProfile}) => {
+const UserProfileModal = () => {
     const [confirmLoading, setConfirmLoading] = useState(false)
+    const isOpenModalProfile = useSelector(state => state.profile.isOpenModalProfile)
+    const activeProfile = useSelector(state => state.profile.activeProfile)
 
     const [form] = Form.useForm()
     const dispatch = useDispatch();
@@ -14,22 +21,24 @@ const UserProfileModal = ({setIsLoader, activeProfile, isVisible, setIsVisible, 
     const onDataSuccess = useCallback((data) => {
         dispatch(setMessageDataCreator(data))
         if (data.success) {
-            setIsLoader(true)
-            setIsVisible(false)
-            setActiveProfile(initialUserValues)
+            dispatch(toggleLoaderProfileCreator())
+            dispatch(toggleIsOpenModalCreator())
+            dispatch(setActiveProfileCreator(initialUserValues))
             form.setFieldsValue({initialUserValues})
         }
         setConfirmLoading(false)
     }, [])
 
     useEffect(() => {
-        form.setFieldsValue(activeProfile)
+        if (activeProfile) {
+            form.setFieldsValue(activeProfile)
+        }
     }, [activeProfile])
 
     const handleCancel = useCallback(() => {
-        setActiveProfile(initialUserValues)
+        dispatch(setActiveProfileCreator(initialUserValues))
         form.setFieldsValue(initialUserValues)
-        setIsVisible(false)
+        dispatch(toggleIsOpenModalCreator())
     }, [])
 
     const onFinish = (values) => {
@@ -55,7 +64,7 @@ const UserProfileModal = ({setIsLoader, activeProfile, isVisible, setIsVisible, 
     }
 
     return (
-        <Modal confirmLoading={confirmLoading} visible={isVisible} onOk={onOk} onCancel={handleCancel}>
+        <Modal confirmLoading={confirmLoading} visible={isOpenModalProfile} onOk={onOk} onCancel={handleCancel}>
             <Form labelCol={{ span: 8 }}
                   form={form}
                   wrapperCol={{ span: 16 }}
@@ -87,13 +96,13 @@ const UserProfileModal = ({setIsLoader, activeProfile, isVisible, setIsVisible, 
                 >
                     <Input />
                 </Form.Item>
-                <Form.Item
-                    label="Birthday"
-                    name="birthdate"
-                    rules={[{ required: true, message: 'Please input your birthdate!' }]}
-                >
-                    <DatePicker />
-                </Form.Item>
+                {/*<Form.Item*/}
+                {/*    label="Birthday"*/}
+                {/*    name="birthdate"*/}
+                {/*    rules={[{ required: true, message: 'Please input your birthdate!' }]}*/}
+                {/*>*/}
+                {/*    <DatePicker />*/}
+                {/*</Form.Item>*/}
             </Form>
         </Modal>
     )

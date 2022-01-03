@@ -80,9 +80,7 @@ export const deleteUserAxiosRequest = (id) => {
     }).catch(({response}) =>  response.data)
 }
 export const getUserProfilesAxiosRequest = (id) => {
-    debugger
     return axios.get(`${baseUrl}/admin/user/profiles/${id}`, {headers: getHeaders()}).then(data => {
-        debugger
         return data.data
     }).catch(({response}) =>  response.data)
 }

@@ -4,7 +4,7 @@ import InfiniteScroll from 'react-infinite-scroll-component';
 import {getUserProfilesAxiosRequest} from "../../api/usersApi";
 import {useSelector} from "react-redux";
 
-const CurrentUserProfiles = () => {
+const CurrentUserProfiles = ({showModal}) => {
     const [loading, setLoading] = useState(false);
     const [userProfiles, setUserProfiles] = useState([]);
 
@@ -47,7 +47,7 @@ const CurrentUserProfiles = () => {
                 next={loadMoreData}
                 hasMore={userProfiles.length > 50}
                 loader={<Skeleton avatar paragraph={{ rows: 1 }} active={loading} />}
-                endMessage={<Divider plain><div >Add profile +</div></Divider>}
+                endMessage={<Divider plain><div onClick={showModal}>Add profile +</div></Divider>}
                 scrollableTarget="scrollableDiv"
             >
                 <List
@@ -59,7 +59,6 @@ const CurrentUserProfiles = () => {
                             />
                             <div>{item.gender}</div>
                             <div>{item.city}</div>
-
                         </List.Item>
                     )}
                 />

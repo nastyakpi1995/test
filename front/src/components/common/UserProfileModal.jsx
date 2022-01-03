@@ -21,8 +21,8 @@ const UserProfileModal = () => {
     const onDataSuccess = useCallback((data) => {
         dispatch(setMessageDataCreator(data))
         if (data.success) {
-            dispatch(toggleLoaderProfileCreator())
             dispatch(toggleIsOpenModalCreator())
+            dispatch(toggleLoaderProfileCreator())
             dispatch(setActiveProfileCreator(initialUserValues))
             form.setFieldsValue({initialUserValues})
         }
@@ -41,6 +41,11 @@ const UserProfileModal = () => {
         dispatch(toggleIsOpenModalCreator())
     }, [])
 
+    const applyUserAction = (onActionFunction, values) => {
+        onActionFunction(values).then(data => {
+            onDataSuccess(data)
+        })
+    }
     const onFinish = (values) => {
         const prepareValues = {
             ...values,
@@ -49,13 +54,13 @@ const UserProfileModal = () => {
         setConfirmLoading(true)
 
         if (!activeProfile.id) {
-            createProfilesAxiosRequest(prepareValues).then(data => {
-                onDataSuccess(data)
-            })
+            applyUserAction(createProfilesAxiosRequest, prepareValues)
         } else {
-            editProfileAxiosRequest(prepareValues, activeProfile.id).then(data => {
-                onDataSuccess(data)
-            })
+            const prepareData = {
+                ...prepareValues,
+                id: activeProfile.id
+            }
+            applyUserAction(editProfileAxiosRequest, prepareData)
         }
     }
 

@@ -16,8 +16,8 @@ import UserProfileModal from "./components/common/UserProfileModal";
 
 const  App = () => {
     const messageBoxData = useSelector(state => getMessageBoxSelect(state))
-  return (
-      <div>
+    return (
+        <div>
           <MessageBox messageBoxData={messageBoxData} />
           <UserProfileModal />
           <Routes>

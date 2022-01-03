@@ -8,7 +8,7 @@ const TOGGLE_IS_LOADER_PROFILE = 'TOGGLE_IS_LOADER_PROFILE'
 
 const initialState = {
     profiles: [],
-    selectedByAdminUserId: '',
+    selectedByAdminUser: {},
     isOpenModalProfile: false,
     activeProfile: initialUserValues,
     isLoader: false
@@ -25,7 +25,7 @@ const profileReducer = (state= initialState, action) => {
         case SELECTED_BY_ADMIN_USER_ID: {
             return {
                 ...state,
-                selectedByAdminUserId: action.payload
+                selectedByAdminUser: action.payload
             }
         }
         case TOGGLE_OPEN_MODAL_PROFILE: {
@@ -56,9 +56,9 @@ export const getProfilesCreator = (profiles) => ({
     type: GET_PROFILES,
     profiles
 })
-export const setSelectedByAdminUserIdCreator = (id) => ({
+export const setSelectedByAdminUserCreator = (user) => ({
     type: SELECTED_BY_ADMIN_USER_ID,
-    payload: id
+    payload: user
 })
 
 export const toggleIsOpenModalCreator = () => ({

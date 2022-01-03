@@ -1,14 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { List, message, Avatar, Skeleton, Divider } from 'antd';
 import InfiniteScroll from 'react-infinite-scroll-component';
-import {getUserProfilesAxiosRequest} from "../../api/usersApi";
-import {useSelector} from "react-redux";
+import {deleteProfileAxiosRequest, getUserProfilesAxiosRequest} from "../../api/usersApi";
+import {useDispatch, useSelector} from "react-redux";
+import {setActiveProfileCreator, toggleLoaderProfileCreator} from "../../redux/reducers/profileReducer";
+import {setMessageDataCreator} from "../../redux/reducers/authReducer";
 
 const CurrentUserProfiles = ({showModal}) => {
     const [loading, setLoading] = useState(false);
     const [userProfiles, setUserProfiles] = useState([]);
-
-    const currentUserId = useSelector(state => state.profile.selectedByAdminUserId)
+    const dispatch = useDispatch()
+    const currentUser = useSelector(state => state.profile.selectedByAdminUser)
 
     const loadMoreData = () => {
         if (loading) {
@@ -16,7 +18,7 @@ const CurrentUserProfiles = ({showModal}) => {
         }
         setLoading(true);
 
-        getUserProfilesAxiosRequest(currentUserId).then(data => {
+        getUserProfilesAxiosRequest(currentUser.id).then(data => {
             if (data.success) {
                 setUserProfiles(data.userProfiles)
             }
@@ -25,10 +27,26 @@ const CurrentUserProfiles = ({showModal}) => {
     };
 
     useEffect(() => {
-        if (currentUserId) {
+        if (currentUser.id) {
             loadMoreData();
         }
-    }, [currentUserId]);
+    }, [currentUser.id, loading]);
+
+    const editUser = (profile) => {
+        showModal()
+        dispatch(setActiveProfileCreator(profile))
+    }
+    const onProfileDelete = (id) => {
+        setLoading(true)
+        deleteProfileAxiosRequest(id).then(data => {
+            dispatch(setMessageDataCreator(data))
+            setLoading(false)
+
+            if (data.success) {
+                dispatch(toggleLoaderProfileCreator())
+            }
+        })
+    }
 
     return (
         <div
@@ -41,13 +59,12 @@ const CurrentUserProfiles = ({showModal}) => {
                 border: '1px solid rgba(140, 140, 140, 0.35)',
             }}
         >
-            <h1>User profiles:</h1>
+            <h1>User  profiles:</h1>
             <InfiniteScroll
                 dataLength={userProfiles.length}
                 next={loadMoreData}
                 hasMore={userProfiles.length > 50}
                 loader={<Skeleton avatar paragraph={{ rows: 1 }} active={loading} />}
-                endMessage={<Divider plain><div onClick={showModal}>Add profile +</div></Divider>}
                 scrollableTarget="scrollableDiv"
             >
                 <List
@@ -59,6 +76,8 @@ const CurrentUserProfiles = ({showModal}) => {
                             />
                             <div>{item.gender}</div>
                             <div>{item.city}</div>
+                            <div onClick={() => editUser(item)}>edit</div>
+                            <div onClick={() => onProfileDelete(item.id)}>delete</div>
                         </List.Item>
                     )}
                 />

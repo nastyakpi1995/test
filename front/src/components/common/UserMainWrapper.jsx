@@ -10,7 +10,6 @@ const UserMainWrapper = ({children}) => {
             <HeaderContainer />
              <Content>{children}</Content>
          </Layout>
-
      </div>
     )
 }

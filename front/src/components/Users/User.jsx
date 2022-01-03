@@ -4,7 +4,7 @@ import {DeleteOutlined, EditOutlined} from "@ant-design/icons";
 import {useDispatch} from "react-redux";
 import {deleteUserAxiosRequest} from "../../api/usersApi";
 import {setMessageDataCreator} from "../../redux/reducers/authReducer";
-import {setSelectedByAdminUserIdCreator} from "../../redux/reducers/profileReducer";
+import {setSelectedByAdminUserCreator} from "../../redux/reducers/profileReducer";
 
 const User = ({user, setActiveUser, setIsVisible, setIsLoader}) => {
     const { username, id, isadmin } = user;
@@ -16,7 +16,7 @@ const User = ({user, setActiveUser, setIsVisible, setIsLoader}) => {
     }
 
     const onClickUser = () => {
-        dispatch(setSelectedByAdminUserIdCreator(id))
+        dispatch(setSelectedByAdminUserCreator({id, username}))
     }
 
     const onDeleteProfile = () => {

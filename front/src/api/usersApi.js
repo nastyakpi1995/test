@@ -42,6 +42,7 @@ export const loginAxiosRequest = (body) => {
 }
 
 export const createProfilesAxiosRequest = (body) => {
+    debugger
    return axios.post(`${baseUrl}/private/profile/create`, {...body}, {headers: getHeaders()}).then(data => {
        return data.data
    }).catch(({response}) =>  response.data)
@@ -55,8 +56,8 @@ export const getProfilesAxiosRequest = () => {
     })
 }
 
-export const editProfileAxiosRequest = (body, id) => {
-    return axios.put(`${baseUrl}/private/profile/edit/${id}`, {...body}, {headers: getHeaders()}).then(data => {
+export const editProfileAxiosRequest = (body) => {
+    return axios.put(`${baseUrl}/private/profile/edit/${body.id}`, {...body}, {headers: getHeaders()}).then(data => {
         return data.data
     }).catch(({response}) =>  response.data)
 }

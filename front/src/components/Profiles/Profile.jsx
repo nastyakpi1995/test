@@ -14,7 +14,7 @@ const Profile = ({profile}) => {
     const { name, gender, city, id } = profile;
     const dispatch = useDispatch()
 
-    const OnEditProfile = useCallback(() => {
+    const onEditProfile = useCallback(() => {
         dispatch(toggleIsOpenModalCreator())
         dispatch(setActiveProfileCreator(profile))
     }, [])
@@ -31,7 +31,7 @@ const Profile = ({profile}) => {
     return (
             <Card
                 actions={[
-                    <EditOutlined onClick={OnEditProfile} key="edit" />,
+                    <EditOutlined onClick={onEditProfile} key="edit" />,
                     <DeleteOutlined onClick={onDeleteProfile}  key="delete" />,
                 ]}
                 hoverable style={{ width: 300, margin: 60, justifyContent: 'center', textAlign: 'center' }}>

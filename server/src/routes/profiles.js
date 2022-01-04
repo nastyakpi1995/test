@@ -24,6 +24,7 @@ router.put(`/profile/edit/:profileId`, verify, async (req, res) => {
 
 router.delete(`/profile/delete/:profileId`, verify, async (req,res) => {
     let {profileId} = req.params
+    console.log('profileId', profileId)
   return  ProfileController.deleteProfile(res, profileId)
 })
 

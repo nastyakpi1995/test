@@ -63,7 +63,7 @@ export const editProfileAxiosRequest = (body) => {
 export const deleteProfileAxiosRequest = (id) => {
     return axios.delete(`${baseUrl}/private/profile/delete/${id}`, {headers: getHeaders()}).then(data => {
         return data.data
-    }).catch(({response}) =>  response.data)
+    }).catch((response) =>  response.data)
 }
 export const adminDashboardAxiosRequest = (id) => {
     return axios.get(`${baseUrl}/admin/dashboard`, {headers: getHeaders()})
@@ -71,21 +71,19 @@ export const adminDashboardAxiosRequest = (id) => {
 export const usersAxiosRequest = () => {
     return axios.get(`${baseUrl}/admin/users`, {headers: getHeaders()})
 }
-export const getUserAndProfilesById = (userId) => {
+export const getUserDataById = (userId) => {
     return axios.get(`${baseUrl}/admin/user/${userId}`, {headers: getHeaders()})
 }
 
+// export const editUserAxiosRequest = (userId) => {
+//     return axios.put(`${baseUrl}/admin/user/${userId}`, )
+// }
 // export const editUserAxiosRequest = (values, id) => {
 //     return axios.put(`${baseUrl}/admin/user/${id}`,  {...values}, {headers: getHeaders()})
 // }
 // export const deleteUserAxiosRequest = (id) => {
 //     return axios.delete(`${baseUrl}/admin/user/${id}`, {headers: getHeaders()}).then(data => {
 //
-//         return data.data
-//     }).catch(({response}) =>  response.data)
-// }
-// export const getUserProfilesAxiosRequest = (id) => {
-//     return axios.get(`${baseUrl}/admin/user/profiles/${id}`, {headers: getHeaders()}).then(data => {
 //         return data.data
 //     }).catch(({response}) =>  response.data)
 // }

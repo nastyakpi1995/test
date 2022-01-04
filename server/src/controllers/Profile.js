@@ -30,7 +30,10 @@ class ProfileController {
         })
     }
     async deleteProfile(res, profileId) {
-        await db.query(`delete from profiles where id=$1`, [profileId])
+        const user = await db.query(`select * from profiles where id=$1`, [profileId])
+
+        const data = await db.query(`DELETE FROM profiles WHERE id=$1`, [profileId])
+        console.log('profileId 3333', profileId, user.rows, data)
 
         return res.status(200).send({
             success: true,

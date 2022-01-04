@@ -4,14 +4,18 @@ import {DeleteOutlined, EditOutlined} from "@ant-design/icons";
 import {deleteProfileAxiosRequest} from "../../api/usersApi";
 import {setMessageDataCreator} from "../../redux/reducers/authReducer";
 import {useDispatch} from "react-redux";
-import {setActiveProfileCreator, toggleLoaderProfileCreator} from "../../redux/reducers/profileReducer";
+import {
+    setActiveProfileCreator,
+    toggleIsOpenModalCreator,
+    toggleLoaderProfileCreator
+} from "../../redux/reducers/profileReducer";
 
-const Profile = ({profile, showModal}) => {
+const Profile = ({profile}) => {
     const { name, gender, city, id } = profile;
     const dispatch = useDispatch()
 
     const OnEditProfile = useCallback(() => {
-        showModal()
+        dispatch(toggleIsOpenModalCreator())
         dispatch(setActiveProfileCreator(profile))
     }, [])
 

@@ -24,7 +24,7 @@ const UserProfileModal = () => {
             dispatch(toggleIsOpenModalCreator())
             dispatch(toggleLoaderProfileCreator())
             dispatch(setActiveProfileCreator(initialUserValues))
-            form.setFieldsValue({initialUserValues})
+            form.setFieldsValue(activeProfile)
         }
         setConfirmLoading(false)
     }, [])
@@ -37,7 +37,7 @@ const UserProfileModal = () => {
 
     const handleCancel = useCallback(() => {
         dispatch(setActiveProfileCreator(initialUserValues))
-        form.setFieldsValue(initialUserValues)
+        form.setFieldsValue(activeProfile)
         dispatch(toggleIsOpenModalCreator())
     }, [])
 

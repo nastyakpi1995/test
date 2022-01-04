@@ -37,8 +37,7 @@ const Profiles = () => {
             <div style={{display: 'flex', flexWrap: 'wrap'}}>
                 {profiles.length >= 0 ? profiles.map((profile, idx) => (
                     <Profile key={idx}
-                             profile={profile}
-                             showModal={toggleIsOpenModal}/>
+                             profile={profile}/>
                 )) : null}
                 <NewProfile showModal={toggleIsOpenModal} />
             </div>

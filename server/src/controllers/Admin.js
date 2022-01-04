@@ -46,13 +46,6 @@ class AdminController {
     //         message: 'User was update successfully'
     //     })
     // }
-    // async getUserProfiles(userId, res) {
-    //     const userProfiles = await db.query(`select * from profiles where user_id=$1`, [userId]);
-    //     res.status(200).send({
-    //         success: true,
-    //         userProfiles: userProfiles.rows
-    //     })
-    // }
 }
 
 module.exports = new AdminController

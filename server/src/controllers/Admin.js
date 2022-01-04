@@ -26,22 +26,33 @@ class AdminController {
             success: true
         })
     }
-    async updateUser(user, id, res) {
-        await db.query(`update users set username=$1, isadmin=$2 where id=$3`, [user.username,  user.isadmin, id])
+    async getUserById(userId, res) {
+        const userById = await db.query(`select username, isadmin, email from users where id=$1`, [userId])
+        const userProfiles = await db.query(`select * from profiles where user_id=$1`, [userId]);
 
         res.status(200).send({
             success: true,
-            message: 'User was update successfully'
+            userData: {
+                user: userById.rows[0],
+                userProfiles: userProfiles.rows
+            }
         })
     }
-    async getUserProfiles(userId, res) {
-        const userProfiles = await db.query(`select * from profiles where user_id=$1`, [userId]);
-        console.log(userProfiles, 'ddddddddd')
-        res.status(200).send({
-            success: true,
-            userProfiles: userProfiles.rows
-        })
-    }
+    // async updateUser(user, id, res) {
+    //     await db.query(`update users set username=$1, isadmin=$2 where id=$3`, [user.username,  user.isadmin, id])
+    //
+    //     res.status(200).send({
+    //         success: true,
+    //         message: 'User was update successfully'
+    //     })
+    // }
+    // async getUserProfiles(userId, res) {
+    //     const userProfiles = await db.query(`select * from profiles where user_id=$1`, [userId]);
+    //     res.status(200).send({
+    //         success: true,
+    //         userProfiles: userProfiles.rows
+    //     })
+    // }
 }
 
 module.exports = new AdminController

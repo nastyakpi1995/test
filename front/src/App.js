@@ -1,9 +1,9 @@
 import './App.css';
-import {Routes, Route, BrowserRouter, Navigate} from "react-router-dom";
+import {Routes, Route, BrowserRouter} from "react-router-dom";
 import Login from "./components/Auth/Login";
 import {Provider, useSelector} from "react-redux";
 import store from "./redux/store";
-import React, {useEffect} from "react";
+import React from "react";
 import Registration from "./components/Auth/Registration";
 import MessageBox from "./components/common/MessageBox";
 import {getMessageBoxSelect} from "./redux/selects/auth";
@@ -13,6 +13,7 @@ import AdminRouter from "./components/common/AdminRouter";
 import Dashboard from "./components/Dashboard";
 import Users from "./components/Users";
 import UserProfileModal from "./components/common/UserProfileModal";
+import UserById from "./components/Users/UserById";
 
 const  App = () => {
     const messageBoxData = useSelector(state => getMessageBoxSelect(state))
@@ -26,6 +27,7 @@ const  App = () => {
               <Route path="/profiles" element={<PrivatRouter><Profiles /></PrivatRouter>} />
               <Route path="/dashboard" element={<AdminRouter><Dashboard /></AdminRouter>} />
               <Route path="/users" element={<AdminRouter><Users /></AdminRouter>} />
+              <Route path="/user/:userId" element={<AdminRouter><UserById /></AdminRouter>} />
           </Routes>
       </div>
   );

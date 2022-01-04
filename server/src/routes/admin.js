@@ -7,19 +7,26 @@ router.get(`/dashboard`, adminVerify, async (req, res) => {
 
     return AdminController.getDashboard(res)
 })
+
 router.get(`/users`, adminVerify, async (req, res) => {
     const {id} = req.user
     return AdminController.getUsers(res, id)
 })
-router.put(`/user/:profileId`, adminVerify, async (req, res) => {
-    const body = req.body
-    let {profileId} = req.params
 
-    return AdminController.updateUser(body, profileId, res)
+router.get(`/user/:userId`, adminVerify, async (req, res) => {
+    const {userId} = req.params;
+    return AdminController.getUserById(userId, res)
 })
-router.get(`/user/profiles/:userId`, adminVerify, async (req, res) => {
-    let {userId} = req.params
+// router.put(`/user/:profileId`, adminVerify, async (req, res) => {
+//     const body = req.body
+//     let {profileId} = req.params
 
-    return AdminController.getUserProfiles(userId, res)
-})
+//     return AdminController.updateUser(body, profileId, res)
+// })
+// router.get(`/user/profiles/:userId`, adminVerify, async (req, res) => {
+//     let {userId} = req.params
+//
+//     return AdminController.getUserProfiles(userId, res)
+// })
+
 module.exports = router

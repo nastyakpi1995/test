@@ -4,31 +4,29 @@ import NewProfile from "./NewProfile";
 import Profile from "./Profile";
 import {getProfilesAxiosRequest} from "../../api/usersApi";
 import {
-    getProfilesCreator,
     toggleIsOpenModalCreator,
     toggleLoaderProfileCreator
 } from "../../redux/reducers/profileReducer";
 import {useDispatch, useSelector} from "react-redux";
-import {getProfiles} from "../../redux/selects/profile";
 
 const Profiles = () => {
     const dispatch = useDispatch();
-    const profiles = useSelector(state => getProfiles(state))
     const toggleIsOpenModal = useCallback(() => dispatch(toggleIsOpenModalCreator()), [])
     const isLoader = useSelector(state => state.profile.isLoader)
+    const [profiles, setProfiles] = useState([])
 
     useEffect(() => {
         if (isLoader) {
-            getProfilesAxiosRequest().then((data) => {
-                dispatch(getProfilesCreator(data?.data))
+            getProfilesAxiosRequest().then(({data}) => {
+                setProfiles(data)
                 dispatch(toggleLoaderProfileCreator())
             })
         }
     }, [isLoader])
 
     useEffect(() => {
-        getProfilesAxiosRequest().then((data) => {
-            dispatch(getProfilesCreator(data?.data))
+        getProfilesAxiosRequest().then(({data}) => {
+            setProfiles(data)
         })
     }, [])
 

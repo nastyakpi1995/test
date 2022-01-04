@@ -1,14 +1,10 @@
 import {initialUserValues} from "../../utils/helpers";
 
-const GET_PROFILES = 'ADD_PROFILE'
-const SELECTED_BY_ADMIN_USER_ID = 'SELECTED_BY_ADMIN_USER'
 const TOGGLE_OPEN_MODAL_PROFILE = 'IS_OPEN_MODAL_PROFILE'
 const SET_ACTIVE_PROFILE = 'SET_ACTIVE_PROFILE'
 const TOGGLE_IS_LOADER_PROFILE = 'TOGGLE_IS_LOADER_PROFILE'
 
 const initialState = {
-    profiles: [],
-    selectedByAdminUser: {},
     isOpenModalProfile: false,
     activeProfile: initialUserValues,
     isLoader: false
@@ -16,18 +12,6 @@ const initialState = {
 
 const profileReducer = (state= initialState, action) => {
     switch (action.type) {
-        case GET_PROFILES: {
-            return {
-                ...state,
-                profiles: action.profiles,
-            }
-        }
-        case SELECTED_BY_ADMIN_USER_ID: {
-            return {
-                ...state,
-                selectedByAdminUser: action.payload
-            }
-        }
         case TOGGLE_OPEN_MODAL_PROFILE: {
             return {
                 ...state,
@@ -52,14 +36,6 @@ const profileReducer = (state= initialState, action) => {
     }
 }
 
-export const getProfilesCreator = (profiles) => ({
-    type: GET_PROFILES,
-    profiles
-})
-export const setSelectedByAdminUserCreator = (user) => ({
-    type: SELECTED_BY_ADMIN_USER_ID,
-    payload: user
-})
 
 export const toggleIsOpenModalCreator = () => ({
     type: TOGGLE_OPEN_MODAL_PROFILE,

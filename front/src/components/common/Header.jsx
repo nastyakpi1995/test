@@ -62,7 +62,6 @@ const HeaderContainer = () => {
                                 <Menu.Item key="3" icon={<UsergroupDeleteOutlined />}><NavLink to={'/users'}>Users</NavLink> </Menu.Item>
                             </Menu>
                         ) : null}
-
                     </div>
                 </Header>
     )

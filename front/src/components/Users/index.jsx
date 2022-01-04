@@ -5,7 +5,6 @@ import {setMessageDataCreator} from "../../redux/reducers/authReducer";
 import {useDispatch} from "react-redux";
 import User from "./User";
 import EditModalUser from "./EditModalUser";
-import CurrentUserProfiles from "./CurrentUserProfiles";
 import {toggleIsOpenModalCreator} from "../../redux/reducers/profileReducer";
 
 const Users = () => {
@@ -16,12 +15,18 @@ const Users = () => {
     const dispatch = useDispatch()
     const showModal = useCallback(() => dispatch(toggleIsOpenModalCreator()), [])
 
+    const prepareMessageDataFailed = {
+        isVisible: true,
+        message: 'you server not start',
+        success: false
+    }
     useEffect(() => {
         if (isLoader) {
+
             usersAxiosRequest().then(({data}) => {
                 setUsers(data.users)
-            }).catch(({response}) => {
-                dispatch(setMessageDataCreator(response.data))
+            }).catch((data) => {
+                dispatch(setMessageDataCreator(prepareMessageDataFailed))
             })
             setIsLoader(false)
         }
@@ -30,8 +35,8 @@ const Users = () => {
     useEffect(() => {
         usersAxiosRequest().then(({data}) => {
             setUsers(data.users)
-        }).catch(({response}) => {
-            dispatch(setMessageDataCreator(response.data))
+        }).catch((data) => {
+            dispatch(setMessageDataCreator(prepareMessageDataFailed))
         })
     }, [])
 
@@ -43,7 +48,6 @@ const Users = () => {
                     <User setIsLoader={setIsLoader} setIsVisible={setIsVisible} setActiveUser={setActiveUser} user={user} />
                 )) : null}
             </div>
-            <CurrentUserProfiles showModal={showModal} />
         </div>
     </UserMainWrapper>
 

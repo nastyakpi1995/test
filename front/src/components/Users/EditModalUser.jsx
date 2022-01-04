@@ -1,7 +1,6 @@
 import React, {useEffect, useState} from "react";
 import {Checkbox, DatePicker, Form, Input, Modal, Radio} from "antd";
 import {useDispatch} from "react-redux";
-import {createProfilesAxiosRequest, editProfileAxiosRequest, editUserAxiosRequest} from "../../api/usersApi";
 import {setMessageDataCreator} from "../../redux/reducers/authReducer";
 
 const EditModalUser = ({activeUser, isVisible, setIsVisible, setIsLoader}) => {
@@ -29,10 +28,10 @@ const EditModalUser = ({activeUser, isVisible, setIsVisible, setIsLoader}) => {
     const onFinish = (values) => {
         setConfirmLoading(true)
 
-        editUserAxiosRequest(values, activeUser.id).then(data => {
-            onDataSuccess(data.data)
-            setConfirmLoading(false)
-        })
+        // editUserAxiosRequest(values, activeUser.id).then(data => {
+        //     onDataSuccess(data.data)
+        //     setConfirmLoading(false)
+        // })
     }
 
     const onOk = () => {

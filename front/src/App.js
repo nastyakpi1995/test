@@ -14,6 +14,7 @@ import Dashboard from "./components/Dashboard";
 import Users from "./components/Users";
 import UserProfileModal from "./components/common/UserProfileModal";
 import UserById from "./components/Users/UserById";
+import NotFoundRoute from "./components/NotFoundRoute";
 
 const  App = () => {
     const messageBoxData = useSelector(state => getMessageBoxSelect(state))
@@ -28,6 +29,7 @@ const  App = () => {
               <Route path="/dashboard" element={<AdminRouter><Dashboard /></AdminRouter>} />
               <Route path="/users" element={<AdminRouter><Users /></AdminRouter>} />
               <Route path="/user/:userId" element={<AdminRouter><UserById /></AdminRouter>} />
+              <Route path="*" element={<NotFoundRoute />} />
           </Routes>
       </div>
   );

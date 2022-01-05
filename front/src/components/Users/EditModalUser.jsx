@@ -26,6 +26,7 @@ const EditModalUser = ({activeUser, isVisible, setIsVisible, setActiveUser}) => 
     const handleCancel = () => {
         form.setFieldsValue(initialUserValues)
         setIsVisible(false)
+        setActiveUser(initialUserValues)
     }
 
     const onFinish = (values) => {
@@ -58,6 +59,18 @@ const EditModalUser = ({activeUser, isVisible, setIsVisible, setActiveUser}) => 
                         const value = e.target.value;
                         form.setFieldsValue({
                             'name': value
+                        })
+                    }} />
+                </Form.Item>
+                <Form.Item
+                    label="Email"
+                    name="email"
+                    rules={[{ required: true, message: 'Please input your user email !' }]}
+                >
+                    <Input onChange={(e) => {
+                        const value = e.target.value;
+                        form.setFieldsValue({
+                            'email': value
                         })
                     }} />
                 </Form.Item>

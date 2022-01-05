@@ -25,4 +25,9 @@ router.put(`/user/:userId`, adminVerify, async (req, res) => {
     return AdminController.updateUser(body, userId, res)
 })
 
+router.delete(`/user/:userId`, adminVerify, async (req, res) => {
+    let {userId} = req.params
+
+    return AdminController.deleteUser(userId, res)
+})
 module.exports = router

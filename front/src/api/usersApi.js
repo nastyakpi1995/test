@@ -79,9 +79,8 @@ export const editUserAxiosRequest = (values, userId) => {
     return axios.put(`${baseUrl}/admin/user/${userId}`,{...values}, {headers: getHeaders()})
 }
 
-// export const deleteUserAxiosRequest = (id) => {
-//     return axios.delete(`${baseUrl}/admin/user/${id}`, {headers: getHeaders()}).then(data => {
-//
-//         return data.data
-//     }).catch(({response}) =>  response.data)
-// }
+export const deleteUserAxiosRequest = (id) => {
+    return axios.delete(`${baseUrl}/admin/user/${id}`, {headers: getHeaders()}).then(data => {
+        return data.data
+    }).catch((response) =>  response.data)
+}

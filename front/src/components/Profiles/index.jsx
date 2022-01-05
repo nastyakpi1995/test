@@ -1,5 +1,5 @@
 import React, {useCallback, useEffect, useState} from "react";
-import UserMainWrapper from "../common/UserMainWrapper";
+import HeaderWrapper from "../common/HeaderWrapper";
 import NewProfile from "./NewProfile";
 import Profile from "./Profile";
 import {getProfilesAxiosRequest} from "../../api/usersApi";
@@ -33,7 +33,7 @@ const Profiles = () => {
     if (isLoader) return <div>loader</div>
 
     return (
-        <UserMainWrapper>
+        <HeaderWrapper>
             <div style={{display: 'flex', flexWrap: 'wrap'}}>
                 {profiles.length >= 0 ? profiles.map((profile, idx) => (
                     <Profile key={idx}
@@ -41,8 +41,9 @@ const Profiles = () => {
                 )) : null}
                 <NewProfile showModal={toggleIsOpenModal} />
             </div>
-        </UserMainWrapper>
+        </HeaderWrapper>
     )
 }
+
 
 export default Profiles

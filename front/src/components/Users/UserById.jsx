@@ -1,6 +1,6 @@
 import React, {useState, useEffect, useCallback} from 'react';
 import {useNavigate, useParams} from "react-router-dom";
-import UserMainWrapper from "../common/UserMainWrapper";
+import HeaderWrapper from "../common/HeaderWrapper";
 import Profile from "../Profiles/Profile";
 import {deleteUserAxiosRequest, getUserDataById} from "../../api/usersApi";
 import {useDispatch, useSelector} from "react-redux";
@@ -10,6 +10,7 @@ import EditModalUser from "./EditModalUser";
 import {initialUserValues} from "../../utils/helpers";
 import {setMessageDataCreator} from "../../redux/reducers/authReducer";
 import {toggleLoaderProfileCreator} from "../../redux/reducers/profileReducer";
+import styled from "styled-components";
 
 const UserById = () => {
     const {userId} = useParams()
@@ -46,34 +47,55 @@ const UserById = () => {
             dispatch(setMessageDataCreator(data))
             if (data.success) {
                 dispatch(toggleLoaderProfileCreator())
+                navigator('/users')
             }
         })
-        navigator('/users')
     }
 
     return (
-        <UserMainWrapper>
-            <EditModalUser  isVisible={isModalVisible} setIsVisible={setIsModalVisible} activeUser={activeUser} setActiveUser={setActiveUser} />
-            <div style={{display: 'flex', justifyContent: 'center'}}>
-                <Card
-                    actions={[
-                        <EditOutlined onClick={onEditUser} key="edit" />,
-                        <DeleteOutlined onClick={onDeleteUser}  key="delete" />,
-                    ]}
-                    hoverable style={{ width: 300, margin: 60, justifyContent: 'center', textAlign: 'center' }}>
-                    <p>User: {userData.user?.username}</p>
-                    <p>{userData.user?.email}</p>
-                </Card>
-            </div>
-            <h1 style={{textAlign: 'center'}}>{userData.user?.username} profiles</h1>
-            <div style={{display: 'flex', flexWrap: 'wrap'}}>
+        <HeaderWrapper>
+            <EditModalUser isVisible={isModalVisible}
+                           setIsVisible={setIsModalVisible}
+                           activeUser={activeUser}
+                           setActiveUser={setActiveUser} />
+            <WrapUserCard>
+                <CardUser hoverable
+                          actions={[<EditOutlined onClick={onEditUser} key="edit" />,
+                              <DeleteOutlined onClick={onDeleteUser}  key="delete" />]}
+                    >
+                    <UserInfo>User: {userData.user?.username}</UserInfo>
+                    <UserInfo>{userData.user?.email}</UserInfo>
+                </CardUser>
+            </WrapUserCard>
+            <Title>{userData.user?.username} profiles</Title>
+            <ProfilesWrap>
                 {userData.userProfiles?.length >= 0 ? userData.userProfiles.map((profile, idx) => (
                     <Profile key={idx}
                              profile={profile}/>
                 )) : null}
-            </div>
-        </UserMainWrapper>
+            </ProfilesWrap>
+        </HeaderWrapper>
     )
 };
 
+const WrapUserCard = styled.div`
+  display: flex;
+  justify-content: center;
+`;
+const CardUser = styled(Card)`
+  width: 300px;
+  margin: 60px;
+  justify-content: center;
+  text-align: center;
+`;
+const Title = styled.h1`
+  text-align: center;
+`
+const ProfilesWrap = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+`
+const UserInfo = styled.p`
+    font-size: 16px;
+`
 export default UserById

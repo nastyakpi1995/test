@@ -3,7 +3,7 @@ import {Layout} from "antd";
 import HeaderContainer from "./Header";
 
 const {Content} = Layout
-const UserMainWrapper = ({children}) => {
+const HeaderWrapper = ({children}) => {
     return (
      <div>
          <Layout>
@@ -14,4 +14,4 @@ const UserMainWrapper = ({children}) => {
     )
 }
 
-export default UserMainWrapper
+export default HeaderWrapper

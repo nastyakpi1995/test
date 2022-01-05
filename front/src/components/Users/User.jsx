@@ -1,20 +1,30 @@
 import React from "react";
 import {Card} from "antd";
 import {Link} from "react-router-dom";
+import styled from "styled-components";
 
 const User = ({user}) => {
     const { username, id } = user;
 
     return (
-        <Card hoverable
-              style={{ width: 300, height: 150, margin: 60, justifyContent: 'center', textAlign: 'center' }}>
+        <MyCard hoverable>
              <Link to={`/user/${id}`}>
-                 <p>user: </p>
-                 <p>name: {username}</p>
-                 <p>id: {id}</p>
+                 <UserInfo>user: </UserInfo>
+                 <UserInfo>name: {username}</UserInfo>
+                 <UserInfo>id: {id}</UserInfo>
              </Link>
-        </Card>
+        </MyCard>
     )
 }
+const MyCard = styled(Card)`
+  width: 300px;
+  height: 150px;
+  margin: 60px;
+  justify-content: center;
+  text-align: center
+`
+const UserInfo = styled.p`
+    font-size: 16px;
+`
 
 export default User

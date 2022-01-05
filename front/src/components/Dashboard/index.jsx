@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import UserMainWrapper from "../common/UserMainWrapper";
+import HeaderWrapper from "../common/HeaderWrapper";
 import Information from "./Information";
 import {adminDashboardAxiosRequest} from "../../api/usersApi";
 import {useDispatch} from "react-redux";
@@ -18,13 +18,13 @@ const Dashboard = () => {
     }, [])
 
     return (
-        <UserMainWrapper>
+        <HeaderWrapper>
             <div style={{display: 'flex', height: '100vh'}}>
                 <Information name={'profiles'} counts={counts?.profiles} />
                 <Information name={'users'} counts={counts?.usersCount}/>
                 <Information name={'profile with Kiev'} counts={counts?.profileKiev} />
             </div>
-        </UserMainWrapper>
+        </HeaderWrapper>
         )
 }
 

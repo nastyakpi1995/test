@@ -9,6 +9,7 @@ import {
     toggleIsOpenModalCreator,
     toggleLoaderProfileCreator
 } from "../../redux/reducers/profileReducer";
+import styled from "styled-components";
 
 const Profile = ({profile}) => {
     const { name, gender, city, id } = profile;
@@ -29,17 +30,25 @@ const Profile = ({profile}) => {
     }, [])
 
     return (
-            <Card
-                actions={[
-                    <EditOutlined onClick={onEditProfile} key="edit" />,
-                    <DeleteOutlined onClick={onDeleteProfile}  key="delete" />,
-                ]}
-                hoverable style={{ width: 300, margin: 60, justifyContent: 'center', textAlign: 'center' }}>
-                <p>{name}</p>
-                <p>{gender}</p>
-                <p>{city}</p>
-            </Card>
+            <CardProfile hoverable
+                         actions={[
+                             <EditOutlined onClick={onEditProfile} key="edit" />,
+                             <DeleteOutlined onClick={onDeleteProfile}  key="delete" />
+                         ]}>
+                <CardItem>{name}</CardItem>
+                <CardItem>{gender}</CardItem>
+                <CardItem>{city}</CardItem>
+            </CardProfile>
     )
 }
 
+const CardProfile = styled(Card)`
+  width: 300px;
+  margin: 60px;
+  justify-content: center;
+  text-align: center;
+`
+const CardItem = styled.p`
+    font-size: 16px;
+`
 export default Profile

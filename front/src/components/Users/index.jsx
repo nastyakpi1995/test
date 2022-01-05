@@ -1,9 +1,10 @@
 import React, {useEffect, useState} from "react";
-import UserMainWrapper from "../common/UserMainWrapper";
+import HeaderWrapper from "../common/HeaderWrapper";
 import { usersAxiosRequest} from "../../api/usersApi";
 import {setMessageDataCreator} from "../../redux/reducers/authReducer";
 import {useDispatch} from "react-redux";
 import User from "./User";
+import styled from "styled-components";
 
 const Users = () => {
     const [users, setUsers] = useState(null);
@@ -34,16 +35,25 @@ const Users = () => {
         })
     }, [])
 
-    return <UserMainWrapper>
-        <div  style={{display: 'flex', height: '100vh', maxWidth: '1800px', justifyContent: 'space-between'}}>
-            <div style={{display: 'flex'}}>
+    return <HeaderWrapper>
+        <UserWrap>
+            <UsersContent>
                 {users ? users.map(user => (
                     <User user={user} />
                 )) : null}
-            </div>
-        </div>
-    </UserMainWrapper>
-
+            </UsersContent>
+        </UserWrap>
+    </HeaderWrapper>
 }
+
+const UserWrap = styled.div`
+  display: flex;
+  height: 100vh;
+  max-width: 1800px;
+  justify-content: space-between;
+`
+const UsersContent = styled.div`
+  display: flex;
+`
 
 export default Users

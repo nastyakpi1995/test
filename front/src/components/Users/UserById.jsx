@@ -1,13 +1,13 @@
 import React, {useState, useEffect, useCallback} from 'react';
 import {useNavigate, useParams} from "react-router-dom";
 import HeaderWrapper from "../common/HeaderWrapper";
-import Profile from "../Profiles/Profile";
+import ProfileCard from "../common/ProfileCard";
 import {deleteUserAxiosRequest, getUserDataById} from "../../api/usersApi";
 import {useDispatch, useSelector} from "react-redux";
 import {Card} from "antd";
 import {DeleteOutlined, EditOutlined} from "@ant-design/icons";
 import EditModalUser from "./EditModalUser";
-import {initialUserValues} from "../../utils/helpers";
+import {initialUserValues} from "../../utils/constants";
 import {setMessageDataCreator} from "../../redux/reducers/authReducer";
 import {toggleLoaderProfileCreator} from "../../redux/reducers/profileReducer";
 import styled from "styled-components";
@@ -23,7 +23,6 @@ const UserById = () => {
     const navigator = useNavigate()
     const fetchGetUserDataById = () => {
         getUserDataById(userId).then(({data}) => {
-
             setUserData(data.userData)
         })
     }
@@ -34,6 +33,7 @@ const UserById = () => {
     useEffect(() => {
         if (isLoader) {
             fetchGetUserDataById()
+            dispatch(toggleLoaderProfileCreator())
         }
     }, [isLoader])
 
@@ -46,7 +46,6 @@ const UserById = () => {
         deleteUserAxiosRequest(userData.user.id).then(data => {
             dispatch(setMessageDataCreator(data))
             if (data.success) {
-                dispatch(toggleLoaderProfileCreator())
                 navigator('/users')
             }
         })
@@ -70,8 +69,8 @@ const UserById = () => {
             <Title>{userData.user?.username} profiles</Title>
             <ProfilesWrap>
                 {userData.userProfiles?.length >= 0 ? userData.userProfiles.map((profile, idx) => (
-                    <Profile key={idx}
-                             profile={profile}/>
+                    <ProfileCard key={idx}
+                                 profile={profile}/>
                 )) : null}
             </ProfilesWrap>
         </HeaderWrapper>

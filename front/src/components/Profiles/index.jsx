@@ -1,7 +1,7 @@
 import React, {useCallback, useEffect, useState} from "react";
 import HeaderWrapper from "../common/HeaderWrapper";
 import NewProfile from "./NewProfile";
-import Profile from "./Profile";
+import ProfileCard from "../common/ProfileCard";
 import {getProfilesAxiosRequest} from "../../api/usersApi";
 import {
     toggleIsOpenModalCreator,
@@ -9,10 +9,12 @@ import {
 } from "../../redux/reducers/profileReducer";
 import {useDispatch, useSelector} from "react-redux";
 import styled from "styled-components";
+import {Col, Row} from "antd";
 
 const Profiles = () => {
     const dispatch = useDispatch();
-    const toggleIsOpenModal = useCallback(() => dispatch(toggleIsOpenModalCreator()), [])
+    const toggleIsOpenModal = () => dispatch(toggleIsOpenModalCreator())
+
     const isLoader = useSelector(state => state.profile.isLoader)
     const [profiles, setProfiles] = useState([])
 
@@ -37,8 +39,7 @@ const Profiles = () => {
         <HeaderWrapper>
             <ProfilesContainer>
                 {profiles.length >= 0 ? profiles.map((profile, idx) => (
-                    <Profile key={idx}
-                             profile={profile}/>
+                    <ProfileCard key={idx} profile={profile}/>
                 )) : null}
                 <NewProfile showModal={toggleIsOpenModal} />
             </ProfilesContainer>

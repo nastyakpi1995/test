@@ -3,12 +3,15 @@ import {DatePicker, Form, Input, Modal, Radio} from "antd";
 import {useDispatch, useSelector} from "react-redux";
 import {createProfilesAxiosRequest, editProfileAxiosRequest} from "../../api/usersApi";
 import {setMessageDataCreator} from "../../redux/reducers/authReducer";
-import {initialProfileValues} from "../../utils/helpers";
 import {
     setActiveProfileCreator,
     toggleIsOpenModalCreator,
     toggleLoaderProfileCreator
 } from "../../redux/reducers/profileReducer";
+import {locale} from "moment";
+import moment from "moment";
+import {initialProfileValues} from "../../utils/constants";
+import {getFormatedData} from "../../utils/helpers";
 
 const UserProfileModal = () => {
     const [confirmLoading, setConfirmLoading] = useState(false)
@@ -31,7 +34,8 @@ const UserProfileModal = () => {
 
     useEffect(() => {
         if (activeProfile) {
-            form.setFieldsValue(activeProfile)
+            const formatDate = {...activeProfile, birthdate:getFormatedData(activeProfile.birthdate)}
+            form.setFieldsValue(formatDate)
         }
     }, [activeProfile])
 
@@ -49,7 +53,7 @@ const UserProfileModal = () => {
     const onFinish = (values) => {
         const prepareValues = {
             ...values,
-            // birthdate: values.birthdate._d
+            birthdate: moment(new Date(values.birthdate)).format("DD.MM.YYYY")
         }
         setConfirmLoading(true)
 
@@ -101,13 +105,13 @@ const UserProfileModal = () => {
                 >
                     <Input />
                 </Form.Item>
-                {/*<Form.Item*/}
-                {/*    label="Birthday"*/}
-                {/*    name="birthdate"*/}
-                {/*    rules={[{ required: true, message: 'Please input your birthdate!' }]}*/}
-                {/*>*/}
-                {/*    <DatePicker />*/}
-                {/*</Form.Item>*/}
+                <Form.Item
+                    label="birthdate"
+                    name="birthdate"
+                    rules={[{ required: true, message: 'Please input date' }]}
+                >
+                    <DatePicker locale={locale} format={'DD.MM.YYYY'}/>
+                </Form.Item>
             </Form>
         </Modal>
     )

@@ -1,4 +1,4 @@
-import {initialProfileValues} from "../../utils/helpers";
+import {initialProfileValues} from "../../utils/constants";
 
 const TOGGLE_OPEN_MODAL_PROFILE = 'TOGGLE_OPEN_MODAL_PROFILE'
 const SET_ACTIVE_PROFILE = 'SET_ACTIVE_PROFILE'

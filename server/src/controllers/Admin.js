@@ -4,18 +4,17 @@ const db = require('../config/db')
 
 class AdminController {
     async getDashboard(res) {
-        const users = await UserModel.getUsersId()
-        const profiles = await ProfileModel.getProfilesCity()
-        const profileKiev = profiles.rows.filter(el => el.city.toLowerCase() === 'kiev')
-
+        const users = await db.query(`SELECT id FROM users`).catch(console.log);
+        const profiles = await db.query(`SELECT birthdate FROM profiles`).catch(console.log);
+        const profilesAdult = profiles.rows.filter(el => {
+            const todayYear = new Date().getFullYear()
+            const currentYear = el.birthdate.split('.')[2]
+            return todayYear - currentYear >= 18
+        })
         res.status(200).send({
-            success: true,
+            success:true,
             message: '',
-            data: {
-                usersCount: users.rowCount,
-                profiles: profiles.rows.length,
-                profileKiev: profileKiev.length
-            }
+            data:[{count: users.rowCount,name:"users"}, {count: profiles.rowCount,name:"profiles"}, {count: profilesAdult.length,name:"adult"}]
         })
     }
     async getUsers(res, adminId) {

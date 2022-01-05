@@ -3,7 +3,7 @@ import {Checkbox, DatePicker, Form, Input, Modal, Radio} from "antd";
 import {useDispatch} from "react-redux";
 import {setMessageDataCreator} from "../../redux/reducers/authReducer";
 import {toggleLoaderProfileCreator} from "../../redux/reducers/profileReducer";
-import {initialUserValues} from "../../utils/helpers";
+import {initialUserValues} from "../../utils/constants";
 import {editUserAxiosRequest} from "../../api/usersApi";
 
 const EditModalUser = ({activeUser, isVisible, setIsVisible, setActiveUser}) => {
@@ -34,6 +34,7 @@ const EditModalUser = ({activeUser, isVisible, setIsVisible, setActiveUser}) => 
 
         editUserAxiosRequest(values, activeUser.id).then(data => {
             onDataSuccess(data.data)
+            dispatch(toggleLoaderProfileCreator())
             setConfirmLoading(false)
         })
     }

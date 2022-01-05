@@ -38,8 +38,8 @@ const Users = () => {
     return <HeaderWrapper>
         <UserWrap>
             <UsersContent>
-                {users ? users.map(user => (
-                    <User user={user} />
+                {users ? users.map((user, index) => (
+                    <User key={index} user={user} />
                 )) : null}
             </UsersContent>
         </UserWrap>

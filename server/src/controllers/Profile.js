@@ -19,14 +19,14 @@ class ProfileController {
 
         return res.status(200).send({
             success: true,
-            message: 'Profile was create successfully'
+            message: 'ProfileCard was create successfully'
         })
     }
     async updateProfile(profile, res, profileId) {
         await db.query(`update profiles set name=$1, city=$2, gender=$3 where id=$4`, [profile.name, profile.city, profile.gender, profileId])
         return res.status(200).send({
             success: true,
-            message: 'Profile was update successfully'
+            message: 'ProfileCard was update successfully'
         })
     }
     async deleteProfile(res, profileId) {
@@ -36,7 +36,7 @@ class ProfileController {
 
         return res.status(200).send({
             success: true,
-            message: 'Profile was delete successfully'
+            message: 'ProfileCard was delete successfully'
         })
     }
 }

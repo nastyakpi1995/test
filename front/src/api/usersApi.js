@@ -65,7 +65,7 @@ export const deleteProfileAxiosRequest = (id) => {
         return data.data
     }).catch((response) =>  response.data)
 }
-export const adminDashboardAxiosRequest = (id) => {
+export const adminDashboardAxiosRequest = () => {
     return axios.get(`${baseUrl}/admin/dashboard`, {headers: getHeaders()})
 }
 export const usersAxiosRequest = () => {

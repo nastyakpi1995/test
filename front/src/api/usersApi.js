@@ -35,7 +35,7 @@ export const loginAxiosRequest = (body) => {
        const prepareData = {
            data,
            success: false,
-           message: 'Yo can not login, server did not run'
+           message: data.message ? data.message : 'Yo can not login, server did not run'
        }
        return prepareData
    })

@@ -1,12 +1,12 @@
-import {initialUserValues} from "../../utils/helpers";
+import {initialProfileValues} from "../../utils/helpers";
 
-const TOGGLE_OPEN_MODAL_PROFILE = 'IS_OPEN_MODAL_PROFILE'
+const TOGGLE_OPEN_MODAL_PROFILE = 'TOGGLE_OPEN_MODAL_PROFILE'
 const SET_ACTIVE_PROFILE = 'SET_ACTIVE_PROFILE'
 const TOGGLE_IS_LOADER_PROFILE = 'TOGGLE_IS_LOADER_PROFILE'
 
 const initialState = {
     isOpenModalProfile: false,
-    activeProfile: initialUserValues,
+    activeProfile: initialProfileValues,
     isLoader: false
 }
 

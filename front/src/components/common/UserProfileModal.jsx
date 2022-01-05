@@ -3,7 +3,7 @@ import {DatePicker, Form, Input, Modal, Radio} from "antd";
 import {useDispatch, useSelector} from "react-redux";
 import {createProfilesAxiosRequest, editProfileAxiosRequest} from "../../api/usersApi";
 import {setMessageDataCreator} from "../../redux/reducers/authReducer";
-import {initialUserValues} from "../../utils/helpers";
+import {initialProfileValues} from "../../utils/helpers";
 import {
     setActiveProfileCreator,
     toggleIsOpenModalCreator,
@@ -23,7 +23,7 @@ const UserProfileModal = () => {
         if (data.success) {
             dispatch(toggleIsOpenModalCreator())
             dispatch(toggleLoaderProfileCreator())
-            dispatch(setActiveProfileCreator(initialUserValues))
+            dispatch(setActiveProfileCreator(initialProfileValues))
             form.setFieldsValue(activeProfile)
         }
         setConfirmLoading(false)
@@ -36,7 +36,7 @@ const UserProfileModal = () => {
     }, [activeProfile])
 
     const handleCancel = useCallback(() => {
-        dispatch(setActiveProfileCreator(initialUserValues))
+        dispatch(setActiveProfileCreator(initialProfileValues))
         form.setFieldsValue(activeProfile)
         dispatch(toggleIsOpenModalCreator())
     }, [])

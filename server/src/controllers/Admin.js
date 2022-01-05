@@ -38,14 +38,14 @@ class AdminController {
             }
         })
     }
-    // async updateUser(user, id, res) {
-    //     await db.query(`update users set username=$1, isadmin=$2 where id=$3`, [user.username,  user.isadmin, id])
-    //
-    //     res.status(200).send({
-    //         success: true,
-    //         message: 'User was update successfully'
-    //     })
-    // }
+    async updateUser(user, userId, res) {
+        await db.query(`update users set username=$1, isadmin=$2, email=$3 where id=$3`, [user.username,  user.isadmin, user.email, userId])
+
+        res.status(200).send({
+            success: true,
+            message: 'User was update successfully'
+        })
+    }
 }
 
 module.exports = new AdminController

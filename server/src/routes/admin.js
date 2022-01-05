@@ -17,11 +17,12 @@ router.get(`/user/:userId`, adminVerify, async (req, res) => {
     const {userId} = req.params;
     return AdminController.getUserById(userId, res)
 })
-// router.put(`/user/:profileId`, adminVerify, async (req, res) => {
-//     const body = req.body
-//     let {profileId} = req.params
 
-//     return AdminController.updateUser(body, profileId, res)
-// })
+router.put(`/user/:userId`, adminVerify, async (req, res) => {
+    const body = req.body
+    let {userId} = req.params
+
+    return AdminController.updateUser(body, userId, res)
+})
 
 module.exports = router

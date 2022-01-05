@@ -7,13 +7,14 @@ import {useSelector} from "react-redux";
 import {Card} from "antd";
 import {DeleteOutlined, EditOutlined} from "@ant-design/icons";
 import EditModalUser from "./EditModalUser";
-import {toggleIsOpenModalCreator} from "../../redux/reducers/profileReducer";
+import {initialUserValues} from "../../utils/helpers";
 
 const UserById = () => {
     const {userId} = useParams()
     const [userData, setUserData] = useState({})
     const isLoader = useSelector(state => state.profile.isLoader)
-
+    const [isModalVisible, setIsModalVisible] = useState(false)
+    const [activeUser, setActiveUser] = useState(initialUserValues)
 
     const fetchGetUserDataById = () => {
         getUserDataById(userId).then(({data}) => {
@@ -31,7 +32,8 @@ const UserById = () => {
     }, [isLoader])
 
     const onEditUser = () => {
-        // editUserAxiosRequest(userData.user.id)
+        setIsModalVisible(true)
+        setActiveUser(userData.user)
     }
 
     const onDeleteUser = () => {
@@ -40,7 +42,7 @@ const UserById = () => {
 
     return (
         <UserMainWrapper>
-            {/*<EditModalUser setIsLoader={setIsLoader} isVisible={isVisible} setIsVisible={setIsVisible} activeUser={activeUser}/>*/}
+            <EditModalUser  isVisible={isModalVisible} setIsVisible={setIsModalVisible} activeUser={activeUser} setActiveUser={setActiveUser} />
             <div>
                 <Card
                     actions={[

@@ -75,12 +75,10 @@ export const getUserDataById = (userId) => {
     return axios.get(`${baseUrl}/admin/user/${userId}`, {headers: getHeaders()})
 }
 
-// export const editUserAxiosRequest = (userId) => {
-//     return axios.put(`${baseUrl}/admin/user/${userId}`, )
-// }
-// export const editUserAxiosRequest = (values, id) => {
-//     return axios.put(`${baseUrl}/admin/user/${id}`,  {...values}, {headers: getHeaders()})
-// }
+export const editUserAxiosRequest = (values, userId) => {
+    return axios.put(`${baseUrl}/admin/user/${userId}`,{...values}, {headers: getHeaders()})
+}
+
 // export const deleteUserAxiosRequest = (id) => {
 //     return axios.delete(`${baseUrl}/admin/user/${id}`, {headers: getHeaders()}).then(data => {
 //

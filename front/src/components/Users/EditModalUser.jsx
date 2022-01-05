@@ -2,8 +2,11 @@ import React, {useEffect, useState} from "react";
 import {Checkbox, DatePicker, Form, Input, Modal, Radio} from "antd";
 import {useDispatch} from "react-redux";
 import {setMessageDataCreator} from "../../redux/reducers/authReducer";
+import {toggleLoaderProfileCreator} from "../../redux/reducers/profileReducer";
+import {initialUserValues} from "../../utils/helpers";
+import {editUserAxiosRequest} from "../../api/usersApi";
 
-const EditModalUser = ({activeUser, isVisible, setIsVisible, setIsLoader}) => {
+const EditModalUser = ({activeUser, isVisible, setIsVisible, setActiveUser}) => {
     const [confirmLoading, setConfirmLoading] = useState(false)
     const [form] = Form.useForm()
     const dispatch = useDispatch();
@@ -11,27 +14,27 @@ const EditModalUser = ({activeUser, isVisible, setIsVisible, setIsLoader}) => {
     const onDataSuccess = (data) => {
         dispatch(setMessageDataCreator(data))
         if (data.success) {
-            setIsLoader(true)
+            dispatch(toggleLoaderProfileCreator())
             setIsVisible(false)
-            form.setFieldsValue({username: '', id: null, isadmin: false})
+            form.setFieldsValue(initialUserValues)
         }
     }
     useEffect(() => {
-        form.setFieldsValue({username: activeUser.username, isadmin: activeUser.isadmin, id: activeUser.id})
+        form.setFieldsValue(activeUser)
     }, [activeUser])
 
     const handleCancel = () => {
-        form.setFieldsValue({name: '', id: null, isadmin: false})
+        form.setFieldsValue(initialUserValues)
         setIsVisible(false)
     }
 
     const onFinish = (values) => {
         setConfirmLoading(true)
 
-        // editUserAxiosRequest(values, activeUser.id).then(data => {
-        //     onDataSuccess(data.data)
-        //     setConfirmLoading(false)
-        // })
+        editUserAxiosRequest(values, activeUser.id).then(data => {
+            onDataSuccess(data.data)
+            setConfirmLoading(false)
+        })
     }
 
     const onOk = () => {

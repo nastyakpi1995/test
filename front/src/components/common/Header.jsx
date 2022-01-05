@@ -10,6 +10,7 @@ import {authToken, savedUser} from "../../utils/constants";
 import {setMessageDataCreator} from "../../redux/reducers/authReducer";
 import {useDispatch, useSelector} from "react-redux";
 import {setUserCreator} from "../../redux/reducers/userReducer";
+import styled from "styled-components";
 
 const {Header} = Layout
 
@@ -35,26 +36,13 @@ const HeaderContainer = () => {
 
     return (
         <Header>
-            <div>
-                <div style={{  float: 'left',
-                    width: 170,
-                    height: '100%',
-                    display: 'flex',
-                }}>
-                    <div style={{
-                        width: 40,
-                        height: 65,
-                        border: '2px solid #c6c2c2',
-                        borderRadius: 15,
-                        marginRight: 15
-                    }}>
-                        <img style={{ width: '100%'}}
-                             src={'https://shapka-youtube.ru/wp-content/uploads/2021/02/avatarka-dlya-skaypa-dlya-parney.jpg'} />
-                            </div>
-                            <div style={{color: 'white'}}>{currentUser?.username}</div>
-                            <div style={{color: 'white', cursor: 'pointer', marginLeft: 10}} onClick={logOut}>Log out</div>
-                        </div>
-
+                <HeaderWrap>
+                    <ImgContainer>
+                        <Img src={'https://shapka-youtube.ru/wp-content/uploads/2021/02/avatarka-dlya-skaypa-dlya-parney.jpg'} />
+                    </ImgContainer>
+                    <Text>{currentUser?.username}</Text>
+                    <LogOut onClick={logOut}>Log out</LogOut>
+                </HeaderWrap>
                         {currentUser?.isadmin ? (
                             <Menu theme="dark" mode="horizontal" defaultSelectedKeys={['2']} >
                                 <Menu.Item key="1" icon={<KeyOutlined />}><NavLink to={'/profiles'} >Profiles</NavLink></Menu.Item>
@@ -62,9 +50,33 @@ const HeaderContainer = () => {
                                 <Menu.Item key="3" icon={<UsergroupDeleteOutlined />}><NavLink to={'/users'}>Users</NavLink> </Menu.Item>
                             </Menu>
                         ) : null}
-                    </div>
-                </Header>
+        </Header>
     )
 }
+
+const HeaderWrap = styled.div`
+  float: left;
+  width: 170px;
+  height: 100%;
+  display: flex;
+`;
+const ImgContainer = styled.div`
+  width: 40px;
+  height: 65px;
+  border: 2px solid #c6c2c2;
+  border-radius: 15px;
+  margin-right: 15px;
+`;
+const Img = styled.img`
+  width: 100%;
+`
+const Text = styled.p`
+  color: white
+`
+const LogOut = styled(Text)`
+  cursor: pointer;
+  margin-left: 10px;
+`
+
 
 export default HeaderContainer

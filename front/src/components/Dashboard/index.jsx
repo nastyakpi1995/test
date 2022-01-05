@@ -4,6 +4,7 @@ import Information from "./Information";
 import {adminDashboardAxiosRequest} from "../../api/usersApi";
 import {useDispatch} from "react-redux";
 import {setMessageDataCreator} from "../../redux/reducers/authReducer";
+import styled from "styled-components";
 
 const Dashboard = () => {
     const [counts, setCounts] = useState(null)
@@ -19,13 +20,17 @@ const Dashboard = () => {
 
     return (
         <HeaderWrapper>
-            <div style={{display: 'flex', height: '100vh'}}>
+            <DashboardWrap>
                 <Information name={'profiles'} counts={counts?.profiles} />
                 <Information name={'users'} counts={counts?.usersCount}/>
                 <Information name={'profile with Kiev'} counts={counts?.profileKiev} />
-            </div>
+            </DashboardWrap>
         </HeaderWrapper>
         )
 }
+const DashboardWrap = styled.div`
+  display: flex;
+  height: 100vh
+`
 
 export default Dashboard;

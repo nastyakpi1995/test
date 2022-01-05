@@ -8,6 +8,7 @@ import {
     toggleLoaderProfileCreator
 } from "../../redux/reducers/profileReducer";
 import {useDispatch, useSelector} from "react-redux";
+import styled from "styled-components";
 
 const Profiles = () => {
     const dispatch = useDispatch();
@@ -34,16 +35,20 @@ const Profiles = () => {
 
     return (
         <HeaderWrapper>
-            <div style={{display: 'flex', flexWrap: 'wrap'}}>
+            <ProfilesContainer>
                 {profiles.length >= 0 ? profiles.map((profile, idx) => (
                     <Profile key={idx}
                              profile={profile}/>
                 )) : null}
                 <NewProfile showModal={toggleIsOpenModal} />
-            </div>
+            </ProfilesContainer>
         </HeaderWrapper>
     )
 }
 
+const ProfilesContainer = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+`
 
 export default Profiles

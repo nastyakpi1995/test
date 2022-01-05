@@ -2,6 +2,7 @@ import React, {useEffect, useState} from "react";
 import {Alert} from "antd";
 import {useDispatch} from "react-redux";
 import {setMessageDataDefaultCreator} from "../../redux/reducers/authReducer";
+import styled from "styled-components";
 
 
 const SLIDING_TIMEOUT = 8000;
@@ -27,9 +28,9 @@ const MessageBox = ({messageBoxData: {type, message, isVisible}}) => {
 
     return (
         <div>
-            <Alert
+            <MyAlert
                 showIcon
-                style={{position: "absolute", transition: "all 0.4s ease-out", right: 20, top: isTop ? 40 : -100}}
+                isTop={isTop}
                 message={message}
                 type={type ? type : 'success'}
             />
@@ -37,4 +38,12 @@ const MessageBox = ({messageBoxData: {type, message, isVisible}}) => {
     )
 }
 
+const MyAlert = styled(Alert)`
+  position: absolute;
+  transition: all 0.4s ease-out;
+  right: 20px;
+  top: ${props => {
+    return props.isTop ? '80px' : '-100px'
+  }};
+`
 export default MessageBox

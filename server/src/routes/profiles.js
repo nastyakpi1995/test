@@ -8,10 +8,10 @@ router.get(`/profiles`, verify, async (req, res) => {
     return ProfileController.getProfiles(res, id)
 })
 
-router.post(`/profile/create`, verify, async (req, res) => {
+router.post(`/profile/create/:userId`, verify, async (req, res) => {
     const body = req.body
-    const {id} = req.user
-    return ProfileController.createProfile(body, res, id)
+    const {userId} = req.params
+    return ProfileController.createProfile(body, res, userId)
 })
 
 router.put(`/profile/edit/:profileId`, verify, async (req, res) => {

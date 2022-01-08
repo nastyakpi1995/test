@@ -4,16 +4,25 @@ import NewProfile from "./NewProfile";
 import ProfileCard from "../common/ProfileCard";
 import {getProfilesAxiosRequest} from "../../api/usersApi";
 import {
+    setActiveProfileCreator,
     toggleIsOpenModalCreator,
     toggleLoaderProfileCreator
 } from "../../redux/reducers/profileReducer";
 import {useDispatch, useSelector} from "react-redux";
 import styled from "styled-components";
-import {Col, Row} from "antd";
+import {initialProfileValues} from "../../utils/constants";
 
 const Profiles = () => {
     const dispatch = useDispatch();
-    const toggleIsOpenModal = () => dispatch(toggleIsOpenModalCreator())
+    const userId = useSelector((state) => state.user.user.id)
+    const onCreateProfile = () => {
+        const prepareActiveProfile = {
+            ...initialProfileValues,
+            currentUserId: userId
+        }
+        dispatch(setActiveProfileCreator(prepareActiveProfile))
+        dispatch(toggleIsOpenModalCreator())
+    }
 
     const isLoader = useSelector(state => state.profile.isLoader)
     const [profiles, setProfiles] = useState([])
@@ -41,7 +50,7 @@ const Profiles = () => {
                 {profiles.length >= 0 ? profiles.map((profile, idx) => (
                     <ProfileCard key={idx} profile={profile}/>
                 )) : null}
-                <NewProfile showModal={toggleIsOpenModal} />
+                <NewProfile showModal={onCreateProfile} />
             </ProfilesContainer>
         </HeaderWrapper>
     )

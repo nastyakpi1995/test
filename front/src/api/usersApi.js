@@ -44,7 +44,7 @@ export const loginAxiosRequest = (body) => {
 }
 
 export const createProfilesAxiosRequest = (body) => {
-   return axios.post(`${baseUrl}/private/profile/create`, {...body}, {headers: getHeaders()}).then(data => {
+   return axios.post(`${baseUrl}/private/profile/create/${body.userId}`, {...body}, {headers: getHeaders()}).then(data => {
        return data.data
    }).catch(({response}) =>  response.data)
 }

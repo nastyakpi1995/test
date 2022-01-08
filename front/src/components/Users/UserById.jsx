@@ -7,10 +7,15 @@ import {useDispatch, useSelector} from "react-redux";
 import {Card} from "antd";
 import {DeleteOutlined, EditOutlined} from "@ant-design/icons";
 import EditModalUser from "./EditModalUser";
-import {initialUserValues} from "../../utils/constants";
+import {initialProfileValues, initialUserValues} from "../../utils/constants";
 import {setMessageDataCreator} from "../../redux/reducers/authReducer";
-import {toggleLoaderProfileCreator} from "../../redux/reducers/profileReducer";
+import {
+    setActiveProfileCreator,
+    toggleIsOpenModalCreator,
+    toggleLoaderProfileCreator
+} from "../../redux/reducers/profileReducer";
 import styled from "styled-components";
+import NewProfile from "../Profiles/NewProfile";
 
 const UserById = () => {
     const {userId} = useParams()
@@ -36,6 +41,15 @@ const UserById = () => {
             dispatch(toggleLoaderProfileCreator())
         }
     }, [isLoader])
+
+    const onCreateProfile = () => {
+        const prepareActiveProfile = {
+            ...initialProfileValues,
+            currentUserId: userId
+        }
+        dispatch(setActiveProfileCreator(prepareActiveProfile))
+        dispatch(toggleIsOpenModalCreator())
+    }
 
     const onEditUser = () => {
         setIsModalVisible(true)
@@ -72,6 +86,7 @@ const UserById = () => {
                     <ProfileCard key={idx}
                                  profile={profile}/>
                 )) : null}
+                <NewProfile showModal={onCreateProfile} />
             </ProfilesWrap>
         </HeaderWrapper>
     )

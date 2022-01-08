@@ -8,7 +8,8 @@ export const initialProfileValues = {
     gender: 'male',
     city: '',
     birthdate: moment(),
-    id: null
+    id: null,
+    currentUserId: null
 }
 
 export const initialUserValues = {

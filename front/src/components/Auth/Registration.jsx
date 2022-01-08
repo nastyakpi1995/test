@@ -15,7 +15,6 @@ let Registration = () => {
 
         setIsLoader(true)
         registerAxiosRequest(values).then((data) => {
-            debugger
             dispatch(setMessageDataCreator(data))
             setIsLoader(false)
             if (data.success) {
@@ -67,7 +66,7 @@ let Registration = () => {
                 </Form.Item>
 
                 <Form.Item type="flex" justify="center">
-                    <ButtonAuth className={'btnLogin'} htmlType="submit" >
+                    <ButtonAuth loading={isLoader} className={'btnLogin'} htmlType="submit" >
                         Sign Up
                     </ButtonAuth>
                 </Form.Item>

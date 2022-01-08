@@ -53,7 +53,8 @@ const UserProfileModal = () => {
     const onFinish = (values) => {
         const prepareValues = {
             ...values,
-            birthdate: moment(new Date(values.birthdate)).format("DD.MM.YYYY")
+            birthdate: moment(new Date(values.birthdate)).format("DD.MM.YYYY"),
+            userId: activeProfile.currentUserId
         }
         setConfirmLoading(true)
 

@@ -1,13 +1,10 @@
-import React, {useState} from "react";
+import React, {useEffect, useRef, useState} from "react";
 import {Button, Form, Input} from "antd";
 import {loginAxiosRequest} from "../../api/usersApi";
-import {Link, useNavigate} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 import {useDispatch} from "react-redux";
 import {setMessageDataCreator} from "../../redux/reducers/authReducer";
 import {setUserCreator} from "../../redux/reducers/userReducer";
-import styled from "styled-components";
-import colors from "../../styles/colors";
-import Title from "antd/es/typography/Title";
 import {ButtonAuth, ContainerForm, LinkToRegister, MyTitle, SForm} from "../../styles/common";
 
 
@@ -15,6 +12,7 @@ let Login = () => {
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const [isLoader, setIsLoader] = useState(false)
+    const inputRef = useRef(null)
 
     const onFinish = (values) => {
         setIsLoader(true)
@@ -29,6 +27,9 @@ let Login = () => {
         })
     };
 
+    useEffect(() => {
+        inputRef.current.focus()
+    }, [])
     return (
         <ContainerForm>
             <div>
@@ -47,7 +48,7 @@ let Login = () => {
                     name="email"
                     rules={[{ required: true, message: 'Please input your email!' }]}
                 >
-                    <Input />
+                    <Input ref={inputRef} />
                 </Form.Item>
                 <Form.Item
                     label="Password"
@@ -58,7 +59,7 @@ let Login = () => {
                 </Form.Item>
                 <Form.Item wrapperCol={{ offset: 25 }}>
                     <ButtonAuth loading={isLoader} htmlType="submit">
-                        Sign Inm
+                        Sign In
                     </ButtonAuth>
                 </Form.Item>
             </SForm>

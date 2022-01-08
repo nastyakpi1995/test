@@ -11,13 +11,16 @@ const getHeaders = () => {
 }
 
 export const registerAxiosRequest = (values) => {
+    debugger
     return axios.post(`${baseUrl}/api/user/register`, {...values}).then(({data}) => {
+        debugger
         return data
     }).catch((data) => {
+        debugger
         const prepareData = {
             data,
             success: false,
-            message: 'Yo can not login, server did not run'
+            message: data.response ? data.response.data.message : 'Yo can not login, server did not run'
         }
         return prepareData
     })
@@ -28,14 +31,13 @@ export const loginAxiosRequest = (body) => {
        if (data.data.token) {
            localStorage.setItem(savedUser, JSON.stringify(data.data.user))
            localStorage.setItem(authToken, data.data.token)
-
        }
        return data.data
    }).catch((data) => {
        const prepareData = {
            data,
            success: false,
-           message: data.message ? data.message : 'Yo can not login, server did not run'
+           message: data.response ? data.response.data.message : 'Yo can not login, server did not run'
        }
        return prepareData
    })

@@ -13,7 +13,6 @@ router.post(`/user/register`, async (req, res) => {
 router.post(`/user/login`, async (req, res) => {
     let body = req.body
 
-
     return UserController.loginUser(body, res)
 })
 

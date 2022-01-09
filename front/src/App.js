@@ -11,7 +11,6 @@ import PrivatRouter from "./components/common/PrivatRouter";
 import AdminRouter from "./components/common/AdminRouter";
 import Dashboard from "./components/Dashboard";
 import Users from "./components/Users";
-import ContainerProfileModal from "./components/common/UserProfileModal";
 import UserById from "./components/Users/UserById";
 import NotFoundRoute from "./components/NotFoundRoute";
 
@@ -19,7 +18,6 @@ const  App = () => {
     return (
         <div>
           <ContainerMessageBox />
-          <ContainerProfileModal />
           <Routes>
               <Route path="/registration" element={<Registration />} />
               <Route path="/login" element={<Login />} />

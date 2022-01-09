@@ -11,6 +11,7 @@ import {
 import {useDispatch, useSelector} from "react-redux";
 import styled from "styled-components";
 import {initialProfileValues} from "../../utils/constants";
+import ContainerProfileModal from "../common/ProfileModal/ContianerProfileModal";
 
 const Profiles = () => {
     const dispatch = useDispatch();
@@ -52,6 +53,7 @@ const Profiles = () => {
                 )) : null}
                 <NewProfile showModal={onCreateProfile} />
             </ProfilesContainer>
+            <ContainerProfileModal />
         </HeaderWrapper>
     )
 }

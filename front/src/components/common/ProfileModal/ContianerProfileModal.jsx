@@ -1,19 +1,20 @@
 import React, {useCallback, useEffect, useState} from "react";
-import {DatePicker, Form, Input, Modal, Radio} from "antd";
+import {Form} from "antd";
 import {useDispatch, useSelector} from "react-redux";
-import {createProfilesAxiosRequest, editProfileAxiosRequest} from "../../api/usersApi";
-import {setMessageDataCreator} from "../../redux/reducers/authReducer";
+import {createProfilesAxiosRequest, editProfileAxiosRequest} from "../../../api/usersApi";
+import {setMessageDataCreator} from "../../../redux/reducers/authReducer";
 import {
     setActiveProfileCreator,
     toggleIsOpenModalCreator,
     toggleLoaderProfileCreator
-} from "../../redux/reducers/profileReducer";
-import {locale} from "moment";
+} from "../../../redux/reducers/profileReducer";
 import moment from "moment";
-import {initialProfileValues} from "../../utils/constants";
-import {getFormatedData} from "../../utils/helpers";
+import {initialProfileValues} from "../../../utils/constants";
+import {getFormatedData} from "../../../utils/helpers";
+import ProfileModal from "./ProfileModal";
 
-const UserProfileModal = () => {
+
+const ContainerProfileModal = () => {
     const [confirmLoading, setConfirmLoading] = useState(false)
     const isOpenModalProfile = useSelector(state => state.profile.isOpenModalProfile)
     const activeProfile = useSelector(state => state.profile.activeProfile)
@@ -69,52 +70,26 @@ const UserProfileModal = () => {
         }
     }
 
-    const onOk = () => {
+    const onOk = useCallback(() => {
         form.submit()
+    }, [])
+    const onChange = (e) => {
+        const value = e.target.value;
+        form.setFieldsValue({'name': value})
     }
 
     return (
-        <Modal confirmLoading={confirmLoading} visible={isOpenModalProfile} onOk={onOk} onCancel={handleCancel}>
-            <Form labelCol={{ span: 8 }}
-                  form={form}
-                  wrapperCol={{ span: 16 }}
-                  initialValues={activeProfile}
-                  onFinish={onFinish}>
-                <Form.Item
-                    label="Name"
-                    name="name"
-                    rules={[{ required: true, message: 'Please input your name!' }]}
-                >
-                    <Input
-                        onChange={(e) => {
-                            const value = e.target.value;
-                            form.setFieldsValue({'name': value})
-                        }}
-                    />
-                </Form.Item>
-
-                <Form.Item label='gender' name={'gender'}>
-                    <Radio.Group>
-                        <Radio checked value={'male'}>male</Radio>
-                        <Radio value={'female'}>female</Radio>
-                    </Radio.Group>
-                </Form.Item>
-                <Form.Item
-                    label="City"
-                    name="city"
-                    rules={[{ required: true, message: 'Please input your city!' }]}
-                >
-                    <Input />
-                </Form.Item>
-                <Form.Item
-                    label="birthdate"
-                    name="birthdate"
-                    rules={[{ required: true, message: 'Please input date' }]}
-                >
-                    <DatePicker locale={locale} format={'DD.MM.YYYY'}/>
-                </Form.Item>
-            </Form>
-        </Modal>
+        <ProfileModal
+            confirmLoading={confirmLoading}
+            isOpenModalProfile={isOpenModalProfile}
+            onOk={onOk}
+            handleCancel={handleCancel}
+            activeProfile={activeProfile}
+            onFinish={onFinish}
+            form={form}
+            onChange={onChange}
+        />
     )
 }
-export default UserProfileModal
+
+export default ContainerProfileModal

@@ -16,6 +16,7 @@ import {
 } from "../../redux/reducers/profileReducer";
 import styled from "styled-components";
 import NewProfile from "../Profiles/NewProfile";
+import ContainerProfileModal from "../common/ProfileModal/ContianerProfileModal";
 
 const UserById = () => {
     const {userId} = useParams()
@@ -88,6 +89,7 @@ const UserById = () => {
                 )) : null}
                 <NewProfile showModal={onCreateProfile} />
             </ProfilesWrap>
+            <ContainerProfileModal />
         </HeaderWrapper>
     )
 };

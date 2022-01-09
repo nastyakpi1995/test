@@ -5,23 +5,21 @@ import {Provider, useSelector} from "react-redux";
 import store from "./redux/store";
 import React from "react";
 import Registration from "./components/Auth/Registration";
-import MessageBox from "./components/common/MessageBox";
-import {getMessageBoxSelect} from "./redux/selects/auth";
+import ContainerMessageBox from "./components/common/MessageBox/ContainerMessageBox";
 import Profiles from "./components/Profiles";
 import PrivatRouter from "./components/common/PrivatRouter";
 import AdminRouter from "./components/common/AdminRouter";
 import Dashboard from "./components/Dashboard";
 import Users from "./components/Users";
-import UserProfileModal from "./components/common/UserProfileModal";
+import ContainerProfileModal from "./components/common/UserProfileModal";
 import UserById from "./components/Users/UserById";
 import NotFoundRoute from "./components/NotFoundRoute";
 
 const  App = () => {
-    const messageBoxData = useSelector(state => getMessageBoxSelect(state))
     return (
         <div>
-          <MessageBox messageBoxData={messageBoxData} />
-          <UserProfileModal />
+          <ContainerMessageBox />
+          <ContainerProfileModal />
           <Routes>
               <Route path="/registration" element={<Registration />} />
               <Route path="/login" element={<Login />} />
@@ -36,11 +34,12 @@ const  App = () => {
 }
 
 const MainApp = () => {
+
     return (
         <Provider store={store}>
-            <BrowserRouter>
-                <App />
-            </BrowserRouter>
+                <BrowserRouter>
+                    <App />
+                </BrowserRouter>
         </Provider>
     )
 }

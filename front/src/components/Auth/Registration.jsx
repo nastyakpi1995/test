@@ -5,6 +5,7 @@ import {useNavigate} from 'react-router-dom'
 import {useDispatch} from "react-redux";
 import {setMessageDataCreator} from "../../redux/reducers/authReducer";
 import {ButtonSubmit, ContainerForm, LinkToRegister, MyTitle, SForm} from "../../styles/common";
+import {links} from "../../utils/constants";
 
 let Registration = () => {
     const dispatch = useDispatch()
@@ -17,7 +18,7 @@ let Registration = () => {
             dispatch(setMessageDataCreator(data))
             setIsLoader(false)
             if (data.success) {
-                navigate('/login')
+                navigate(links.login)
             }
         })
     };
@@ -26,7 +27,7 @@ let Registration = () => {
         <ContainerForm>
             <div>
                 <MyTitle>Registration</MyTitle>
-                <LinkToRegister to='/login'>You don't have account? login</LinkToRegister>
+                <LinkToRegister to={links.login}>You don't have account? login</LinkToRegister>
             </div>
             <SForm
                 name="basic"

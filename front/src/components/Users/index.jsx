@@ -6,7 +6,7 @@ import {useDispatch} from "react-redux";
 import User from "./User";
 import styled from "styled-components";
 import EditModalUser from "./EditModalUser";
-import {initialUserValues} from "../../utils/constants";
+import {initialUserValues, links} from "../../utils/constants";
 import {useNavigate} from "react-router-dom";
 import UserByIdProfiles from "./UserByIdProfiles";
 
@@ -52,7 +52,7 @@ const Users = () => {
         deleteUserAxiosRequest(id).then(data => {
             dispatch(setMessageDataCreator(data))
             if (data.success) {
-                navigator('/users')
+                navigator(links.users)
             }
         })
     }

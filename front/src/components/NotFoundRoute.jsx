@@ -1,11 +1,12 @@
 import React from "react";
 import {Link} from "react-router-dom";
 import styled from 'styled-components';
+import {links} from "../utils/constants";
 
 const NotFoundRoute = () => {
     return (
         <Wrap>
-            <LinkMy to='/login'>Not Found Route!
+            <LinkMy to={links.login}>Not Found Route!
                 Go to Login</LinkMy>
         </Wrap>
     )

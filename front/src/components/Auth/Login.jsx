@@ -6,6 +6,7 @@ import {useDispatch} from "react-redux";
 import {setMessageDataCreator} from "../../redux/reducers/authReducer";
 import {setUserCreator} from "../../redux/reducers/userReducer";
 import { ButtonSubmit, ContainerForm, LinkToRegister, MyTitle, SForm} from "../../styles/common";
+import {links} from "../../utils/constants";
 
 
 let Login = () => {
@@ -22,7 +23,7 @@ let Login = () => {
             dispatch(setMessageDataCreator(data))
             if (data?.success) {
                 dispatch(setUserCreator(data.user))
-                navigate('/profiles')
+                navigate(links.profiles)
             }
         })
     };
@@ -34,7 +35,7 @@ let Login = () => {
         <ContainerForm>
             <div>
                 <MyTitle>Sign in</MyTitle>
-                <LinkToRegister to='/registration'>You don't have account? Registration</LinkToRegister>
+                <LinkToRegister to={links.registration}>You don't have account? Registration</LinkToRegister>
             </div>
             <SForm
                 name="login"

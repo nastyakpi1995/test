@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useCallback} from 'react';
 import ProfileCard from "../common/ProfileCard";
 import { getUserDataById} from "../../utils/apiCaller";
 import {useDispatch, useSelector} from "react-redux";
@@ -33,14 +33,14 @@ const UserByIdProfiles = ({userId}) => {
         }
     }, [isLoader])
 
-    const onCreateProfile = () => {
+    const onCreateProfile = useCallback(() => {
         const prepareActiveProfile = {
             ...initialProfileValues,
             currentUserId: userId
         }
         dispatch(setActiveProfileCreator(prepareActiveProfile))
         dispatch(toggleIsOpenModalCreator())
-    }
+    }, [dispatch])
 
 
     return (
@@ -63,7 +63,8 @@ const ProfilesWrap = styled.div`
   flex-wrap: wrap;
 `
 const SProfiles = styled.div`
-    width: 100%;
+  width: 100%;
+  margin-left: 15px;
 `
 
 export default UserByIdProfiles

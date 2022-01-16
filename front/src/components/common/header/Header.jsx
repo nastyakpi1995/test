@@ -1,7 +1,7 @@
 import React, {useCallback} from "react";
 
 import {Link, useNavigate} from "react-router-dom";
-import {authToken, savedUser} from "../../../utils/constants";
+import {authToken, links, savedUser} from "../../../utils/constants";
 import {setMessageDataCreator} from "../../../redux/reducers/authReducer";
 import {useDispatch, useSelector} from "react-redux";
 import {setUserCreator} from "../../../redux/reducers/userReducer";
@@ -26,13 +26,13 @@ const HeaderContainer = () => {
         localStorage.setItem(authToken, '')
         localStorage.removeItem(savedUser)
         dispatch(setUserCreator(null))
-        navigate('/login')
+        navigate(links.login)
     }, [dispatch])
 
     return (
         <Header>
             <Container>
-                <LogoLink to={"/profiles"}>
+                <LogoLink to={links.profiles}>
                     <img src={currentUser?.isadmin ? avatarAdmin : avatarUser} alt="user"/>
                     <LogoTitle>{currentUser?.username}</LogoTitle>
                 </LogoLink>

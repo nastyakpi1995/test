@@ -18,3 +18,12 @@ export const initialUserValues = {
     id: '',
     email: ''
 }
+
+export const links = {
+    registration: '/registration',
+    login: '/login',
+    profiles: '/profiles',
+    dashboard: '/dashboard',
+    users: '/users',
+    all: '*'
+}

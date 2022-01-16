@@ -6,11 +6,9 @@ import {setMessageDataCreator} from "../../../redux/reducers/authReducer";
 import {useDispatch, useSelector} from "react-redux";
 import {setUserCreator} from "../../../redux/reducers/userReducer";
 import styled from "styled-components";
-import profileIcon from '../../../images/icons/profileIcon.svg'
-import dashboardIcon from '../../../images/icons/dashboardIcon.svg'
-import usersIcon from '../../../images/icons/usersIcon.svg'
 import avatarAdmin from '../../../images/avatarAdmin.svg'
 import avatarUser from '../../../images/avatarUser.svg'
+import AdminMenu from "./AdminMenu";
 
 const HeaderContainer = () => {
     const navigate = useNavigate()
@@ -29,34 +27,19 @@ const HeaderContainer = () => {
         localStorage.removeItem(savedUser)
         dispatch(setUserCreator(null))
         navigate('/login')
-    }, [])
+    }, [dispatch])
 
     return (
         <Header>
             <Container>
-                <LogoLink to={"/"}>
+                <LogoLink to={"/profiles"}>
                     <img src={currentUser?.isadmin ? avatarAdmin : avatarUser} alt="user"/>
                     <LogoTitle>{currentUser?.username}</LogoTitle>
                 </LogoLink>
                 <SNav>
-                    {currentUser?.isadmin ? (
-                    <Nav>
-                        <NavList  to={'/profiles'}>
-                            <Text>Profiles</Text>
-                            <img src={profileIcon} alt="profile"/>
-                        </NavList>
-                        <NavList to={'/dashboard'}>
-                                <Text>Dashboard</Text>
-                                <img src={dashboardIcon} alt="dashboard"/>
-                        </NavList>
-                        <NavList to={'/users'}>
-                                <Text>Users</Text>
-                                <img src={usersIcon} alt="users"/>
-                        </NavList>
-                    </Nav>
-                    ) : null}
-                    <Logout>
-                        <div onClick={handleLogOut}><span style={{cursor:"pointer"}} >Log out</span></div>
+                    {currentUser?.isadmin ? <AdminMenu /> : null}
+                    <Logout onClick={handleLogOut}>
+                        <span>Log out</span>
                     </Logout>
                 </SNav>
             </Container>
@@ -64,10 +47,20 @@ const HeaderContainer = () => {
     )
 }
 
+const Header = styled.header`
+  width: 100%;
+  background: var(--background2);
+  margin-bottom: 20px;
+  padding: 10px 15px;
+  height: 70px;
+`
+
 const Container = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  max-width: 1700px;
+  margin: 0 auto;
 `
 
 const SNav = styled.nav`
@@ -75,34 +68,11 @@ const SNav = styled.nav`
   align-items: center;
 `;
 
-const Nav = styled.div`
-  margin-right: 100px;
-  display: flex;
-  align-items: center;
-`;
 const LogoLink = styled(Link)`
   display: flex;
   align-items: center;
+  height: 50px;
   cursor: pointer;
-`
-const NavList = styled(Link)`
-  margin-right: 45px;
-  display: flex;
-  
-  img {
-    fill: red;
-  }
-  &:not(:first-child) img {
-    vertical-align: baseline;
-  }
-`
-
-const Text = styled.div`
-  color: var(--white);
-  font-size: 18px;
-  line-height: 27px;
-  letter-spacing: 0.75px;
-  margin-right: 20px;
 `
 
 const Logout = styled.div`
@@ -110,6 +80,7 @@ const Logout = styled.div`
   font-size: 18px;
   line-height: 27px;
   letter-spacing: 0.75px;
+  cursor: pointer;
 `
 
 const LogoTitle = styled.div`
@@ -119,12 +90,6 @@ const LogoTitle = styled.div`
   letter-spacing: 0.75px;
   color: var(--white);
   margin-left: 20px;
-`
-const Header = styled.header`
-  width: 100%;
-  background: var(--background2);
-  margin-bottom: 60px;
-  padding: 16px 35px;
 `
 
 export default HeaderContainer

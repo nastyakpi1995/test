@@ -4,14 +4,13 @@ import {Link} from "react-router-dom";
 import styled from "styled-components";
 
 const User = ({user}) => {
-    const { username, id } = user;
+    const { username, email, id } = user;
 
     return (
         <MyCard hoverable>
              <Link to={`/user/${id}`}>
-                 <UserInfo>user: </UserInfo>
-                 <UserInfo>name: {username}</UserInfo>
-                 <UserInfo>id: {id}</UserInfo>
+                 <UserInfo>{username}</UserInfo>
+                 <UserInfo>{email}</UserInfo>
              </Link>
         </MyCard>
     )
@@ -19,12 +18,14 @@ const User = ({user}) => {
 const MyCard = styled(Card)`
   width: 300px;
   height: 150px;
-  margin: 60px;
+  margin: 10px;
   justify-content: center;
-  text-align: center
+  text-align: center;
+  
 `
 const UserInfo = styled.p`
-    font-size: 16px;
+    font-size: 18px;
+  color: var(--title);
 `
 
 export default User

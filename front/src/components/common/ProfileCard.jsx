@@ -13,7 +13,7 @@ import {CardInfo, CardTitle, CardTop, MyCard} from "../../styles/common";
 import styled from "styled-components";
 
 const ProfileCard = ({profile}) => {
-    const { name, gender, city, id } = profile;
+    const { name, gender, birthdate, id } = profile;
     const dispatch = useDispatch()
 
     const onEditProfile = useCallback(() => {
@@ -34,7 +34,7 @@ const ProfileCard = ({profile}) => {
                 <CardTop>
                     <CardTitle>{name}</CardTitle>
                     <CardInfo>{gender}</CardInfo>
-                    <CardInfo>{city}</CardInfo>
+                    <CardInfo>{birthdate}</CardInfo>
                 </CardTop>
                 <CardBottom>
                     <Button onClick={onEditProfile}>

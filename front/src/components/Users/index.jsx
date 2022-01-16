@@ -42,6 +42,7 @@ const Users = () => {
                     <User key={index} user={user} />
                 )) : null}
             </UsersContent>
+
         </UserWrap>
     </HeaderWrapper>
 }
@@ -50,10 +51,12 @@ const UserWrap = styled.div`
   display: flex;
   height: 100vh;
   max-width: 1800px;
+  margin: 0 auto;
   justify-content: space-between;
 `
 const UsersContent = styled.div`
   display: flex;
+  
 `
 
 export default Users

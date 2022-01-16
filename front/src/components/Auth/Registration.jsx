@@ -12,7 +12,6 @@ let Registration = () => {
     const [isLoader, setIsLoader] = useState(false)
 
     const onFinish = async (values) => {
-
         setIsLoader(true)
         registerAxiosRequest(values).then((data) => {
             dispatch(setMessageDataCreator(data))

@@ -1,8 +1,10 @@
 import {initialProfileValues} from "../../utils/constants";
 
-const TOGGLE_OPEN_MODAL_PROFILE = 'TOGGLE_OPEN_MODAL_PROFILE'
-const SET_ACTIVE_PROFILE = 'SET_ACTIVE_PROFILE'
-const TOGGLE_IS_LOADER_PROFILE = 'TOGGLE_IS_LOADER_PROFILE'
+const types = {
+    toggleLoaderProfileType: 'toggleLoaderProfileType',
+    toggleOpenModalProfileType: 'toggleOpenModalProfile',
+    setActiveProfileType: 'setActiveProfileType'
+}
 
 const initialState = {
     isOpenModalProfile: false,
@@ -12,19 +14,19 @@ const initialState = {
 
 const profileReducer = (state= initialState, action) => {
     switch (action.type) {
-        case TOGGLE_OPEN_MODAL_PROFILE: {
+        case types.toggleOpenModalProfileType: {
             return {
                 ...state,
                 isOpenModalProfile: !state.isOpenModalProfile
             }
         }
-        case SET_ACTIVE_PROFILE: {
+        case types.setActiveProfileType: {
             return {
                 ...state,
                 activeProfile: action.payload
             }
         }
-        case TOGGLE_IS_LOADER_PROFILE: {
+        case types.toggleLoaderProfileType: {
             return {
                 ...state,
                 isLoader: !state.isLoader
@@ -36,17 +38,16 @@ const profileReducer = (state= initialState, action) => {
     }
 }
 
-
 export const toggleIsOpenModalCreator = () => ({
-    type: TOGGLE_OPEN_MODAL_PROFILE,
+    type: types.toggleOpenModalProfileType,
 })
 
 export const setActiveProfileCreator = (profile) => ({
-    type: SET_ACTIVE_PROFILE,
+    type: types.setActiveProfileType,
     payload: profile
 })
 export const toggleLoaderProfileCreator = () => ({
-    type: TOGGLE_IS_LOADER_PROFILE,
+    type: types.toggleLoaderProfileType,
 })
 
 export default profileReducer

@@ -1,7 +1,6 @@
 import React from "react";
 import styled from "styled-components";
 import {MyCard} from "../../styles/common";
-import colors from "../../styles/colors";
 
 const DashboardCard = ({name, count}) => {
     return (
@@ -17,12 +16,12 @@ const DashboardCard = ({name, count}) => {
 const CardTitle = styled.p`
   margin-bottom: 50px;
   font-size: 36px;
-  color: ${colors.TITLE};
+  color: var(--title);
   letter-spacing: 1px;
   line-height: 34px;
 `
 const CardInfo = styled.p`
-  color: ${colors.TITLE};
+  color: var(--title);
   font-weight: 600;
   font-size: 48px;
   line-height: 34px;

@@ -1,5 +1,7 @@
-const SET_MESSAGE_DATA = 'SET_MESSAGE_DATA';
-const SET_MESSAGE_DATA_DEFAULT = 'SET_MESSAGE_DATA_DEFAULT';
+const types = {
+    setMessageDataType: 'setMessageDataType',
+    setMessageDataDefaultType: 'setMessageDataDefaultType'
+}
 
 const initState = {
     messageData: {
@@ -11,7 +13,7 @@ const initState = {
 
 const authReducer = (state= initState, action) => {
     switch (action.type) {
-        case SET_MESSAGE_DATA: {
+        case types.setMessageDataType: {
             const {message, success} = action.messageData
             return {
                 ...state,
@@ -22,7 +24,7 @@ const authReducer = (state= initState, action) => {
                 }
             }
         }
-        case SET_MESSAGE_DATA_DEFAULT: {
+        case types.setMessageDataDefaultType: {
             return {
                 ...state,
                 messageData: {
@@ -40,11 +42,11 @@ const authReducer = (state= initState, action) => {
 }
 
 export const setMessageDataCreator = (messageData) => ({
-    type: SET_MESSAGE_DATA,
+    type: types.setMessageDataType,
     messageData,
 })
 export const setMessageDataDefaultCreator = (typeData) => ({
-    type: SET_MESSAGE_DATA_DEFAULT,
+    type: types.setMessageDataDefaultType,
     typeData
 })
 

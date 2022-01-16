@@ -1,8 +1,6 @@
 import './App.css';
-import {Routes, Route, BrowserRouter} from "react-router-dom";
+import {Route, Routes} from "react-router-dom";
 import Login from "./components/Auth/Login";
-import {Provider, useSelector} from "react-redux";
-import store from "./redux/store";
 import React from "react";
 import Registration from "./components/Auth/Registration";
 import ContainerMessageBox from "./components/common/MessageBox/ContainerMessageBox";
@@ -31,19 +29,7 @@ const  App = () => {
   );
 }
 
-const MainApp = () => {
-
-    return (
-        <Provider store={store}>
-                <BrowserRouter>
-                    <App />
-                </BrowserRouter>
-        </Provider>
-    )
-}
-
-
-export default MainApp;
+export default App;
 
 
 

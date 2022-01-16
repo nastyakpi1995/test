@@ -4,7 +4,7 @@ import {registerAxiosRequest} from "../../api/usersApi";
 import {useNavigate} from 'react-router-dom'
 import {useDispatch} from "react-redux";
 import {setMessageDataCreator} from "../../redux/reducers/authReducer";
-import {ButtonAuth, ContainerForm, LinkToRegister, MyTitle, SForm} from "../../styles/common";
+import {ButtonSubmit, ContainerForm, LinkToRegister, MyTitle, SForm} from "../../styles/common";
 
 let Registration = () => {
     const dispatch = useDispatch()
@@ -66,9 +66,9 @@ let Registration = () => {
                 </Form.Item>
 
                 <Form.Item type="flex" justify="center">
-                    <ButtonAuth loading={isLoader} className={'btnLogin'} htmlType="submit" >
+                    <ButtonSubmit loading={isLoader} className={'btnLogin'} htmlType="submit" >
                         Sign Up
-                    </ButtonAuth>
+                    </ButtonSubmit>
                 </Form.Item>
 
             </SForm>

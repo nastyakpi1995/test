@@ -11,7 +11,7 @@ const ContainerMessageBox = () => {
     const [isTop, setIsTop] = useState(false)
     const dispatch = useDispatch()
     const messageBoxData = useSelector(state => getMessageBoxSelect(state))
-    const {type, isVisible} = messageBoxData
+    const {type, isVisible, message} = messageBoxData
 
     const slideMessageBox = useCallback(() => {
         if (isTop) {
@@ -31,7 +31,7 @@ const ContainerMessageBox = () => {
     }, [isTop])
 
     return (
-        <MessageBox messageBoxData={messageBoxData} isTop={isTop} />
+        <MessageBox message={message} type={type} isTop={isTop} />
     )
 }
 

@@ -1,4 +1,4 @@
-import React, {useCallback, useEffect, useState} from "react";
+import React, {useCallback, useEffect, useMemo, useState} from "react";
 import {Form} from "antd";
 import {useDispatch, useSelector} from "react-redux";
 import {createProfilesAxiosRequest, editProfileAxiosRequest} from "../../../api/usersApi";
@@ -13,11 +13,15 @@ import {initialProfileValues} from "../../../utils/constants";
 import {getFormatedData} from "../../../utils/helpers";
 import ProfileModal from "./ProfileModal";
 
+const getTitle = (id, name) => {
+    return id ? `Change ${name} profile`  : 'Create new profile'
+}
 
 const ContainerProfileModal = () => {
     const [confirmLoading, setConfirmLoading] = useState(false)
     const isOpenModalProfile = useSelector(state => state.profile.isOpenModalProfile)
     const activeProfile = useSelector(state => state.profile.activeProfile)
+    const title = useMemo(() => getTitle(activeProfile.id, activeProfile.name), [activeProfile])
 
     const [form] = Form.useForm()
     const dispatch = useDispatch();
@@ -58,7 +62,6 @@ const ContainerProfileModal = () => {
             userId: activeProfile.currentUserId
         }
         setConfirmLoading(true)
-
         if (!activeProfile.id) {
             applyUserAction(createProfilesAxiosRequest, prepareValues)
         } else {
@@ -70,19 +73,17 @@ const ContainerProfileModal = () => {
         }
     }
 
-    const onOk = useCallback(() => {
-        form.submit()
-    }, [])
     const onChange = (e) => {
         const value = e.target.value;
         form.setFieldsValue({'name': value})
     }
 
+
     return (
         <ProfileModal
+            title={title}
             confirmLoading={confirmLoading}
             isOpenModalProfile={isOpenModalProfile}
-            onOk={onOk}
             handleCancel={handleCancel}
             activeProfile={activeProfile}
             onFinish={onFinish}

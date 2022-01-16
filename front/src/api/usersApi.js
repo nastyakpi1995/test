@@ -11,12 +11,9 @@ const getHeaders = () => {
 }
 
 export const registerAxiosRequest = (values) => {
-    debugger
     return axios.post(`${baseUrl}/api/user/register`, {...values}).then(({data}) => {
-        debugger
         return data
     }).catch((data) => {
-        debugger
         const prepareData = {
             data,
             success: false,

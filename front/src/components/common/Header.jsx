@@ -6,7 +6,6 @@ import {setMessageDataCreator} from "../../redux/reducers/authReducer";
 import {useDispatch, useSelector} from "react-redux";
 import {setUserCreator} from "../../redux/reducers/userReducer";
 import styled from "styled-components";
-import colors from "../../styles/colors";
 import profileIcon from '../../images/icons/profileIcon.svg'
 import dashboardIcon from '../../images/icons/dashboardIcon.svg'
 import usersIcon from '../../images/icons/usersIcon.svg'
@@ -103,14 +102,14 @@ const NavList = styled.li`
 `
 
 const Text = styled.div`
-  color: ${colors.TITLE};
+  color: var(--title);
   font-size: 18px;
   line-height: 27px;
   letter-spacing: 0.75px;
 `
 
 const Logout = styled.ul`
-  color: ${colors.TITLE};
+  color: var(--title);
   font-size: 18px;
   line-height: 27px;
   letter-spacing: 0.75px;
@@ -124,7 +123,7 @@ const LogoTitle = styled.div`
 `
 const Header = styled.header`
   width: 100%;
-  background: ${colors.BACKGROUND};
+  background: var(--background2);
   margin-bottom: 60px;
   padding: 16px 35px;
 `

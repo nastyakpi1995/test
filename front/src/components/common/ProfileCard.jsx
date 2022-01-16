@@ -11,7 +11,6 @@ import {
 } from "../../redux/reducers/profileReducer";
 import {CardInfo, CardTitle, CardTop, MyCard} from "../../styles/common";
 import styled from "styled-components";
-import colors from "../../styles/colors";
 
 const ProfileCard = ({profile}) => {
     const { name, gender, city, id } = profile;
@@ -55,22 +54,22 @@ const Button = styled.button`
   cursor: pointer;
   border-bottom-right-radius: 14px;
   &:hover {
-    background: ${colors.RED};
-    color: ${colors.WHITE};
+    background: var(--red);
+    color: var(--white2);
   }
   &:first-child{
-    border-right: 1px solid #D6D8E7;
+    border-right: 1px solid var(--white2);
     border-bottom-left-radius: 14px;
     border-bottom-right-radius: 0;
     &:hover {
-      background:${colors.PURPLE};
-      color: ${colors.WHITE};
+      background: var(--purple);
+      color: var(--white);
     }
   }
 `
 
 export const CardBottom = styled.div`
-    border: 1px solid #D6D8E7;
+    border: 1px solid var(--white2);
     width: 100%;
     border-bottom-left-radius: 16px;
     border-bottom-right-radius: 16px;

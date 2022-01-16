@@ -5,7 +5,7 @@ import {useNavigate} from "react-router-dom";
 import {useDispatch} from "react-redux";
 import {setMessageDataCreator} from "../../redux/reducers/authReducer";
 import {setUserCreator} from "../../redux/reducers/userReducer";
-import {ButtonAuth, ContainerForm, LinkToRegister, MyTitle, SForm} from "../../styles/common";
+import { ButtonSubmit, ContainerForm, LinkToRegister, MyTitle, SForm} from "../../styles/common";
 
 
 let Login = () => {
@@ -58,17 +58,14 @@ let Login = () => {
                     <Input.Password />
                 </Form.Item>
                 <Form.Item wrapperCol={{ offset: 25 }}>
-                    <ButtonAuth loading={isLoader} htmlType="submit">
+                    <ButtonSubmit loading={isLoader} htmlType="submit">
                         Sign In
-                    </ButtonAuth>
+                    </ButtonSubmit>
                 </Form.Item>
             </SForm>
         </ContainerForm>
     )
 }
-
-
-
 
 
 export default Login

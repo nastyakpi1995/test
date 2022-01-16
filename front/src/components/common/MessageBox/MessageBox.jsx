@@ -2,8 +2,7 @@ import React from "react";
 import {Alert} from "antd";
 import styled from "styled-components";
 
-const MessageBoxInner = ({messageBoxData, isTop}) => {
-    const {type, message} = messageBoxData
+const MessageBoxInner = ({type, message, isTop}) => {
     return (
         <div>
             <MyAlert
@@ -19,6 +18,7 @@ const MessageBoxInner = ({messageBoxData, isTop}) => {
 const MyAlert = styled(Alert)`
   position: absolute;
   transition: all 0.4s ease-out;
+  z-index: 99999;
   right: 20px;
   top: ${props => {
     return props.isTop ? '80px' : '-100px'

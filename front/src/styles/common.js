@@ -1,21 +1,20 @@
 import styled from "styled-components";
-import colors from "./colors";
 import {Button, Form} from "antd";
 import Title from "antd/es/typography/Title";
 import {Link} from "react-router-dom";
 
 export const MyCard = styled.div`
-  background: ${colors.WHITE};
-  max-width: ${(props) => (props.userCard ? "396px" : "320px")};
+  background: var(--white);
+  max-width: ${({userCard}) => (userCard ? "396px" : "320px")};
   width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-top: ${(props) => (props.userCard ? "30px": "35px")};
-  padding-bottom: ${(props) => (props.userCard ? "30px": "0")};
-  border: 1px solid #D6D8E7;
+  padding-top: ${({userCard}) => (userCard ? "30px": "35px")};
+  padding-bottom: ${({userCard}) => (userCard ? "30px": "0")};
+  border: 1px solid var(--line);
   box-sizing: border-box;
-  box-shadow: 0px 8px 16px rgba(17, 17, 17, 0.04);
+  box-shadow: 0 8px 16px var(--inputBg);
   border-radius: 16px;
   margin-bottom: 60px;
   margin-left: 15px;
@@ -27,13 +26,13 @@ export const CardTop = styled.div`
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
-  padding-bottom: ${(props) => (props.userCard ? "0": "30px")};
+  padding-bottom: ${({userCard}) => (userCard ? "0": "30px")};
 `
 export const CardInfo = styled.p`
   font-size: 24px;
   line-height: 36px;
   letter-spacing: 0.75px;
-  color: ${colors.BODY};
+  color: var(--body);
   margin-bottom: 15px;
   
   &:last-child {
@@ -48,21 +47,21 @@ export const CardTitle = styled(CardInfo)`
 
 // form
 
-export const ButtonAuth = styled(Button)`
+export const ButtonSubmit = styled(Button)`
   width: 135px;
   height: 45px;
-  background-color: ${colors.INPUT_BG};
+  background-color: var(--inputBg);
   border-radius: 12px;
   border: none;
   font-size: 24px;
-  transition: all 0.5s ease-out;;
+  transition: all 0.5s ease-out;
   line-height: 36px;
   letter-spacing: 0.75px;
-  color: ${colors.ADD_PROFILE};
+  color: var(--addProfile);
   cursor: pointer;
   &:hover {
-    background-color: ${colors.TITLE};
-    color: ${colors.INPUT_BG};
+    background-color: var(--title);
+    color: var(--inputBg);
   }
 `
 
@@ -80,7 +79,7 @@ export const MyTitle = styled(Title)`
 `
 export const LinkToRegister = styled(Link)`
   font-size: 16px;
-  color: black;
+  color: var(--background);
 `
 
 export const SForm = styled(Form)`
@@ -89,21 +88,21 @@ export const SForm = styled(Form)`
     font-size: 18px;
     line-height: 34px;
     letter-spacing: 1px;
-    color: ${colors.LABEL};
+    color: var(--label);
   }
   .ant-form-item-label > label.ant-form-item-required:not(.ant-form-item-required-mark-optional)::before{
     display: none;
   }
   .ant-input,.ant-input-affix-wrapper{
     border: none;
-    border-bottom: 1px solid #14142B;
+    border-bottom: 1px solid var(--background);
     padding-left: 0;
-    color: ${colors.TITLE};
+    color: var(--title);
     outline: none;
     background: transparent;
   }
   .ant-input-affix-wrapper:hover{
-    border-bottom: 1px solid #14142B;
+    border-bottom: 1px solid var(--background);
   }
   .ant-form-item-control-input-content{
     text-align: center;
@@ -114,15 +113,15 @@ export const SForm = styled(Form)`
   }
   .ant-checkbox-inner{
     border-radius: 2px;
-    border: 1px solid #14142B;
-    background: #E5E5E5;
+    border: 1px solid var(--background);
+    background: var(--white1);
   }
   .ant-checkbox-checked .ant-checkbox-inner::after{
     transform: rotate(
             0deg) scale(1) translate(-19%,-49%);
     width: 12px;
     height: 12px;
-    background: black;
+    background: var(--background);
     transition: unset;
     border: none;
     padding-left: 0;
@@ -130,7 +129,7 @@ export const SForm = styled(Form)`
   .ant-checkbox:hover .ant-checkbox-inner,
   .ant-checkbox .ant-checkbox-inner,
   .ant-checkbox-checked::after{
-    border: 1px solid #14142B;
+    border: 1px solid var(--background);
   }
   .ant-input-affix-wrapper:not(.ant-input-affix-wrapper-disabled):hover,.ant-input-affix-wrapper{
     box-shadow: none;

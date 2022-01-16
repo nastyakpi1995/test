@@ -4,7 +4,7 @@ import {useDispatch} from "react-redux";
 import {setMessageDataCreator} from "../../redux/reducers/authReducer";
 import {toggleLoaderProfileCreator} from "../../redux/reducers/profileReducer";
 import {initialUserValues} from "../../utils/constants";
-import {editUserAxiosRequest} from "../../api/usersApi";
+import {editUserAxiosRequest} from "../../utils/apiCaller";
 
 const EditModalUser = ({activeUser, isVisible, setIsVisible, setActiveUser}) => {
     const [confirmLoading, setConfirmLoading] = useState(false)

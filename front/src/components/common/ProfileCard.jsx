@@ -1,5 +1,5 @@
 import React, {useCallback} from "react";
-import {deleteProfileAxiosRequest} from "../../api/usersApi";
+import {deleteProfileAxiosRequest} from "../../utils/apiCaller";
 import {setMessageDataCreator} from "../../redux/reducers/authReducer";
 import {useDispatch} from "react-redux";
 import deleteImg from "../../images/icons/DeleteIcon.svg"

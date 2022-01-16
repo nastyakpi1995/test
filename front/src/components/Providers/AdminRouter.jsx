@@ -1,6 +1,6 @@
-import React, {useEffect, useState} from "react";
+import React from "react";
 import {Navigate} from "react-router-dom";
-import {authToken, savedUser} from "../../utils/constants";
+import {authToken} from "../../utils/constants";
 import {useSelector} from "react-redux";
 
 const AdminRouter = ({children}) => {

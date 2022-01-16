@@ -1,8 +1,8 @@
 import React, {useCallback, useEffect, useState} from "react";
-import HeaderWrapper from "../common/HeaderWrapper";
+import HeaderWrapper from "../common/header/HeaderWrapper";
 import NewProfile from "./NewProfile";
 import ProfileCard from "../common/ProfileCard";
-import {getProfilesAxiosRequest} from "../../api/usersApi";
+import {getProfilesAxiosRequest} from "../../utils/apiCaller";
 import {
     setActiveProfileCreator,
     toggleIsOpenModalCreator,
@@ -11,7 +11,7 @@ import {
 import {useDispatch, useSelector} from "react-redux";
 import styled from "styled-components";
 import {initialProfileValues} from "../../utils/constants";
-import ContainerProfileModal from "../common/ProfileModal/ContianerProfileModal";
+import ContainerProfileModal from "./ProfileModal/ContianerProfileModal";
 
 const Profiles = () => {
     const dispatch = useDispatch();

@@ -1,6 +1,6 @@
 import React, {useEffect, useRef, useState} from "react";
 import {Button, Form, Input} from "antd";
-import {loginAxiosRequest} from "../../api/usersApi";
+import {loginAxiosRequest} from "../../utils/apiCaller";
 import {useNavigate} from "react-router-dom";
 import {useDispatch} from "react-redux";
 import {setMessageDataCreator} from "../../redux/reducers/authReducer";

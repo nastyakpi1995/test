@@ -1,16 +1,16 @@
 import React, {useCallback, useEffect, useState} from "react";
 
 import {Link, NavLink, useNavigate} from "react-router-dom";
-import {authToken, savedUser} from "../../utils/constants";
-import {setMessageDataCreator} from "../../redux/reducers/authReducer";
+import {authToken, savedUser} from "../../../utils/constants";
+import {setMessageDataCreator} from "../../../redux/reducers/authReducer";
 import {useDispatch, useSelector} from "react-redux";
-import {setUserCreator} from "../../redux/reducers/userReducer";
+import {setUserCreator} from "../../../redux/reducers/userReducer";
 import styled from "styled-components";
-import profileIcon from '../../images/icons/profileIcon.svg'
-import dashboardIcon from '../../images/icons/dashboardIcon.svg'
-import usersIcon from '../../images/icons/usersIcon.svg'
-import avatarAdmin from '../../images/avatarAdmin.svg'
-import avatarUser from '../../images/avatarUser.svg'
+import profileIcon from '../../../images/icons/profileIcon.svg'
+import dashboardIcon from '../../../images/icons/dashboardIcon.svg'
+import usersIcon from '../../../images/icons/usersIcon.svg'
+import avatarAdmin from '../../../images/avatarAdmin.svg'
+import avatarUser from '../../../images/avatarUser.svg'
 
 const HeaderContainer = () => {
     const navigate = useNavigate()

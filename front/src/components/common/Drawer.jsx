@@ -1,7 +1,7 @@
 import {useEffect, useRef} from "react";
 import {createPortal} from "react-dom";
 import styled, {css} from "styled-components";
-import useMountTransition from "../../hook/useMountTransition";
+import useMountTransition from "../../hooks/useMountTransition";
 
 const createRootElement = () => {
     let rootElement = document.createElement('div')

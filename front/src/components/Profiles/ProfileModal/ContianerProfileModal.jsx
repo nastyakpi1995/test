@@ -1,7 +1,7 @@
 import React, {useCallback, useEffect, useMemo, useState} from "react";
 import {Form} from "antd";
 import {useDispatch, useSelector} from "react-redux";
-import {createProfilesAxiosRequest, editProfileAxiosRequest} from "../../../api/usersApi";
+import {createProfilesAxiosRequest, editProfileAxiosRequest} from "../../../utils/apiCaller";
 import {setMessageDataCreator} from "../../../redux/reducers/authReducer";
 import {
     setActiveProfileCreator,

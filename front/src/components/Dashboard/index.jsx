@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
-import HeaderWrapper from "../common/HeaderWrapper";
+import HeaderWrapper from "../common/header/HeaderWrapper";
 import Information from "./DashboardCard";
-import {adminDashboardAxiosRequest} from "../../api/usersApi";
+import {adminDashboardAxiosRequest} from "../../utils/apiCaller";
 import {useDispatch} from "react-redux";
 import {setMessageDataCreator} from "../../redux/reducers/authReducer";
 import styled from "styled-components";

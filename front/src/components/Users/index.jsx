@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
-import HeaderWrapper from "../common/HeaderWrapper";
-import { usersAxiosRequest} from "../../api/usersApi";
+import HeaderWrapper from "../common/header/HeaderWrapper";
+import { usersAxiosRequest} from "../../utils/apiCaller";
 import {setMessageDataCreator} from "../../redux/reducers/authReducer";
 import {useDispatch} from "react-redux";
 import User from "./User";

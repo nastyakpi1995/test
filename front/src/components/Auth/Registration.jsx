@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import {Form, Checkbox, Input} from "antd";
-import {registerAxiosRequest} from "../../api/usersApi";
+import {registerAxiosRequest} from "../../utils/apiCaller";
 import {useNavigate} from 'react-router-dom'
 import {useDispatch} from "react-redux";
 import {setMessageDataCreator} from "../../redux/reducers/authReducer";

@@ -1,8 +1,8 @@
 import React, {useState, useEffect, useCallback} from 'react';
 import {useNavigate, useParams} from "react-router-dom";
-import HeaderWrapper from "../common/HeaderWrapper";
+import HeaderWrapper from "../common/header/HeaderWrapper";
 import ProfileCard from "../common/ProfileCard";
-import {deleteUserAxiosRequest, getUserDataById} from "../../api/usersApi";
+import {deleteUserAxiosRequest, getUserDataById} from "../../utils/apiCaller";
 import {useDispatch, useSelector} from "react-redux";
 import {Card} from "antd";
 import {DeleteOutlined, EditOutlined} from "@ant-design/icons";
@@ -16,7 +16,7 @@ import {
 } from "../../redux/reducers/profileReducer";
 import styled from "styled-components";
 import NewProfile from "../Profiles/NewProfile";
-import ContainerProfileModal from "../common/ProfileModal/ContianerProfileModal";
+import ContainerProfileModal from "../Profiles/ProfileModal/ContianerProfileModal";
 
 const UserById = () => {
     const {userId} = useParams()

@@ -1,5 +1,5 @@
 import axios from "axios";
-import {authToken, savedUser} from "../utils/constants";
+import {authToken, savedUser} from "./constants";
 const baseUrl = 'http://localhost:4002'
 
 const getHeaders = () => {

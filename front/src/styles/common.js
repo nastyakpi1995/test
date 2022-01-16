@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import {Button, Form} from "antd";
+import {Button, Form, Input} from "antd";
 import Title from "antd/es/typography/Title";
 import {Link} from "react-router-dom";
 
@@ -137,3 +137,20 @@ export const SForm = styled(Form)`
     border-color: unset;
   }
 `
+
+// modal Form
+export const SFormModal = styled(Form)`
+  max-width: 700px;
+  margin: 0 auto;
+`
+export const SFormItemModal = styled(Form.Item)`
+  label {
+    width: 110px;
+    font-size: 20px;
+    color: var(--white);
+  }
+`
+export const SInputModal = styled(Input)`
+    border-radius: 10px;
+  font-size: 20px;
+`;

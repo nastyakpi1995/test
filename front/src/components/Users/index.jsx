@@ -1,14 +1,23 @@
 import React, {useEffect, useState} from "react";
 import HeaderWrapper from "../common/header/HeaderWrapper";
-import { usersAxiosRequest} from "../../utils/apiCaller";
+import {deleteUserAxiosRequest, usersAxiosRequest} from "../../utils/apiCaller";
 import {setMessageDataCreator} from "../../redux/reducers/authReducer";
 import {useDispatch} from "react-redux";
 import User from "./User";
 import styled from "styled-components";
+import EditModalUser from "./EditModalUser";
+import {initialUserValues} from "../../utils/constants";
+import {useNavigate} from "react-router-dom";
+import UserByIdProfiles from "./UserByIdProfiles";
 
 const Users = () => {
     const [users, setUsers] = useState(null);
     const [isLoader, setIsLoader] = useState(false)
+    const [isModalVisible, setIsModalVisible] = useState(false)
+    const [activeEditUser, setActiveEditUser] = useState(initialUserValues)
+    const [chooseUserId, setChooseUserId] = useState(false)
+    const navigator = useNavigate()
+
     const dispatch = useDispatch()
 
     const prepareMessageDataFailed = {
@@ -35,14 +44,35 @@ const Users = () => {
         })
     }, [])
 
+    const onEditUser = (user) => {
+        setIsModalVisible(true)
+        setActiveEditUser(user)
+    }
+    const onDeleteUser = (id) => {
+        deleteUserAxiosRequest(id).then(data => {
+            dispatch(setMessageDataCreator(data))
+            if (data.success) {
+                navigator('/users')
+            }
+        })
+    }
     return <HeaderWrapper>
+        <EditModalUser isVisible={isModalVisible}
+                       setIsVisible={setIsModalVisible}
+                       activeEditUser={activeEditUser}
+                       setActiveEditUser={setActiveEditUser} />
         <UserWrap>
             <UsersContent>
                 {users ? users.map((user, index) => (
-                    <User key={index} user={user} />
+                    <User key={index}
+                          user={user}
+                          active={chooseUserId === user.id}
+                          onClick={() => setChooseUserId(user.id)}
+                          onEditUser={() => onEditUser(user)}
+                          onDeleteUser={() => onDeleteUser(user.id)} />
                 )) : null}
             </UsersContent>
-
+            {chooseUserId ? <UserByIdProfiles userId={chooseUserId} /> : null}
         </UserWrap>
     </HeaderWrapper>
 }
@@ -52,11 +82,10 @@ const UserWrap = styled.div`
   height: 100vh;
   max-width: 1800px;
   margin: 0 auto;
-  justify-content: space-between;
 `
 const UsersContent = styled.div`
   display: flex;
-  
+  flex-direction: column;
 `
 
 export default Users

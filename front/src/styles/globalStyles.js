@@ -12,6 +12,7 @@ export default createGlobalStyle`
     --addProfile: #4e4b66;
     --body: #4e4b66;
     --lablel: #6e7191;
+    --container: #777680;
     --white1: #bec2c6;
     --white: #fbfbfb;
     --background3: #f7f7fc;

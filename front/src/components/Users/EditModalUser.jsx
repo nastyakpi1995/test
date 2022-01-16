@@ -9,7 +9,7 @@ import Drawer from "../common/Drawer";
 import {ButtonSubmit, SFormItemModal, SFormModal, SInputModal, STitleModal} from "../../styles/common";
 import styled from "styled-components";
 
-const EditModalUser = ({activeUser, isVisible, setIsVisible, setActiveUser}) => {
+const EditModalUser = ({activeEditUser, isVisible, setIsVisible, setActiveEditUser}) => {
     const [confirmLoading, setConfirmLoading] = useState(false)
     const [form] = Form.useForm()
     const dispatch = useDispatch();
@@ -23,19 +23,19 @@ const EditModalUser = ({activeUser, isVisible, setIsVisible, setActiveUser}) => 
         }
     }
     useEffect(() => {
-        form.setFieldsValue(activeUser)
-    }, [activeUser])
+        form.setFieldsValue(activeEditUser)
+    }, [activeEditUser])
 
     const handleCancel = () => {
         form.setFieldsValue(initialUserValues)
         setIsVisible(false)
-        setActiveUser(initialUserValues)
+        setActiveEditUser(initialUserValues)
     }
 
     const onFinish = (values) => {
         setConfirmLoading(true)
 
-        editUserAxiosRequest(values, activeUser.id).then(data => {
+        editUserAxiosRequest(values, activeEditUser.id).then(data => {
             onDataSuccess(data.data)
             dispatch(toggleLoaderProfileCreator())
             setConfirmLoading(false)
@@ -44,9 +44,9 @@ const EditModalUser = ({activeUser, isVisible, setIsVisible, setActiveUser}) => 
 
     return (
         <Drawer visible={isVisible}  onClose={handleCancel}>
-            <STitleModal>Edit {activeUser.username} profile</STitleModal>
+            <STitleModal>Edit {activeEditUser.username} profile</STitleModal>
             <SFormModal name={'user'}
-                  initialValues={activeUser}
+                  initialValues={activeEditUser}
                   form={form}
                   wrapperCol={{ span: 16 }}
                   onFinish={onFinish}>

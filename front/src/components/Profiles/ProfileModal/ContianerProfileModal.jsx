@@ -42,12 +42,16 @@ const ContainerProfileModal = () => {
             const formatDate = {...activeProfile, birthdate:getFormatedData(activeProfile.birthdate)}
             form.setFieldsValue(formatDate)
         }
+        return () => {
+            setConfirmLoading(false)
+        }
     }, [activeProfile])
 
     const handleCancel = useCallback(() => {
         dispatch(setActiveProfileCreator(initialProfileValues))
         form.setFieldsValue(activeProfile)
         dispatch(toggleIsOpenModalCreator())
+
     }, [])
 
     const applyUserAction = (onActionFunction, values) => {

@@ -7,6 +7,19 @@ import styled from "styled-components";
 import { Row} from "antd";
 import DashboardCard from "./DashboardCard";
 
+const getCurrentTitle = (name) => {
+    switch (name) {
+        case "users":
+            return "Users: "
+        case "profiles":
+            return "Profiles: "
+        case "adult":
+            return "Profiles over 18 years old: "
+        default:
+            return ''
+    }
+}
+
 const Dashboard = () => {
     const [dashboard,setDashboard] = useState([])
     const dispatch = useDispatch();
@@ -19,18 +32,6 @@ const Dashboard = () => {
         })
     }, [])
 
-    const getCurrentTitle = (name) => {
-        switch (name) {
-            case "users":
-                return "Users: "
-            case "profiles":
-                return "Profiles: "
-            case "adult":
-                return "Profiles over 18 years old: "
-            default:
-                return ''
-        }
-    }
     return (
         <HeaderWrapper>
             <div className="container">
@@ -45,9 +46,5 @@ const Dashboard = () => {
 
         )
 }
-const DashboardWrap = styled.div`
-  display: flex;
-  height: 100vh
-`
 
 export default Dashboard;

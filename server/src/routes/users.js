@@ -16,12 +16,4 @@ router.post(`/user/login`, async (req, res) => {
     return UserController.loginUser(body, res)
 })
 
-router.put(`/users/:userId`, async (req, res) => {
-
-})
-
-router.delete(`/users/:userId`, async (req, res) => {
-
-})
-
 module.exports = router;

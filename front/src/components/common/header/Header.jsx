@@ -1,4 +1,4 @@
-import React, {useCallback, useEffect, useState} from "react";
+import React, {useCallback} from "react";
 
 import {Link, useNavigate} from "react-router-dom";
 import {authToken, savedUser} from "../../../utils/constants";
@@ -20,7 +20,6 @@ const HeaderContainer = () => {
 
     const handleLogOut = useCallback(() => {
         const prepareMessageData = {
-            isVisible: true,
             message: 'you log out successfully',
             success: 'success'
         }
@@ -35,32 +34,29 @@ const HeaderContainer = () => {
     return (
         <Header>
             <Container>
-                <Logo>
-                    <Link to={"/"}><img src={currentUser?.isadmin ? avatarAdmin : avatarUser} alt="user"/>
-                        <LogoTitle>{currentUser?.username}</LogoTitle></Link>
-                </Logo>
+                <LogoLink to={"/"}>
+                    <img src={currentUser?.isadmin ? avatarAdmin : avatarUser} alt="user"/>
+                    <LogoTitle>{currentUser?.username}</LogoTitle>
+                </LogoLink>
                 <SNav>
                     {currentUser?.isadmin ? (
                     <Nav>
-                        <NavList><Link to={'/profiles'}>
+                        <NavList  to={'/profiles'}>
                             <Text>Profiles</Text>
-                            <img src={profileIcon} alt="profile"/></Link></NavList>
-                        <NavList>
-                            <Link to={'/dashboard'}>
+                            <img src={profileIcon} alt="profile"/>
+                        </NavList>
+                        <NavList to={'/dashboard'}>
                                 <Text>Dashboard</Text>
                                 <img src={dashboardIcon} alt="dashboard"/>
-                            </Link>
                         </NavList>
-                        <NavList>
-                            <Link to={'/users'}>
+                        <NavList to={'/users'}>
                                 <Text>Users</Text>
                                 <img src={usersIcon} alt="users"/>
-                            </Link>
                         </NavList>
                     </Nav>
                     ) : null}
                     <Logout>
-                        <li onClick={handleLogOut}><span style={{cursor:"pointer"}} >Log out</span></li>
+                        <div onClick={handleLogOut}><span style={{cursor:"pointer"}} >Log out</span></div>
                     </Logout>
                 </SNav>
             </Container>
@@ -79,22 +75,22 @@ const SNav = styled.nav`
   align-items: center;
 `;
 
-const Nav = styled.ul`
+const Nav = styled.div`
   margin-right: 100px;
   display: flex;
   align-items: center;
 `;
-const Logo = styled.div`
+const LogoLink = styled(Link)`
   display: flex;
   align-items: center;
+  cursor: pointer;
 `
-const NavList = styled.li`
+const NavList = styled(Link)`
   margin-right: 45px;
-  &:last-child{
-    margin-right: 0;
-  }
-  & img {
-    margin-right: 25px;
+  display: flex;
+  
+  img {
+    fill: red;
   }
   &:not(:first-child) img {
     vertical-align: baseline;
@@ -102,14 +98,15 @@ const NavList = styled.li`
 `
 
 const Text = styled.div`
-  color: var(--title);
+  color: var(--white);
   font-size: 18px;
   line-height: 27px;
   letter-spacing: 0.75px;
+  margin-right: 20px;
 `
 
-const Logout = styled.ul`
-  color: var(--title);
+const Logout = styled.div`
+  color: var(--white);
   font-size: 18px;
   line-height: 27px;
   letter-spacing: 0.75px;
@@ -120,6 +117,8 @@ const LogoTitle = styled.div`
   font-size: 18px;
   line-height: 27px;
   letter-spacing: 0.75px;
+  color: var(--white);
+  margin-left: 20px;
 `
 const Header = styled.header`
   width: 100%;

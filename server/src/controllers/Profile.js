@@ -30,9 +30,8 @@ class ProfileController {
         })
     }
     async deleteProfile(res, profileId) {
-        const user = await db.query(`select * from profiles where id=$1`, [profileId])
-
-        const data = await db.query(`DELETE FROM profiles WHERE id=$1`, [profileId])
+        await db.query(`select * from profiles where id=$1`, [profileId])
+        await db.query(`DELETE FROM profiles WHERE id=$1`, [profileId])
 
         return res.status(200).send({
             success: true,

@@ -46,12 +46,12 @@ const DrawerContainer = styled.div`
   --transition-speed: 0.3s;
 `
 const SDrawer = styled.div`
-  background: var(--background-button2);
-  width: 70%;
+  background: var(--bckModal);
+  width: 42%;
   height: 100%;
   overflow: auto;
   position: fixed;
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 0 15px var(--background);
   transition: transform var(--transition-speed) ease;
   top: 0;
   right: 0;

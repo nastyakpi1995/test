@@ -1,5 +1,4 @@
 const UserModel = require('../models/User')
-const ProfileModel = require('../models/Profile');
 const db = require('../config/db')
 
 class AdminController {

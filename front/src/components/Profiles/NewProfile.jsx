@@ -17,7 +17,7 @@ const NewProfile = ({showModal}) => {
 const NewProfileCard = styled(Card)`
   max-width: 320px;
   width: 100%;
-  padding: 75px 0;
+  padding: 37px 0;
   border: 1px solid var(--white);
   box-sizing: border-box;
   box-shadow: 0 8px 16px rgba(17, 17, 17, 0.04);

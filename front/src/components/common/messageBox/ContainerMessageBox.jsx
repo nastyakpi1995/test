@@ -13,22 +13,23 @@ const ContainerMessageBox = () => {
     const messageBoxData = useSelector(state => getMessageBoxSelect(state))
     const {type, isVisible, message} = messageBoxData
 
-    const slideMessageBox = useCallback(() => {
+    useEffect(() => {
+        setIsTop(isVisible)
+    }, [isVisible, setIsTop])
+
+    useEffect(() => {
+        let timeoutId;
+
         if (isTop) {
-            setTimeout(() => {
+            timeoutId = setTimeout(() => {
                 setIsTop(false)
                 dispatch(setMessageDataDefaultCreator(type))
             }, SLIDING_TIMEOUT)
         }
-    }, [isTop, dispatch])
-
-    useEffect(() => {
-        setIsTop(isVisible)
-    }, [isVisible])
-
-    useEffect(() => {
-        slideMessageBox()
-    }, [isTop])
+        return () => {
+            clearTimeout(timeoutId)
+        }
+    }, [isTop, dispatch, setIsTop])
 
     return (
         <MessageBox message={message} type={type} isTop={isTop} />

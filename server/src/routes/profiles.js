@@ -16,7 +16,6 @@ router.post(`/profile/create/:userId`, verify, async (req, res) => {
 
 router.put(`/profile/edit/:profileId`, verify, async (req, res) => {
     const body = req.body
-    const {id} = req.user
     let {profileId} = req.params
 
     return ProfileController.updateProfile(body, res, profileId)

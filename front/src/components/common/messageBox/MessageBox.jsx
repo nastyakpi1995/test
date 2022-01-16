@@ -20,9 +20,7 @@ const MyAlert = styled(Alert)`
   transition: all 0.4s ease-out;
   z-index: 99999;
   right: 20px;
-  top: ${props => {
-    return props.isTop ? '80px' : '-100px'
-}};
+  top: ${({isTop}) => isTop ? '80px' : '-100px'};
 `
 const MessageBox = React.memo(MessageBoxInner);
 export default MessageBox

@@ -20,7 +20,7 @@ const ContainerMessageBox = () => {
                 dispatch(setMessageDataDefaultCreator(type))
             }, SLIDING_TIMEOUT)
         }
-    }, [isTop])
+    }, [isTop, dispatch])
 
     useEffect(() => {
         setIsTop(isVisible)

@@ -1,11 +1,10 @@
 import React, {useEffect, useState} from "react";
 import HeaderWrapper from "../common/header/HeaderWrapper";
-import Information from "./DashboardCard";
 import {adminDashboardAxiosRequest} from "../../utils/apiCaller";
 import {useDispatch} from "react-redux";
 import {setMessageDataCreator} from "../../redux/reducers/authReducer";
 import styled from "styled-components";
-import {Col, Row, Spin} from "antd";
+import { Row} from "antd";
 import DashboardCard from "./DashboardCard";
 
 const Dashboard = () => {

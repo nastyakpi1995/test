@@ -1,6 +1,6 @@
 import React, {useCallback, useEffect, useState} from "react";
 
-import {Link, NavLink, useNavigate} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import {authToken, savedUser} from "../../../utils/constants";
 import {setMessageDataCreator} from "../../../redux/reducers/authReducer";
 import {useDispatch, useSelector} from "react-redux";

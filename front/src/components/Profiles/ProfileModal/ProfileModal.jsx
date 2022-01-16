@@ -2,15 +2,14 @@ import React from "react";
 import { DatePicker, Radio} from "antd";
 import {locale} from "moment";
 import Drawer from "../../common/Drawer";
-import styled from "styled-components";
-import {ButtonSubmit, SFormModal, SInputModal, SFormItemModal} from "../../../styles/common";
+import {ButtonSubmit, SFormModal, SInputModal, SFormItemModal, STitleModal} from "../../../styles/common";
 
 const ProfileModalInner = ({
     confirmLoading, isOpenModalProfile, handleCancel, activeProfile, onFinish, form, onChange, title
 }) => {
     return (
         <Drawer visible={isOpenModalProfile} onClose={handleCancel}>
-            <Title>{title}</Title>
+            <STitleModal>{title}</STitleModal>
             <SFormModal
                   form={form}
                   wrapperCol={{ span: 16 }}
@@ -53,13 +52,6 @@ const ProfileModalInner = ({
         </Drawer>
     )
 }
-
-const Title = styled.div`
-  color: var(--background3);
-  font-size: 50px;
-  text-align: center;
-  margin-bottom: 50px;
-`
 
 const ProfileModal = React.memo(ProfileModalInner)
 export default ProfileModal

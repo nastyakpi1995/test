@@ -1,4 +1,4 @@
-import React, {useCallback, useEffect, useState} from "react";
+import React, { useEffect, useState} from "react";
 import HeaderWrapper from "../common/header/HeaderWrapper";
 import NewProfile from "./NewProfile";
 import ProfileCard from "../common/ProfileCard";

@@ -2,6 +2,7 @@ import {useEffect, useRef} from "react";
 import {createPortal} from "react-dom";
 import styled, {css} from "styled-components";
 import useMountTransition from "../../hooks/useMountTransition";
+import FocusTrap from 'focus-trap-react'
 
 const createRootElement = () => {
     let rootElement = document.createElement('div')
@@ -26,7 +27,7 @@ const Drawer = ({visible, children, onClose}) => {
     }, [])
 
     return createPortal(
-        <>
+        <FocusTrap active={visible}>
             <DrawerContainer
                 aria-hidden={visible ? "false" : "true"}>
                 <SDrawer isTransitioning={isTransitioning}
@@ -36,7 +37,7 @@ const Drawer = ({visible, children, onClose}) => {
                 <Backdrop isTransitioning={isTransitioning}
                           visible={visible} onClick={onClose} />
             </DrawerContainer>
-         </>,
+         </FocusTrap>,
         portalRootRef.current
     )
 }

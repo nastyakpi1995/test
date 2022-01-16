@@ -1,10 +1,13 @@
 import React, {useEffect, useState} from "react";
-import {Checkbox, DatePicker, Form, Input, Modal, Radio} from "antd";
+import {Checkbox, Form} from "antd";
 import {useDispatch} from "react-redux";
 import {setMessageDataCreator} from "../../redux/reducers/authReducer";
 import {toggleLoaderProfileCreator} from "../../redux/reducers/profileReducer";
 import {initialUserValues} from "../../utils/constants";
 import {editUserAxiosRequest} from "../../utils/apiCaller";
+import Drawer from "../common/Drawer";
+import {ButtonSubmit, SFormItemModal, SFormModal, SInputModal, STitleModal} from "../../styles/common";
+import styled from "styled-components";
 
 const EditModalUser = ({activeUser, isVisible, setIsVisible, setActiveUser}) => {
     const [confirmLoading, setConfirmLoading] = useState(false)
@@ -39,53 +42,59 @@ const EditModalUser = ({activeUser, isVisible, setIsVisible, setActiveUser}) => 
         })
     }
 
-    const onOk = () => {
-        form.submit()
-    }
-
     return (
-        <Modal confirmLoading={confirmLoading} visible={isVisible} onOk={onOk} onCancel={handleCancel}>
-            <Form labelCol={{ span: 8 }}
-                  name={'user'}
+        <Drawer visible={isVisible}  onClose={handleCancel}>
+            <STitleModal>Edit {activeUser.username} profile</STitleModal>
+            <SFormModal name={'user'}
                   initialValues={activeUser}
                   form={form}
                   wrapperCol={{ span: 16 }}
                   onFinish={onFinish}>
-                <Form.Item
+                <SFormItem
                     label="User Name"
                     name="username"
                     rules={[{ required: true, message: 'Please input your user name !' }]}
                 >
-                    <Input onChange={(e) => {
+                    <SInputModal onChange={(e) => {
                         const value = e.target.value;
                         form.setFieldsValue({
                             'name': value
                         })
                     }} />
-                </Form.Item>
-                <Form.Item
+                </SFormItem>
+                <SFormItem
                     label="Email"
                     name="email"
                     rules={[{ required: true, message: 'Please input your user email !' }]}
                 >
-                    <Input onChange={(e) => {
+                    <SInputModal onChange={(e) => {
                         const value = e.target.value;
                         form.setFieldsValue({
                             'email': value
                         })
                     }} />
-                </Form.Item>
-                <Form.Item
+                </SFormItem>
+                <SFormItem
                     label="Add permitions to admin"
                     name="isadmin"
                     valuePropName="checked"
                     rules={[{ required: false }]}
                 >
                     <Checkbox />
-                </Form.Item>
-            </Form>
-        </Modal>
+                </SFormItem>
+                <SFormItem>
+                    <ButtonSubmit loading={confirmLoading} htmlType='submit'>
+                        Submit
+                    </ButtonSubmit>
+                </SFormItem>
+            </SFormModal>
+        </Drawer>
     )
 }
 
+const SFormItem = styled(SFormItemModal)`
+  label {
+    width: 230px !important;
+  }
+`
 export default EditModalUser

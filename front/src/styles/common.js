@@ -154,3 +154,10 @@ export const SInputModal = styled(Input)`
     border-radius: 10px;
   font-size: 20px;
 `;
+
+export const STitleModal = styled.div`
+  color: var(--background3);
+  font-size: 50px;
+  text-align: center;
+  margin-bottom: 50px;
+`

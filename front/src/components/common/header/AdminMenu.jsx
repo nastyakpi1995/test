@@ -32,7 +32,7 @@ const NavList = styled(Link)`
 `
 
 const Text = styled.div`
-  color: var(--white);
+  color: var(--whiteLight);
   font-size: 18px;
   line-height: 27px;
   letter-spacing: 0.75px;

@@ -25,13 +25,13 @@ const User = ({user, onEditUser, onDeleteUser, onClick, active}) => {
 const MyCard = styled.div`
   width: 350px;
   padding-left: 10px;
-  background: var(--container);
+  background: var(--containerLight);
   border-radius: 5px;
   display: flex;
   justify-content: space-between;
   margin: 10px;
   padding-right: 10px;
-  border: ${(props) => (props.active ? '4px solid var(--title)' : '4px solid var(--transparent)')}
+  border: ${(props) => (props.active ? '4px solid var(--titleLight)' : '4px solid var(--transparent)')}
 `
 
 const Info = styled.div``
@@ -45,17 +45,17 @@ const SButton = styled.div`
     object-fit: cover;
     width: 25px;
     height: 25px;
-    color: var(--white);
+    color: var(--whiteLight);
   }
 `
 
 const UserName = styled.p`
   font-size: 18px;
-  color: var(--white);
+  color: var(--whiteLight);
 `
 const UserEmail = styled.p`
   font-size: 16px;
-  color: var(--white1);
+  color: var(--white1Light);
 `
 
 export default User

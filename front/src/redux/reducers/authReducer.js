@@ -1,6 +1,9 @@
+import {theme, themeTypes} from "../../utils/constants";
+
 const types = {
     setMessageDataType: 'setMessageDataType',
-    setMessageDataDefaultType: 'setMessageDataDefaultType'
+    setMessageDataDefaultType: 'setMessageDataDefaultType',
+    setThemeType: 'setThemeType',
 }
 
 const initState = {
@@ -8,7 +11,8 @@ const initState = {
         isVisible: false,
         message: '',
         type: 'success'
-    }
+    },
+    theme: themeTypes.dark
 }
 
 const authReducer = (state= initState, action) => {
@@ -35,6 +39,13 @@ const authReducer = (state= initState, action) => {
             }
         }
 
+        case types.setThemeType: {
+            return ({
+                ...state,
+                theme: action.payload
+            })
+        }
+
         default: {
             return state
         }
@@ -48,6 +59,10 @@ export const setMessageDataCreator = (messageData) => ({
 export const setMessageDataDefaultCreator = (typeData) => ({
     type: types.setMessageDataDefaultType,
     typeData
+})
+export const setThemeCreator = (payload) => ({
+    type: types.setThemeType,
+    payload
 })
 
 export default authReducer

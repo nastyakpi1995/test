@@ -1,7 +1,7 @@
 import React from "react";
 import {Link} from "react-router-dom";
 import styled from 'styled-components';
-import {links} from "../utils/constants";
+import {links} from "../../utils/constants";
 
 const NotFoundRoute = () => {
     return (

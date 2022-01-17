@@ -54,22 +54,22 @@ const Button = styled.button`
   cursor: pointer;
   border-bottom-right-radius: 14px;
   &:hover {
-    background: var(--red);
-    color: var(--white2);
+    background: var(--redLight);
+    color: var(--white2Light);
   }
   &:first-child{
-    border-right: 1px solid var(--white2);
+    border-right: 1px solid var(--white2Light);
     border-bottom-left-radius: 14px;
     border-bottom-right-radius: 0;
     &:hover {
-      background: var(--purple);
-      color: var(--white);
+      background: var(--purpleLight);
+      color: var(--whiteLight);
     }
   }
 `
 
 export const CardBottom = styled.div`
-    border: 1px solid var(--white2);
+    border: 1px solid var(--white2Light);
     width: 100%;
     border-bottom-left-radius: 16px;
     border-bottom-right-radius: 16px;

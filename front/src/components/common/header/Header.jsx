@@ -1,20 +1,23 @@
 import React, {useCallback} from "react";
 
 import {Link, useNavigate} from "react-router-dom";
-import {authToken, links, prepareMessageData, savedUser} from "../../../utils/constants";
-import {setMessageDataCreator} from "../../../redux/reducers/authReducer";
+import {authToken, links, prepareMessageData, savedUser, themeTypes} from "../../../utils/constants";
+import {setMessageDataCreator, setThemeCreator} from "../../../redux/reducers/authReducer";
 import {useDispatch, useSelector} from "react-redux";
 import {setUserCreator} from "../../../redux/reducers/userReducer";
 import styled from "styled-components";
 import avatarAdmin from '../../../images/avatarAdmin.svg'
 import avatarUser from '../../../images/avatarUser.svg'
 import AdminMenu from "./AdminMenu";
+import {Switch} from "antd";
+import {getTheme} from "../../../redux/selects/auth";
 
 const HeaderContainer = () => {
     const navigate = useNavigate()
     const dispatch = useDispatch()
 
     const currentUser = useSelector(state => state.user.user)
+    const theme = useSelector(state => getTheme(state))
 
     const handleLogOut = useCallback(() => {
         dispatch(setMessageDataCreator(prepareMessageData))
@@ -24,8 +27,14 @@ const HeaderContainer = () => {
         navigate(links.login)
     }, [dispatch])
 
+    const changeTheme = (e) => {
+        const {dark, light} = themeTypes
+        const newTheme = theme === dark ? light : dark;
+
+        dispatch(setThemeCreator(newTheme))
+    }
     return (
-        <Header>
+        <Header theme={theme}>
             <Container>
                 <LogoLink to={links.profiles}>
                     <img src={currentUser?.isadmin ? avatarAdmin : avatarUser} alt="user"/>
@@ -33,8 +42,14 @@ const HeaderContainer = () => {
                 </LogoLink>
                 <SNav>
                     {currentUser?.isadmin ? <AdminMenu /> : null}
+
+                    <Switch
+                        checked={theme === themeTypes.dark}
+                        onChange={changeTheme}
+                        checkedChildren="Dark"
+                        unCheckedChildren="Light"
+                    />
                     <Logout onClick={handleLogOut}>
-                        
                         <span>Log out</span>
                     </Logout>
                 </SNav>
@@ -45,7 +60,7 @@ const HeaderContainer = () => {
 
 const Header = styled.header`
   width: 100%;
-  background: var(--background2);
+  background:  var(--background2Light);
   margin-bottom: 20px;
   padding: 10px 15px;
   height: 70px;
@@ -72,7 +87,7 @@ const LogoLink = styled(Link)`
 `
 
 const Logout = styled.div`
-  color: var(--white);
+  color: var(--whiteLight);
   font-size: 18px;
   line-height: 27px;
   letter-spacing: 0.75px;
@@ -84,7 +99,7 @@ const LogoTitle = styled.div`
   font-size: 18px;
   line-height: 27px;
   letter-spacing: 0.75px;
-  color: var(--white);
+  color: var(--whiteLight);
   margin-left: 20px;
 `
 

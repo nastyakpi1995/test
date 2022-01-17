@@ -8,7 +8,7 @@ import PrivatRouter from "./components/providers/PrivatRouter";
 import AdminRouter from "./components/providers/AdminRouter";
 import Dashboard from "./components/layout/Dashboard";
 import Users from "./components/layout/Users";
-import NotFoundRoute from "./components/NotFoundRoute";
+import NotFoundRoute from "./components/layout/NotFoundRoute";
 import {links} from "./utils/constants";
 
 const  App = () => {

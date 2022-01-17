@@ -5,6 +5,7 @@
   "private": true,
   "dependencies": {
     "@ant-design/icons": "^4.7.0",
+    "@rooks/use-key": "^4.11.2",
     "antd": "^4.17.4",
     "axios": "^0.24.0",
     "focus-trap-react": "^8.9.1",

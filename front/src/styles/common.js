@@ -4,7 +4,7 @@ import Title from "antd/es/typography/Title";
 import {Link} from "react-router-dom";
 
 export const MyCard = styled.div`
-  background: var(--white);
+  background: var(--whiteLight);
   max-width: ${({userCard}) => (userCard ? "396px" : "320px")};
   width: 100%;
   display: flex;
@@ -12,9 +12,9 @@ export const MyCard = styled.div`
   align-items: center;
   padding-top: ${({userCard}) => (userCard ? "30px": "35px")};
   padding-bottom: ${({userCard}) => (userCard ? "30px": "0")};
-  border: 1px solid var(--line);
+  border: 1px solid var(--lineLight);
   box-sizing: border-box;
-  box-shadow: 0 8px 16px var(--inputBg);
+  box-shadow: 0 8px 16px var(--inputBgLight);
   border-radius: 16px;
   margin-bottom: 60px;
   margin-left: 15px;
@@ -32,7 +32,7 @@ export const CardInfo = styled.p`
   font-size: 24px;
   line-height: 36px;
   letter-spacing: 0.75px;
-  color: var(--body);
+  color: var(--bodyLight);
   margin-bottom: 15px;
   
   &:last-child {
@@ -50,18 +50,18 @@ export const CardTitle = styled(CardInfo)`
 export const ButtonSubmit = styled(Button)`
   width: 135px;
   height: 45px;
-  background-color: var(--inputBg);
+  background-color: var(--inputBgLight);
   border-radius: 12px;
   border: none;
   font-size: 24px;
   transition: all 0.5s ease-out;
   line-height: 36px;
   letter-spacing: 0.75px;
-  color: var(--addProfile);
+  color: var(--addProfileLight);
   cursor: pointer;
   &:hover {
-    background-color: var(--title);
-    color: var(--inputBg);
+    background-color: var(--titleInputLight);
+    color: var(--inputBgLight);
   }
 `
 
@@ -79,7 +79,7 @@ export const MyTitle = styled(Title)`
 `
 export const LinkToRegister = styled(Link)`
   font-size: 16px;
-  color: var(--background);
+  color: var(--backgroundLight);
 `
 
 export const SForm = styled(Form)`
@@ -102,15 +102,15 @@ export const SForm = styled(Form)`
   }
   .ant-checkbox-inner{
     border-radius: 2px;
-    border: 1px solid var(--background);
-    background: var(--white1);
+    border: 1px solid var(--backgroundLight);
+    background: var(--white1Light);
   }
   .ant-checkbox-checked .ant-checkbox-inner::after{
     transform: rotate(
             0deg) scale(1) translate(-19%,-49%);
     width: 12px;
     height: 12px;
-    background: var(--background);
+    background: var(--backgroundLight);
     transition: unset;
     border: none;
     padding-left: 0;
@@ -118,49 +118,46 @@ export const SForm = styled(Form)`
   .ant-checkbox:hover .ant-checkbox-inner,
   .ant-checkbox .ant-checkbox-inner,
   .ant-checkbox-checked::after{
-    border: 1px solid var(--background);
+    border: 1px solid var(--backgroundLight);
   }
 `
 export const SInput = styled(Input)`
     border: none;
-    border-bottom: 1px solid var(--background);
+    border-bottom: 1px solid var(--backgroundLight);
     padding-left: 0;
-    color: var(--title);
+    color: var(--backgroundLight);
     outline: none;
-    background:  var(--body);;
-    border-bottom: 1px solid var(--background);
-    border-color: var(--title);
+    background: var(--titleInputLight);;
+    border-bottom: 1px solid var(--backgroundLight);
     box-shadow: none;
     &:focus {
-      border-color: var(--title);
-      color: var(--title);
+      border-color: var(--backgroundLight);
       box-shadow: none;
     }
   &:hover{
-    border-color: var(--title);
+    border-color: var(--backgroundLight);
   }
 `
 export const SInputPassport = styled(Input.Password)`
   border: none;
-  border-bottom: 1px solid var(--background);
+  border-bottom: 1px solid var(--backgroundLight);
   box-shadow: none;
   padding: 0;
   input {
     padding-left: 0;
-    color: var(--title);
+    color: var(--backgroundLight);
     outline: none;
-    background:  var(--body);
-    border-bottom: 1px solid var(--background);
-    border-color: var(--title);
+    background:  var(--titleInputLight);
+    border-bottom: 1px solid var(--backgroundLight);
     box-shadow: none;
   }
   input:focus input:hover {
-    border-color: var(--title);
-    color: var(--title);
+    border-color: var(--backgroundLight);
+    color: var(--titleInputLight);
     box-shadow: none;
   }
   span {
-    background:  var(--body);
+    background: var(--titleInputLight);
     margin: 0;
     width: 25px;
     height: 30px;
@@ -175,7 +172,7 @@ export const SFormItemModal = styled(Form.Item)`
   label {
     width: 110px;
     font-size: 20px;
-    color: var(--white);
+    color: var(--whiteLight);
   }
 `
 export const SInputModal = styled(Input)`
@@ -184,7 +181,7 @@ export const SInputModal = styled(Input)`
 `;
 
 export const STitleModal = styled.div`
-  color: var(--background3);
+  color: var(--background3Light);
   font-size: 50px;
   text-align: center;
   margin-bottom: 50px;

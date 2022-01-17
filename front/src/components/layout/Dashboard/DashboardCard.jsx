@@ -16,12 +16,12 @@ const DashboardCard = ({name, count}) => {
 const CardTitle = styled.p`
   margin-bottom: 50px;
   font-size: 36px;
-  color: var(--title);
+  color: var(--titleLight);
   letter-spacing: 1px;
   line-height: 34px;
 `
 const CardInfo = styled.p`
-  color: var(--title);
+  color: var(--titleLight);
   font-weight: 600;
   font-size: 48px;
   line-height: 34px;

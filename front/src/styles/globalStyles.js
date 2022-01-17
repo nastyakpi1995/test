@@ -2,37 +2,30 @@ import {createGlobalStyle} from "styled-components";
 
 export default createGlobalStyle`
   :root {
-    --title: #14142B;
-    --background: #1f2229;
     --transparent: transparent;
-    --background2: #2e303c;
-    --background-button: #373945;
-    --background-button2: #4b4d59;
-    --bckModal: #5c606a;
-    --addProfile: #4e4b66;
-    --body: #4e4b66;
-    --lablel: #6e7191;
-    --container: #777680;
-    --white1: #bec2c6;
-    --white: #fbfbfb;
-    --background3: #f7f7fc;
-    --line: #d6d8e7;
-    --offWhite: #fcfcfc;
-    --inputBg: #eff0f6;
-    --white2: #fff;
-    --blue: #3499ce;
-    --purple: #624af2;
-    --green: #00ba88;
-    --orange: #ce8163;
-    --red: #eb0055;
-    --body1: #e5e5e5;
+    --titleLight: #14142B;
+    --titleInputLight: #e5e5e5;
+    --backgroundLight: #1f2229;
+    --background2Light: #2e303c;
+    --bckModalLight: #5c606a;
+    --addProfileLight: #4e4b66;
+    --bodyLight: #4e4b66;
+    --containerLight: #777680;
+    --white2Light: #fff;
+    --white1Light: #bec2c6;
+    --whiteLight: #fbfbfb;
+    --background3Light: #f7f7fc;
+    --lineLight: #d6d8e7;
+    --inputBgLight: #eff0f6;
+    --purpleLight: #624af2;
+    --redLight: #eb0055;
   }
 
   body, html {
     margin: 0;
     padding: 0;
     font-family: 'Poppins', sans-serif !important;
-    background: var(--body1);
+    background: var(--titleInputLight);
   }
 
   * {
@@ -68,7 +61,7 @@ export default createGlobalStyle`
       font-size: 32px;
       line-height: 48px;
       letter-spacing: 1px;
-      color: var(--title);
+      color: var(--titleLight);
       margin-bottom: 20px;
     }
 

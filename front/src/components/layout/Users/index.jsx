@@ -3,11 +3,12 @@ import HeaderWrapper from "../../common/header/HeaderWrapper";
 import {deleteUserAxiosRequest, usersAxiosRequest} from "../../../utils/apiCaller";
 import {setMessageDataCreator} from "../../../redux/reducers/authReducer";
 import {useDispatch} from "react-redux";
-import User from "./User";
+import {useNavigate} from "react-router-dom";
 import styled from "styled-components";
+
+import User from "./User";
 import EditModalUser from "./EditModalUser";
 import {initialUserValues, links, prepareMessageDataFailed} from "../../../utils/constants";
-import {useNavigate} from "react-router-dom";
 import UserByIdProfiles from "./UserByIdProfiles";
 
 const Users = () => {

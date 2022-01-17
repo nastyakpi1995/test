@@ -1,11 +1,9 @@
-import React, {useCallback, useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {setMessageDataDefaultCreator} from "../../../redux/reducers/authReducer";
 import MessageBox from "./MessageBox";
 import {getMessageBoxSelect} from "../../../redux/selects/auth";
-
-
-const SLIDING_TIMEOUT = 8000;
+import {SLIDING_TIMEOUT} from "../../../utils/constants";
 
 const ContainerMessageBox = () => {
     const [isTop, setIsTop] = useState(false)

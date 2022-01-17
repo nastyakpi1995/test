@@ -1,7 +1,7 @@
 import React, {useCallback} from "react";
 
 import {Link, useNavigate} from "react-router-dom";
-import {authToken, links, savedUser} from "../../../utils/constants";
+import {authToken, links, prepareMessageData, savedUser} from "../../../utils/constants";
 import {setMessageDataCreator} from "../../../redux/reducers/authReducer";
 import {useDispatch, useSelector} from "react-redux";
 import {setUserCreator} from "../../../redux/reducers/userReducer";
@@ -17,11 +17,6 @@ const HeaderContainer = () => {
     const currentUser = useSelector(state => state.user.user)
 
     const handleLogOut = useCallback(() => {
-        const prepareMessageData = {
-            message: 'you log out successfully',
-            success: 'success'
-        }
-
         dispatch(setMessageDataCreator(prepareMessageData))
         localStorage.setItem(authToken, '')
         localStorage.removeItem(savedUser)

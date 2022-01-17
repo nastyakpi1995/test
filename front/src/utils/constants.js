@@ -27,3 +27,15 @@ export const links = {
     users: '/users',
     all: '*'
 }
+
+export const SLIDING_TIMEOUT = 8000;
+
+export const prepareMessageDataFailed = {
+    message: 'you server not start',
+    success: false
+}
+
+export const prepareMessageData = {
+    message: 'you log out successfully',
+    success: 'success'
+}

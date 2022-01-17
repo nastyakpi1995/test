@@ -6,7 +6,7 @@ import {useDispatch} from "react-redux";
 import User from "./User";
 import styled from "styled-components";
 import EditModalUser from "./EditModalUser";
-import {initialUserValues, links} from "../../utils/constants";
+import {initialUserValues, links, prepareMessageDataFailed} from "../../utils/constants";
 import {useNavigate} from "react-router-dom";
 import UserByIdProfiles from "./UserByIdProfiles";
 
@@ -20,11 +20,6 @@ const Users = () => {
 
     const dispatch = useDispatch()
 
-    const prepareMessageDataFailed = {
-        isVisible: true,
-        message: 'you server not start',
-        success: false
-    }
     useEffect(() => {
         if (isLoader) {
             usersAxiosRequest().then(({data}) => {

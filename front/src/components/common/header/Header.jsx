@@ -34,6 +34,7 @@ const HeaderContainer = () => {
                 <SNav>
                     {currentUser?.isadmin ? <AdminMenu /> : null}
                     <Logout onClick={handleLogOut}>
+                        
                         <span>Log out</span>
                     </Logout>
                 </SNav>

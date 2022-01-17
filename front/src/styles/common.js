@@ -93,17 +93,6 @@ export const SForm = styled(Form)`
   .ant-form-item-label > label.ant-form-item-required:not(.ant-form-item-required-mark-optional)::before{
     display: none;
   }
-  .ant-input,.ant-input-affix-wrapper{
-    border: none;
-    border-bottom: 1px solid var(--background);
-    padding-left: 0;
-    color: var(--title);
-    outline: none;
-    background: transparent;
-  }
-  .ant-input-affix-wrapper:hover{
-    border-bottom: 1px solid var(--background);
-  }
   .ant-form-item-control-input-content{
     text-align: center;
   }
@@ -131,13 +120,52 @@ export const SForm = styled(Form)`
   .ant-checkbox-checked::after{
     border: 1px solid var(--background);
   }
-  .ant-input-affix-wrapper:not(.ant-input-affix-wrapper-disabled):hover,.ant-input-affix-wrapper{
-    box-shadow: none;
+`
+export const SInput = styled(Input)`
+    border: none;
+    border-bottom: 1px solid var(--background);
+    padding-left: 0;
+    color: var(--title);
     outline: none;
-    border-color: unset;
+    background:  var(--body);;
+    border-bottom: 1px solid var(--background);
+    border-color: var(--title);
+    box-shadow: none;
+    &:focus {
+      border-color: var(--title);
+      color: var(--title);
+      box-shadow: none;
+    }
+  &:hover{
+    border-color: var(--title);
   }
 `
-
+export const SInputPassport = styled(Input.Password)`
+  border: none;
+  border-bottom: 1px solid var(--background);
+  box-shadow: none;
+  padding: 0;
+  input {
+    padding-left: 0;
+    color: var(--title);
+    outline: none;
+    background:  var(--body);
+    border-bottom: 1px solid var(--background);
+    border-color: var(--title);
+    box-shadow: none;
+  }
+  input:focus input:hover {
+    border-color: var(--title);
+    color: var(--title);
+    box-shadow: none;
+  }
+  span {
+    background:  var(--body);
+    margin: 0;
+    width: 25px;
+    height: 30px;
+  }
+`
 // modal Form
 export const SFormModal = styled(Form)`
   max-width: 700px;

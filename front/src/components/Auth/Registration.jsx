@@ -1,10 +1,10 @@
 import React, {useState} from "react";
-import {Form, Checkbox, Input} from "antd";
+import {Form, Checkbox} from "antd";
 import {registerAxiosRequest} from "../../utils/apiCaller";
 import {useNavigate} from 'react-router-dom'
 import {useDispatch} from "react-redux";
 import {setMessageDataCreator} from "../../redux/reducers/authReducer";
-import {ButtonSubmit, ContainerForm, LinkToRegister, MyTitle, SForm} from "../../styles/common";
+import {ButtonSubmit, ContainerForm, LinkToRegister, MyTitle, SForm, SInput, SInputPassport} from "../../styles/common";
 import {links} from "../../utils/constants";
 
 let Registration = () => {
@@ -42,7 +42,7 @@ let Registration = () => {
                     name="username"
                     rules={[{ required: true, message: 'Please input your username!' }]}
                 >
-                    <Input />
+                    <SInput />
                 </Form.Item>
 
                 <Form.Item
@@ -50,7 +50,7 @@ let Registration = () => {
                     name="email"
                     rules={[{ required: true, message: 'Please input your email!' }]}
                 >
-                    <Input />
+                    <SInput />
                 </Form.Item>
 
                 <Form.Item
@@ -58,7 +58,7 @@ let Registration = () => {
                     name="password"
                     rules={[{ required: true, message: 'Please input your password!' }]}
                 >
-                    <Input.Password />
+                    <SInputPassport />
                 </Form.Item>
 
                 <Form.Item name="isadmin" valuePropName="checked" wrapperCol={{ offset: 8, span: 16 }}>
@@ -75,7 +75,5 @@ let Registration = () => {
         </ContainerForm>
     )
 }
-
-
 
 export default Registration

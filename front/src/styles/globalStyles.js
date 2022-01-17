@@ -25,13 +25,14 @@ export default createGlobalStyle`
     --green: #00ba88;
     --orange: #ce8163;
     --red: #eb0055;
+    --body1: #e5e5e5;
   }
 
   body, html {
     margin: 0;
     padding: 0;
     font-family: 'Poppins', sans-serif !important;
-    background: #E5E5E5;
+    background: var(--body1);
   }
 
   * {

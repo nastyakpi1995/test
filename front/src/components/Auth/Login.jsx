@@ -5,7 +5,7 @@ import {useNavigate} from "react-router-dom";
 import {useDispatch} from "react-redux";
 import {setMessageDataCreator} from "../../redux/reducers/authReducer";
 import {setUserCreator} from "../../redux/reducers/userReducer";
-import { ButtonSubmit, ContainerForm, LinkToRegister, MyTitle, SForm} from "../../styles/common";
+import {ButtonSubmit, ContainerForm, LinkToRegister, MyTitle, SForm, SInput, SInputPassport} from "../../styles/common";
 import {links} from "../../utils/constants";
 
 
@@ -49,14 +49,14 @@ let Login = () => {
                     name="email"
                     rules={[{ required: true, message: 'Please input your email!' }]}
                 >
-                    <Input ref={inputRef} />
+                    <SInput ref={inputRef} />
                 </Form.Item>
                 <Form.Item
                     label="Password"
                     name="password"
                     rules={[{ required: true, message: 'Please input your password!' }]}
                 >
-                    <Input.Password />
+                    <SInputPassport />
                 </Form.Item>
                 <Form.Item wrapperCol={{ offset: 25 }}>
                     <ButtonSubmit loading={isLoader} htmlType="submit">

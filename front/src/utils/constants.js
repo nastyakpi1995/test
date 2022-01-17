@@ -39,8 +39,3 @@ export const prepareMessageData = {
     message: 'you log out successfully',
     success: 'success'
 }
-
-export const themeTypes = {
-    dark: 'dark',
-    light: 'light',
-}

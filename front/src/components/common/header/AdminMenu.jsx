@@ -3,11 +3,11 @@ import {Link} from "react-router-dom";
 import styled from "styled-components";
 import {headerListExample} from "../../../utils/exampleData";
 
-const AdminMenu = () =>  (
+const AdminMenu = ({isDark}) =>  (
     <Nav>
-        {headerListExample.map(el => (
+        {headerListExample(isDark).map(el => (
             <NavList key={el.title} to={el.to}>
-                <Text>{el.title}</Text>
+                <Text isDark={isDark}>{el.title}</Text>
                 <WrapImg><img src={el.img} alt={el.title}/></WrapImg>
             </NavList>
         ))}
@@ -32,7 +32,7 @@ const NavList = styled(Link)`
 `
 
 const Text = styled.div`
-  color: var(--whiteLight);
+  color: ${({isDark}) => isDark ? 'var(--background2Light)' : 'var(--whiteLight)' };
   font-size: 18px;
   line-height: 27px;
   letter-spacing: 0.75px;

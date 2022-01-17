@@ -1,10 +1,15 @@
-import profileIcon from "../images/icons/profileIcon.svg";
-import dashboardIcon from "../images/icons/dashboardIcon.svg";
-import usersIcon from "../images/icons/usersIcon.svg";
+import profileWhiteIcon from '../images/icons/profileWhiteIcon.svg'
+import profileDarkIcon from '../images/icons/profileDarkIcon.svg'
+import dashboardWhiteIcon from "../images/icons/dashboardWhiteIcon.svg";
+import dashboardDarkIcon from "../images/icons/dashboardDarkIcon.svg";
+import usersDarkIcon from "../images/icons/usersDarkIcon.svg";
+import usersWhiteIcon from "../images/icons/usersWhiteIcon.svg";
 import {links} from "./constants";
 
-export const headerListExample = [
-    {to: links.profiles, title: 'Profiles', img: profileIcon},
-    {to: links.dashboard, title: 'Dashboard', img: dashboardIcon},
-    {to: links.users, title: 'Users', img: usersIcon},
-]
+export const headerListExample = (theme) => {
+    return [
+        {to: links.profiles, title: 'Profiles', img: theme ? profileDarkIcon : profileWhiteIcon},
+        {to: links.dashboard, title: 'Dashboard', img: theme ? dashboardDarkIcon : dashboardWhiteIcon},
+        {to: links.users, title: 'Users', img: theme ? usersDarkIcon :  usersWhiteIcon},
+    ]
+}

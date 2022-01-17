@@ -19,13 +19,29 @@ export default createGlobalStyle`
     --inputBgLight: #eff0f6;
     --purpleLight: #624af2;
     --redLight: #eb0055;
+
+    --titleDark: #d3d9dc;
+    --titleInputDark: #1f2229;
+    //--backgroundDark: #1f2229;
+    --background2Dark: #c7cad7;
+    //--bckModalDark: #5c606a;
+    //--addProfileDark: #4e4b66;
+    //--bodyDark: #4e4b66;
+    //--containerDark: #777680;
+    //--white2Dark: #fff;
+    //--white1Dark: #bec2c6;
+    //--whiteDark: #fbfbfb;
+    //--background3Dark: #f7f7fc;
+    //--lineDark: #d6d8e7;
+    //--inputBgDark: #eff0f6;
+    //--purpleDark: #624af2;
+    //--redDark: #eb0055;
   }
 
   body, html {
     margin: 0;
     padding: 0;
     font-family: 'Poppins', sans-serif !important;
-    background: var(--titleInputLight);
   }
 
   * {

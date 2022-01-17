@@ -2,5 +2,5 @@ export const getMessageBoxSelect = (state) => {
     return state.auth.messageData
 }
 export const getTheme = (state) => {
-    return state.auth.theme
+    return state.auth.isDarkTheme
 }

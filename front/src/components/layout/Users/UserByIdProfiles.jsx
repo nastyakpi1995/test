@@ -1,13 +1,13 @@
 import React, {useState, useEffect, useCallback} from 'react';
-import ProfileCard from "../common/ProfileCard";
-import { getUserDataById} from "../../utils/apiCaller";
+import ProfileCard from "../../common/ProfileCard";
+import { getUserDataById} from "../../../utils/apiCaller";
 import {useDispatch, useSelector} from "react-redux";
-import {initialProfileValues} from "../../utils/constants";
+import {initialProfileValues} from "../../../utils/constants";
 import {
     setActiveProfileCreator,
     toggleIsOpenModalCreator,
     toggleLoaderProfileCreator
-} from "../../redux/reducers/profileReducer";
+} from "../../../redux/reducers/profileReducer";
 import styled from "styled-components";
 import NewProfile from "../Profiles/NewProfile";
 import ContainerProfileModal from "../Profiles/ProfileModal/ContianerProfileModal";

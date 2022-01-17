@@ -1,12 +1,12 @@
 import React, {useEffect, useState} from "react";
 import {Checkbox, Form} from "antd";
 import {useDispatch} from "react-redux";
-import {setMessageDataCreator} from "../../redux/reducers/authReducer";
-import {toggleLoaderProfileCreator} from "../../redux/reducers/profileReducer";
-import {initialUserValues} from "../../utils/constants";
-import {editUserAxiosRequest} from "../../utils/apiCaller";
-import Drawer from "../common/Drawer";
-import {ButtonSubmit, SFormItemModal, SFormModal, SInputModal, STitleModal} from "../../styles/common";
+import {setMessageDataCreator} from "../../../redux/reducers/authReducer";
+import {toggleLoaderProfileCreator} from "../../../redux/reducers/profileReducer";
+import {initialUserValues} from "../../../utils/constants";
+import {editUserAxiosRequest} from "../../../utils/apiCaller";
+import Drawer from "../../common/Drawer";
+import {ButtonSubmit, SFormItemModal, SFormModal, SInputModal, STitleModal} from "../../../styles/common";
 import styled from "styled-components";
 
 const EditModalUser = ({activeEditUser, isVisible, setIsVisible, setActiveEditUser}) => {

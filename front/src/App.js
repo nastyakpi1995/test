@@ -1,13 +1,13 @@
 import {Route, Routes} from "react-router-dom";
-import Login from "./components/Auth/Login";
+import Login from "./components/layout/Auth/Login";
 import React from "react";
-import Registration from "./components/Auth/Registration";
+import Registration from "./components/layout/Auth/Registration";
 import ContainerMessageBox from "./components/common/messageBox/ContainerMessageBox";
-import Profiles from "./components/Profiles";
-import PrivatRouter from "./components/Providers/PrivatRouter";
-import AdminRouter from "./components/Providers/AdminRouter";
-import Dashboard from "./components/Dashboard";
-import Users from "./components/Users";
+import Profiles from "./components/layout/Profiles";
+import PrivatRouter from "./components/providers/PrivatRouter";
+import AdminRouter from "./components/providers/AdminRouter";
+import Dashboard from "./components/layout/Dashboard";
+import Users from "./components/layout/Users";
 import NotFoundRoute from "./components/NotFoundRoute";
 import {links} from "./utils/constants";
 

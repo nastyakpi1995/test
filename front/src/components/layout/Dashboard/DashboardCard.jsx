@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import {MyCard} from "../../styles/common";
+import {MyCard} from "../../../styles/common";
 
 const DashboardCard = ({name, count}) => {
     return (

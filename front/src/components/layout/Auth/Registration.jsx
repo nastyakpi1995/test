@@ -1,11 +1,11 @@
 import React, {useState} from "react";
 import {Form, Checkbox} from "antd";
-import {registerAxiosRequest} from "../../utils/apiCaller";
+import {registerAxiosRequest} from "../../../utils/apiCaller";
 import {useNavigate} from 'react-router-dom'
 import {useDispatch} from "react-redux";
-import {setMessageDataCreator} from "../../redux/reducers/authReducer";
-import {ButtonSubmit, ContainerForm, LinkToRegister, MyTitle, SForm, SInput, SInputPassport} from "../../styles/common";
-import {links} from "../../utils/constants";
+import {setMessageDataCreator} from "../../../redux/reducers/authReducer";
+import {ButtonSubmit, ContainerForm, LinkToRegister, MyTitle, SForm, SInput, SInputPassport} from "../../../styles/common";
+import {links} from "../../../utils/constants";
 
 let Registration = () => {
     const dispatch = useDispatch()

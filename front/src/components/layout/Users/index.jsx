@@ -1,12 +1,12 @@
 import React, {useEffect, useState} from "react";
-import HeaderWrapper from "../common/header/HeaderWrapper";
-import {deleteUserAxiosRequest, usersAxiosRequest} from "../../utils/apiCaller";
-import {setMessageDataCreator} from "../../redux/reducers/authReducer";
+import HeaderWrapper from "../../common/header/HeaderWrapper";
+import {deleteUserAxiosRequest, usersAxiosRequest} from "../../../utils/apiCaller";
+import {setMessageDataCreator} from "../../../redux/reducers/authReducer";
 import {useDispatch} from "react-redux";
 import User from "./User";
 import styled from "styled-components";
 import EditModalUser from "./EditModalUser";
-import {initialUserValues, links, prepareMessageDataFailed} from "../../utils/constants";
+import {initialUserValues, links, prepareMessageDataFailed} from "../../../utils/constants";
 import {useNavigate} from "react-router-dom";
 import UserByIdProfiles from "./UserByIdProfiles";
 

@@ -11,13 +11,14 @@ import avatarUser from '../../../images/avatarUser.svg'
 import AdminMenu from "./AdminMenu";
 import {Switch} from "antd";
 import {getTheme} from "../../../redux/selects/auth";
+import {theme} from "../../../styles/theme";
 
 const HeaderContainer = () => {
     const navigate = useNavigate()
     const dispatch = useDispatch()
 
     const currentUser = useSelector(state => state.user.user)
-    const isDarkTheme = useSelector(state => getTheme(state))
+    const tempTheme = useSelector(state => getTheme(state))
 
     const handleLogOut = useCallback(() => {
         dispatch(setMessageDataCreator(prepareMessageData))
@@ -27,25 +28,25 @@ const HeaderContainer = () => {
         navigate(links.login)
     }, [dispatch])
 
-    const changeTheme = () => {
-        dispatch(setThemeCreator())
+    const changeTheme = (e) => {
+        dispatch(setThemeCreator(e ? 'light' : 'dark'))
     }
     return (
-        <Header isDark={isDarkTheme}>
+        <Header tempTheme={tempTheme}>
             <Container>
                 <LogoLink to={links.profiles}>
                     <img src={currentUser?.isadmin ? avatarAdmin : avatarUser} alt="user"/>
-                    <LogoTitle isDark={isDarkTheme}>{currentUser?.username}</LogoTitle>
+                    <LogoTitle tempTheme={tempTheme}>{currentUser?.username}</LogoTitle>
                 </LogoLink>
                 <SNav>
-                    {currentUser?.isadmin ? <AdminMenu isDark={isDarkTheme} /> : null}
+                    {currentUser?.isadmin ? <AdminMenu tempTheme={tempTheme} /> : null}
                     <Switch
-                        checked={isDarkTheme}
+                        checked={tempTheme === 'light'}
                         onChange={changeTheme}
-                        checkedChildren="Light"
-                        unCheckedChildren="Dark"
+                        checkedChildren="Dark"
+                        unCheckedChildren="Light"
                     />
-                    <Logout isDark={isDarkTheme} onClick={handleLogOut}>
+                    <Logout tempTheme={tempTheme} onClick={handleLogOut}>
                         <span>Log out</span>
                     </Logout>
                 </SNav>
@@ -56,7 +57,11 @@ const HeaderContainer = () => {
 
 const Header = styled.header`
   width: 100%;
-  background: ${({isDark}) => isDark ? 'var(--whiteLight)' : 'var(--background2Light)'};
+  background: var(${({tempTheme}) => {
+    const res = theme[tempTheme].background2
+    debugger
+    return res
+  }});
   margin-bottom: 20px;
   padding: 10px 15px;
   height: 70px;
@@ -83,7 +88,7 @@ const LogoLink = styled(Link)`
 `
 
 const Logout = styled.div`
-  color: ${({isDark}) => isDark ? 'var(--background2Light)' : ' var(--whiteLight)' };
+  color: var(${({tempTheme}) => theme[tempTheme].white});
   font-size: 18px;
   line-height: 27px;
   letter-spacing: 0.75px;
@@ -96,7 +101,7 @@ const LogoTitle = styled.div`
   font-size: 18px;
   line-height: 27px;
   letter-spacing: 0.75px;
-  color: ${({isDark}) => isDark ? 'var(--background2Light)' : ' var(--whiteLight)' };
+  color: ${({tempTheme}) => theme[tempTheme].white };
   margin-left: 20px;
 `
 

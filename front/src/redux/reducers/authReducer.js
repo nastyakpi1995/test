@@ -2,7 +2,7 @@
 const types = {
     setMessageDataType: 'setMessageDataType',
     setMessageDataDefaultType: 'setMessageDataDefaultType',
-    setThemeType: 'setThemeType',
+    setTempThemeType: 'setTempThemeType',
 }
 
 const initState = {
@@ -11,7 +11,7 @@ const initState = {
         message: '',
         type: 'success'
     },
-    isDarkTheme: false
+    tempTheme: 'light'
 }
 
 const authReducer = (state= initState, action) => {
@@ -38,10 +38,11 @@ const authReducer = (state= initState, action) => {
             }
         }
 
-        case types.setThemeType: {
+        case types.setTempThemeType: {
+            debugger
             return ({
                 ...state,
-                isDarkTheme: !state.isDarkTheme
+                tempTheme: action.payload
             })
         }
 
@@ -59,8 +60,9 @@ export const setMessageDataDefaultCreator = (typeData) => ({
     type: types.setMessageDataDefaultType,
     typeData
 })
-export const setThemeCreator = () => ({
-    type: types.setThemeType,
+export const setThemeCreator = (payload) => ({
+    type: types.setTempThemeType,
+    payload
 })
 
 export default authReducer

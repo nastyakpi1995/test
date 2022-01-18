@@ -2,12 +2,13 @@ import React from "react";
 import {Link} from "react-router-dom";
 import styled from "styled-components";
 import {headerListExample} from "../../../utils/exampleData";
+import {theme} from "../../../styles/theme";
 
-const AdminMenu = ({isDark}) =>  (
+const AdminMenu = ({tempTheme}) =>  (
     <Nav>
-        {headerListExample(isDark).map(el => (
+        {headerListExample(tempTheme).map(el => (
             <NavList key={el.title} to={el.to}>
-                <Text isDark={isDark}>{el.title}</Text>
+                <Text tempTheme={tempTheme}>{el.title}</Text>
                 <WrapImg><img src={el.img} alt={el.title}/></WrapImg>
             </NavList>
         ))}
@@ -32,7 +33,7 @@ const NavList = styled(Link)`
 `
 
 const Text = styled.div`
-  color: ${({isDark}) => isDark ? 'var(--background2Light)' : 'var(--whiteLight)' };
+  color: var(${({tempTheme}) => theme[tempTheme].white});
   font-size: 18px;
   line-height: 27px;
   letter-spacing: 0.75px;

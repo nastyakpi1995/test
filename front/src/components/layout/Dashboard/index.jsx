@@ -34,17 +34,21 @@ const Dashboard = () => {
 
     return (
         <HeaderWrapper>
-            <div className="container">
-                <h1>Dashboard</h1>
+            <Container>
                 <Row gutter={24}>
                     {dashboard.map(el => (
                         <DashboardCard key={el.name} name={getCurrentTitle(el.name)} count={el.count}/>
                     ))}
                 </Row>
-            </div>
+            </Container>
         </HeaderWrapper>
 
         )
 }
+
+const Container = styled.div`
+  max-width: 1800px;
+  margin: 0 auto;
+`
 
 export default Dashboard;

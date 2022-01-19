@@ -32,21 +32,21 @@ const HeaderContainer = () => {
         dispatch(setThemeCreator(e ? 'light' : 'dark'))
     }
     return (
-        <Header tempTheme={tempTheme}>
+        <Header temp={tempTheme}>
             <Container>
                 <LogoLink to={links.profiles}>
                     <img src={currentUser?.isadmin ? avatarAdmin : avatarUser} alt="user"/>
-                    <LogoTitle tempTheme={tempTheme}>{currentUser?.username}</LogoTitle>
+                    <LogoTitle temp={tempTheme}>{currentUser?.username}</LogoTitle>
                 </LogoLink>
                 <SNav>
-                    {currentUser?.isadmin ? <AdminMenu tempTheme={tempTheme} /> : null}
+                    {currentUser?.isadmin ? <AdminMenu temp={tempTheme} /> : null}
                     <Switch
                         checked={tempTheme === 'light'}
                         onChange={changeTheme}
                         checkedChildren="Dark"
                         unCheckedChildren="Light"
                     />
-                    <Logout tempTheme={tempTheme} onClick={handleLogOut}>
+                    <Logout temp={tempTheme} onClick={handleLogOut}>
                         <span>Log out</span>
                     </Logout>
                 </SNav>
@@ -57,11 +57,7 @@ const HeaderContainer = () => {
 
 const Header = styled.header`
   width: 100%;
-  background: var(${({tempTheme}) => {
-    const res = theme[tempTheme].background2
-    debugger
-    return res
-  }});
+  background: var(${({temp}) => theme[temp].background2});
   margin-bottom: 20px;
   padding: 10px 15px;
   height: 70px;
@@ -88,7 +84,7 @@ const LogoLink = styled(Link)`
 `
 
 const Logout = styled.div`
-  color: var(${({tempTheme}) => theme[tempTheme].white});
+  color: var(${({temp}) => theme[temp].white});
   font-size: 18px;
   line-height: 27px;
   letter-spacing: 0.75px;
@@ -101,7 +97,7 @@ const LogoTitle = styled.div`
   font-size: 18px;
   line-height: 27px;
   letter-spacing: 0.75px;
-  color: ${({tempTheme}) => theme[tempTheme].white };
+  color: ${({temp}) => theme[temp].white };
   margin-left: 20px;
 `
 

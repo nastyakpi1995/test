@@ -39,7 +39,6 @@ const authReducer = (state= initState, action) => {
         }
 
         case types.setTempThemeType: {
-            debugger
             return ({
                 ...state,
                 tempTheme: action.payload

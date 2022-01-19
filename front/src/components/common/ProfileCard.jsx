@@ -1,7 +1,7 @@
 import React, {useCallback} from "react";
 import {deleteProfileAxiosRequest} from "../../utils/apiCaller";
 import {setMessageDataCreator} from "../../redux/reducers/authReducer";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import deleteImg from "../../images/icons/DeleteIcon.svg"
 import edit from "../../images/icons/editIcon.svg"
 import {
@@ -11,10 +11,13 @@ import {
 } from "../../redux/reducers/profileReducer";
 import {CardInfo, CardTitle, CardTop, MyCard} from "../../styles/common";
 import styled from "styled-components";
+import {getTheme} from "../../redux/selects/auth";
 
-const ProfileCard = ({profile}) => {
+const ProfileCardInner = ({profile}) => {
     const { name, gender, birthdate, id } = profile;
     const dispatch = useDispatch()
+
+    const tempTheme = useSelector(state => getTheme(state))
 
     const onEditProfile = useCallback(() => {
         dispatch(toggleIsOpenModalCreator())
@@ -30,18 +33,17 @@ const ProfileCard = ({profile}) => {
     }, [])
 
     return (
-            <MyCard hoverable>
+            <MyCard hoverable temp={tempTheme}>
                 <CardTop>
-                    <CardTitle>{name}</CardTitle>
-                    <CardInfo>{gender}</CardInfo>
-                    <CardInfo>{birthdate}</CardInfo>
+                    <CardTitle temp={tempTheme}>{name}</CardTitle>
+                    <CardInfo temp={tempTheme}>{gender}</CardInfo>
+                    <CardInfo temp={tempTheme}>{birthdate}</CardInfo>
                 </CardTop>
                 <CardBottom>
                     <Button onClick={onEditProfile}>
                         edit <img src={edit} alt="edit"/>
                     </Button>
-                    <Button  onClick={onDeleteProfile}>
-                        delete <img src={deleteImg} alt="delete"/>
+                    <Button onClick={onDeleteProfile}>delete<img src={deleteImg} alt="delete"/>
                     </Button>
                 </CardBottom>
             </MyCard>
@@ -54,25 +56,27 @@ const Button = styled.button`
   cursor: pointer;
   border-bottom-right-radius: 14px;
   &:hover {
-    background: var(--redLight);
-    color: var(--white2Light);
+    background: var(--red);
+    color: var(--white2);
   }
   &:first-child{
-    border-right: 1px solid var(--white2Light);
+    border-right: 1px solid var(--white2);
     border-bottom-left-radius: 14px;
     border-bottom-right-radius: 0;
     &:hover {
-      background: var(--purpleLight);
-      color: var(--whiteLight);
+      background: var(--purple);
+      color: var(--white);
     }
   }
 `
 
 export const CardBottom = styled.div`
-    border: 1px solid var(--white2Light);
+    border: 1px solid var(--white2);
     width: 100%;
     border-bottom-left-radius: 16px;
     border-bottom-right-radius: 16px;
 `
+
+const ProfileCard = React.memo(ProfileCardInner)
 
 export default ProfileCard

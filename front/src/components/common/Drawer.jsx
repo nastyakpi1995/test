@@ -3,6 +3,9 @@ import {createPortal} from "react-dom";
 import styled, {css} from "styled-components";
 import useMountTransition from "../../hooks/useMountTransition";
 import FocusTrap from 'focus-trap-react'
+import {useSelector} from "react-redux";
+import {getTheme} from "../../redux/selects/auth";
+import {theme} from "../../styles/theme";
 
 const createRootElement = () => {
     let rootElement = document.createElement('div')
@@ -16,6 +19,7 @@ const Drawer = ({visible, children, onClose}) => {
         document.getElementById('root-modal') || createRootElement()
     )
     const isTransitioning = useMountTransition(visible, 3000)
+    const tempTheme = useSelector((state) => getTheme(state))
 
     useEffect(() => {
         refBody.current.appendChild(portalRootRef.current)
@@ -30,7 +34,7 @@ const Drawer = ({visible, children, onClose}) => {
         <FocusTrap active={visible}>
             <DrawerContainer
                 aria-hidden={visible ? "false" : "true"}>
-                <SDrawer isTransitioning={isTransitioning}
+                <SDrawer temp={tempTheme} isTransitioning={isTransitioning}
                          visible={visible} role="dialog">
                     {children}
                 </SDrawer>
@@ -46,12 +50,12 @@ const DrawerContainer = styled.div`
   --transition-speed: 0.3s;
 `
 const SDrawer = styled.div`
-  background: var(--bckModalLight);
+  background: var(${({temp}) => theme[temp].bckModal});
   width: 42%;
   height: 100%;
   overflow: auto;
   position: fixed;
-  box-shadow: 0 0 15px var(--backgroundLight);
+  box-shadow: 0 0 15px var(${({temp}) => theme[temp].background});
   transition: transform var(--transition-speed) ease;
   top: 0;
   right: 0;

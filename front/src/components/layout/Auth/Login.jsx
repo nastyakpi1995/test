@@ -38,7 +38,6 @@ let Login = () => {
             </div>
             <SForm
                 name="login"
-                className='formAuth'
                 layout="vertical"
                 onFinish={onFinish}
                 autoComplete="off"

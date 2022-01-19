@@ -11,7 +11,7 @@ const HeaderWrapper = ({children}) => {
     const tempTheme = useSelector(state => getTheme(state))
 
     return (
-        <SLayout tempTheme={'light'}>
+        <SLayout temp={tempTheme}>
             <HeaderContainer />
             <Content>{children}</Content>
         </SLayout>
@@ -20,7 +20,7 @@ const HeaderWrapper = ({children}) => {
 
 const SLayout = styled(Layout)`
   height: 100vh;
-  background: var(${({tempTheme})=> theme[tempTheme].title});
+  background: var(${({temp})=> theme[temp].white});
 `
 
 export default HeaderWrapper

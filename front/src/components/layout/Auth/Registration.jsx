@@ -31,7 +31,6 @@ let Registration = () => {
             </div>
             <SForm
                 name="basic"
-                className="formAuth"
                 layout="vertical"
                 initialValues={{ isadmin: false }}
                 onFinish={onFinish}

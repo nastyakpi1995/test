@@ -3,7 +3,7 @@ import {createGlobalStyle} from "styled-components";
 export default createGlobalStyle`
   :root {
     --transparent: transparent;
-    --title: #14142B;
+    --title: #111125;
     --titleInput: #e5e5e5;
     --background: #1f2229;
     --background2: #2e303c;
@@ -20,14 +20,15 @@ export default createGlobalStyle`
     --purple: #624af2;
     --red: #eb0055;
 
-    //--titleDark: #d3d9dc;
-    //--titleInputDark: #1f2229;
+    --titleDark: #d3d9dc;
+    --bodyDark: #b1b499;
+    --titleInputDark: #333333;
     //--backgroundDark: #1f2229;
     //--background2Dark: #c7cad7;
     //--bckModalDark: #5c606a;
     //--addProfileDark: #4e4b66;
     //--bodyDark: #4e4b66;
-    //--containerDark: #777680;
+    --containerDark: #383927;
     //--white2Dark: #fff;
     //--white1Dark: #bec2c6;
     //--whiteDark: #fbfbfb;
@@ -57,7 +58,7 @@ export default createGlobalStyle`
   p {
     margin: 0;
   }
-  
+
   button {
     background: none;
     outline: none;

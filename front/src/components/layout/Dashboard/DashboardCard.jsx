@@ -1,32 +1,24 @@
 import React from "react";
 import styled from "styled-components";
 import {MyCard} from "../../../styles/common";
+import {useSelector} from "react-redux";
+import {getTheme} from "../../../redux/selects/auth";
+import {theme} from "../../../styles/theme";
 
 const DashboardCard = ({name, count}) => {
+    const tempTheme = useSelector((state) => getTheme(state))
     return (
-        <SDashboard>
-            <div className="cardTop">
-                <CardTitle>{name}</CardTitle>
-                <CardInfo>{count}</CardInfo>
-            </div>
+        <SDashboard temp={tempTheme}>
+            <SCard>
+                <CardTitle temp={tempTheme}>{name}</CardTitle>
+                <CardInfo temp={tempTheme}>{count}cdf</CardInfo>
+            </SCard>
+
         </SDashboard>
     )
 }
 
-const CardTitle = styled.p`
-  margin-bottom: 50px;
-  font-size: 36px;
-  color: var(--titleLight);
-  letter-spacing: 1px;
-  line-height: 34px;
-`
-const CardInfo = styled.p`
-  color: var(--titleLight);
-  font-weight: 600;
-  font-size: 48px;
-  line-height: 34px;
-`;
-
+const SCard = styled.div``
 const SDashboard = styled(MyCard)`
   padding: 80px 75px;
   max-width: unset;
@@ -35,5 +27,18 @@ const SDashboard = styled(MyCard)`
     margin-right: 80px;
   }
 `
+const CardTitle = styled.p`
+  margin-bottom: 50px;
+  font-size: 36px;
+   color: var(${({temp}) => theme[temp].title});
+  letter-spacing: 1px;
+  line-height: 34px;
+`
+const CardInfo = styled.p`
+  color: var(${({temp}) => theme[temp].title});
+  font-weight: 600;
+  font-size: 48px;
+  line-height: 34px;
+`;
 
 export default DashboardCard

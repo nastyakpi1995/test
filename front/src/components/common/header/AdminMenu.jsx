@@ -4,11 +4,11 @@ import styled from "styled-components";
 import {headerListExample} from "../../../utils/exampleData";
 import {theme} from "../../../styles/theme";
 
-const AdminMenu = ({tempTheme}) =>  (
+const AdminMenu = ({temp}) =>  (
     <Nav>
-        {headerListExample(tempTheme).map(el => (
+        {headerListExample(temp).map(el => (
             <NavList key={el.title} to={el.to}>
-                <Text tempTheme={tempTheme}>{el.title}</Text>
+                <Text temp={temp}>{el.title}</Text>
                 <WrapImg><img src={el.img} alt={el.title}/></WrapImg>
             </NavList>
         ))}
@@ -33,7 +33,7 @@ const NavList = styled(Link)`
 `
 
 const Text = styled.div`
-  color: var(${({tempTheme}) => theme[tempTheme].white});
+  color: var(${({temp}) => theme[temp].white});
   font-size: 18px;
   line-height: 27px;
   letter-spacing: 0.75px;

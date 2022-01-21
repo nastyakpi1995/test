@@ -73,6 +73,7 @@ const Users = () => {
     </HeaderWrapper>
 }
 
+export default Users
 const UserWrap = styled.div`
   display: flex;
   height: 100vh;
@@ -83,5 +84,3 @@ const UsersContent = styled.div`
   display: flex;
   flex-direction: column;
 `
-
-export default Users

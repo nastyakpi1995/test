@@ -17,6 +17,7 @@ const DashboardCard = ({name, count}) => {
         </SDashboard>
     )
 }
+export default DashboardCard
 
 const SCard = styled.div``
 const SDashboard = styled(MyCard)`
@@ -40,5 +41,3 @@ const CardInfo = styled.p`
   font-size: 48px;
   line-height: 34px;
 `;
-
-export default DashboardCard

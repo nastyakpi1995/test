@@ -97,9 +97,9 @@ const EditModalUser = ({activeEditUser, isVisible, setIsVisible, setActiveEditUs
     )
 }
 
+export default EditModalUser
 const SFormItem = styled(SFormItemModal)`
   label {
     width: 230px !important;
   }
 `
-export default EditModalUser

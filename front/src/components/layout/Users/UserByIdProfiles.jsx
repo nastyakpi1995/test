@@ -57,7 +57,7 @@ const UserByIdProfiles = ({userId}) => {
     )
 };
 
-
+export default UserByIdProfiles;
 const ProfilesWrap = styled.div`
   display: flex;
   flex-wrap: wrap;
@@ -67,4 +67,3 @@ const SProfiles = styled.div`
   margin-left: 15px;
 `
 
-export default UserByIdProfiles

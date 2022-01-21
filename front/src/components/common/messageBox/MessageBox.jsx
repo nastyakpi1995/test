@@ -15,6 +15,8 @@ const MessageBoxInner = ({type, message, isTop}) => {
     )
 }
 
+const MessageBox = React.memo(MessageBoxInner);
+export default MessageBox
 const MyAlert = styled(Alert)`
   position: absolute;
   transition: all 0.4s ease-out;
@@ -22,5 +24,3 @@ const MyAlert = styled(Alert)`
   right: 20px;
   top: ${({isTop}) => isTop ? '80px' : '-100px'};
 `
-const MessageBox = React.memo(MessageBoxInner);
-export default MessageBox

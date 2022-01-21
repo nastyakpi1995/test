@@ -46,9 +46,8 @@ const Dashboard = () => {
         )
 }
 
+export default Dashboard;
 const Container = styled.div`
   max-width: 1800px;
   margin: 0 auto;
 `
-
-export default Dashboard;

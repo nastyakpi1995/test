@@ -58,6 +58,8 @@ const Profiles = () => {
     )
 }
 
+export default Profiles
+
 const ProfilesContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
@@ -65,4 +67,3 @@ const ProfilesContainer = styled.div`
   margin: 0 auto;
 `
 
-export default Profiles

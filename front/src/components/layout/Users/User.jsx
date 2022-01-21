@@ -26,6 +26,8 @@ const User = ({user, onEditUser, onDeleteUser, onClick, active}) => {
         </MyCard>
     )
 }
+
+export default User;
 const MyCard = styled.div`
   width: 350px;
   padding-left: 10px;
@@ -62,4 +64,3 @@ const UserEmail = styled.p`
   color: var(${({temp}) => theme[temp].white});
 `
 
-export default User

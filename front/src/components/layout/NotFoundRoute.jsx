@@ -12,11 +12,12 @@ const NotFoundRoute = () => {
     )
 }
 
+export default NotFoundRoute;
+
 const LinkMy = styled(Link)`
-  fontSize: 20
+  font-Size: 20px
 `;
 const Wrap = styled.div`
     display: flex;
     justify-content: center;
 `
-export default NotFoundRoute;

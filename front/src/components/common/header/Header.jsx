@@ -97,7 +97,7 @@ const LogoTitle = styled.div`
   font-size: 18px;
   line-height: 27px;
   letter-spacing: 0.75px;
-  color: ${({temp}) => theme[temp].white };
+  color: var(${({temp}) => theme[temp].white });
   margin-left: 20px;
 `
 

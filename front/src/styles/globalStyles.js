@@ -21,14 +21,13 @@ export default createGlobalStyle`
     --red: #eb0055;
 
     --titleDark: #d3d9dc;
-    --bodyDark: #b1b499;
     --titleInputDark: #333333;
     //--backgroundDark: #1f2229;
     //--background2Dark: #c7cad7;
     //--bckModalDark: #5c606a;
     //--addProfileDark: #4e4b66;
     //--bodyDark: #4e4b66;
-    --containerDark: #383927;
+    //--containerDark: #2e2f22;
     //--white2Dark: #fff;
     //--white1Dark: #bec2c6;
     //--whiteDark: #fbfbfb;

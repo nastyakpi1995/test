@@ -26,8 +26,8 @@ export const theme = {
         background: '--background',
         bckModal: '--bckModal',
         addProfile: '--white1',
-        body: '--bodyDark',
-        container: '--containerDark',
+        body: '--titleDark',
+        container: '--white',
         white2: '--white2',
         white1: '--white1',
         white: '--background2',
@@ -38,5 +38,3 @@ export const theme = {
         red: '--red',
     }
 }
-
-// color: theme[value].lightColor

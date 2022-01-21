@@ -3,19 +3,24 @@ import { DatePicker, Radio} from "antd";
 import {locale} from "moment";
 import Drawer from "../../../common/Drawer";
 import {ButtonSubmit, SFormModal, SInputModal, SFormItemModal, STitleModal} from "../../../../styles/common";
+import {useSelector} from "react-redux";
+import {getTheme} from "../../../../redux/selects/auth";
 
 const ProfileModalInner = ({
     confirmLoading, isOpenModalProfile, handleCancel, activeProfile, onFinish, form, onChange, title
 }) => {
+    const tempTheme = useSelector(state => getTheme(state))
+
     return (
         <Drawer visible={isOpenModalProfile} onClose={handleCancel}>
-            <STitleModal>{title}</STitleModal>
+            <STitleModal temp={tempTheme}>{title}</STitleModal>
             <SFormModal
                   form={form}
                   wrapperCol={{ span: 16 }}
                   initialValues={activeProfile}
                   onFinish={onFinish}>
                 <SFormItemModal
+                    temp={tempTheme}
                     label="Name"
                     name="name"
                     rules={[{ required: true, message: 'Please input your name!' }]}
@@ -23,13 +28,14 @@ const ProfileModalInner = ({
                     <SInputModal onChange={onChange}/>
                 </SFormItemModal>
 
-                <SFormItemModal label='gender' name={'gender'}>
+                <SFormItemModal temp={tempTheme} label='gender' name={'gender'}>
                     <Radio.Group>
                         <Radio checked value={'male'}>male</Radio>
                         <Radio value={'female'}>female</Radio>
                     </Radio.Group>
                 </SFormItemModal>
                 <SFormItemModal
+                    temp={tempTheme}
                     label="City"
                     name="city"
                     rules={[{ required: true, message: 'Please input your city!' }]}
@@ -37,13 +43,14 @@ const ProfileModalInner = ({
                     <SInputModal />
                 </SFormItemModal>
                 <SFormItemModal
+                    temp={tempTheme}
                     label="birthdate"
                     name="birthdate"
                     rules={[{ required: true, message: 'Please input date' }]}
                 >
                     <DatePicker locale={locale} format={'DD.MM.YYYY'}/>
                 </SFormItemModal>
-                <SFormItemModal>
+                <SFormItemModal temp={tempTheme}>
                     <ButtonSubmit loading={confirmLoading} htmlType={'submit'}>
                         submit
                     </ButtonSubmit>

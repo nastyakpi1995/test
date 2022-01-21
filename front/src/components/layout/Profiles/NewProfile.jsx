@@ -1,23 +1,29 @@
 import React from "react";
-import {Card} from "antd";
-import styled from "styled-components";
-import plusCircleOutlined from '../../../images/icons/addProfileIcon.svg'
 import {useSelector} from "react-redux";
-import {getTheme} from "../../../redux/selects/auth";
-import {theme} from "../../../styles/theme";
+import styled from 'styled-components';
+import {Card} from 'antd';
+import plusCircleOutlinedWhite from '../../../images/icons/addProfileWhiteIcon.svg'
+import plusCircleOutlined from '../../../images/icons/addProfileIcon.svg'
+import {getTheme} from '../../../redux/selects/auth';
+import {theme} from '../../../styles/theme';
 
+const IconForTheme = (tempTheme) => {
+    return tempTheme === 'dark' ? plusCircleOutlinedWhite : plusCircleOutlined
+}
 const NewProfile = ({showModal}) => {
     const tempTheme = useSelector(state => getTheme(state))
 
     return (
         <NewProfileCard onClick={showModal} temp={tempTheme}>
             <NewProfileLink>
-                <Icon src={plusCircleOutlined} />
+                <Icon src={IconForTheme(tempTheme)} />
                 <Text temp={tempTheme}>Create New Profile</Text>
             </NewProfileLink>
         </NewProfileCard>
     )
 }
+
+export default NewProfile
 
 const NewProfileCard = styled(Card)`
   max-width: 320px;
@@ -45,5 +51,3 @@ const Text = styled.span`
   color: var(${({temp}) => theme[temp].addProfile});
   letter-spacing: 0.75px;
 `
-
-export default NewProfile

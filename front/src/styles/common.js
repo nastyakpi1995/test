@@ -173,7 +173,8 @@ export const SFormItemModal = styled(Form.Item)`
   label {
     width: 110px;
     font-size: 20px;
-    color: var(--white);
+    color: var(${({temp}) => theme[temp].white});
+    text-transform: capitalize;
   }
 `
 export const SInputModal = styled(Input)`
@@ -182,7 +183,7 @@ export const SInputModal = styled(Input)`
 `;
 
 export const STitleModal = styled.div`
-  color: var(--background3);
+  color: var(${({temp}) => theme[temp].white});
   font-size: 50px;
   text-align: center;
   margin-bottom: 50px;

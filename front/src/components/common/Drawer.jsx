@@ -46,11 +46,13 @@ const Drawer = ({visible, children, onClose}) => {
     )
 }
 
+export default Drawer
+
 const DrawerContainer = styled.div`
   --transition-speed: 0.3s;
 `
 const SDrawer = styled.div`
-  background: var(${({temp}) => theme[temp].bckModal});
+  background: var(${({temp}) => theme[temp].background2});
   width: 42%;
   height: 100%;
   overflow: auto;
@@ -93,5 +95,3 @@ const Backdrop = styled.div`
     return '';
 }};
 `
-export default Drawer
-

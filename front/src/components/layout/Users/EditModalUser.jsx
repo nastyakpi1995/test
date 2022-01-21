@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import {Checkbox, Form} from "antd";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {setMessageDataCreator} from "../../../redux/reducers/authReducer";
 import {toggleLoaderProfileCreator} from "../../../redux/reducers/profileReducer";
 import {initialUserValues} from "../../../utils/constants";
@@ -8,11 +8,13 @@ import {editUserAxiosRequest} from "../../../utils/apiCaller";
 import Drawer from "../../common/Drawer";
 import {ButtonSubmit, SFormItemModal, SFormModal, SInputModal, STitleModal} from "../../../styles/common";
 import styled from "styled-components";
+import {getTheme} from "../../../redux/selects/auth";
 
 const EditModalUser = ({activeEditUser, isVisible, setIsVisible, setActiveEditUser}) => {
     const [confirmLoading, setConfirmLoading] = useState(false)
     const [form] = Form.useForm()
     const dispatch = useDispatch();
+    const tempTheme = useSelector(state => getTheme(state))
 
     const onDataSuccess = (data) => {
         dispatch(setMessageDataCreator(data))
@@ -44,13 +46,14 @@ const EditModalUser = ({activeEditUser, isVisible, setIsVisible, setActiveEditUs
 
     return (
         <Drawer visible={isVisible}  onClose={handleCancel}>
-            <STitleModal>Edit {activeEditUser.username} profile</STitleModal>
+            <STitleModal temp={tempTheme}>Edit {activeEditUser.username} profile</STitleModal>
             <SFormModal name={'user'}
                   initialValues={activeEditUser}
                   form={form}
                   wrapperCol={{ span: 16 }}
                   onFinish={onFinish}>
                 <SFormItem
+                    temp={tempTheme}
                     label="User Name"
                     name="username"
                     rules={[{ required: true, message: 'Please input your user name !' }]}
@@ -63,6 +66,7 @@ const EditModalUser = ({activeEditUser, isVisible, setIsVisible, setActiveEditUs
                     }} />
                 </SFormItem>
                 <SFormItem
+                    temp={tempTheme}
                     label="Email"
                     name="email"
                     rules={[{ required: true, message: 'Please input your user email !' }]}
@@ -75,6 +79,7 @@ const EditModalUser = ({activeEditUser, isVisible, setIsVisible, setActiveEditUs
                     }} />
                 </SFormItem>
                 <SFormItem
+                    temp={tempTheme}
                     label="Add permitions to admin"
                     name="isadmin"
                     valuePropName="checked"
@@ -82,7 +87,7 @@ const EditModalUser = ({activeEditUser, isVisible, setIsVisible, setActiveEditUs
                 >
                     <Checkbox />
                 </SFormItem>
-                <SFormItem>
+                <SFormItem temp={tempTheme}>
                     <ButtonSubmit loading={confirmLoading} htmlType='submit'>
                         Submit
                     </ButtonSubmit>

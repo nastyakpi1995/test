@@ -18,9 +18,8 @@ const HeaderWrapper = ({children}) => {
     )
 }
 
+export default HeaderWrapper
 const SLayout = styled(Layout)`
   height: 100vh;
   background: var(${({temp})=> theme[temp].white});
 `
-
-export default HeaderWrapper

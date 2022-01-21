@@ -1,20 +1,30 @@
 import React from "react";
-import {Link} from "react-router-dom";
+import {Link, useLocation} from "react-router-dom";
 import styled from "styled-components";
 import {headerListExample} from "../../../utils/exampleData";
 import {theme} from "../../../styles/theme";
 
-const AdminMenu = ({temp}) =>  (
-    <Nav>
-        {headerListExample(temp).map(el => (
-            <NavList key={el.title} to={el.to}>
-                <Text temp={temp}>{el.title}</Text>
-                <WrapImg><img src={el.img} alt={el.title}/></WrapImg>
-            </NavList>
-        ))}
-    </Nav>
-)
+const isActive = (location, title) => {
+    const locationString = location.pathname.toLowerCase().split('/').join('')
+    const titleLower = title.toLowerCase()
+    return locationString === titleLower
+}
 
+const AdminMenu = ({temp}) => {
+    const location = useLocation();
+    return (
+        <Nav>
+            {headerListExample(temp).map(el => (
+                <NavList temp={temp} active={isActive(location, el.title)} key={el.title} to={el.to}>
+                    <Text temp={temp}>{el.title}</Text>
+                    <WrapImg><img src={el.img} alt={el.title}/></WrapImg>
+                </NavList>
+            ))}
+        </Nav>
+    )
+}
+
+export default AdminMenu
 
 const Nav = styled.div`
   margin-right: 100px;
@@ -26,7 +36,8 @@ const NavList = styled(Link)`
   margin-right: 45px;
   display: flex;
   align-items: center;
-  
+  padding-bottom: 5px;
+  border-bottom: 4px solid var(${({active, temp}) => active ? theme[temp].white : theme[temp].transparent});
   &:not(:first-child) img {
     vertical-align: baseline;
   }
@@ -45,4 +56,3 @@ const WrapImg = styled.div`
   width: 25px;
   display: flex;
 `
-export default AdminMenu

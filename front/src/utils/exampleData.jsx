@@ -7,9 +7,10 @@ import usersWhiteIcon from "../images/icons/usersWhiteIcon.svg";
 import {links} from "./constants";
 
 export const headerListExample = (theme) => {
+    const isDark = theme === 'dark'
     return [
-        {to: links.profiles, title: 'Profiles', img: theme ? profileDarkIcon : profileWhiteIcon},
-        {to: links.dashboard, title: 'Dashboard', img: theme ? dashboardDarkIcon : dashboardWhiteIcon},
-        {to: links.users, title: 'Users', img: theme ? usersDarkIcon :  usersWhiteIcon},
+        {to: links.profiles, title: 'Profiles', img: isDark ? profileDarkIcon : profileWhiteIcon},
+        {to: links.dashboard, title: 'Dashboard', img: isDark ? dashboardDarkIcon : dashboardWhiteIcon},
+        {to: links.users, title: 'Users', img: isDark ? usersDarkIcon :  usersWhiteIcon},
     ]
 }

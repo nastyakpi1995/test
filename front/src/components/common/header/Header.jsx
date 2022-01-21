@@ -1,6 +1,6 @@
 import React, {useCallback} from "react";
 
-import {Link, useNavigate} from "react-router-dom";
+import {Link, useLocation, useNavigate} from "react-router-dom";
 import {authToken, links, prepareMessageData, savedUser} from "../../../utils/constants";
 import {setMessageDataCreator, setThemeCreator} from "../../../redux/reducers/authReducer";
 import {useDispatch, useSelector} from "react-redux";
@@ -12,6 +12,7 @@ import AdminMenu from "./AdminMenu";
 import {Switch} from "antd";
 import {getTheme} from "../../../redux/selects/auth";
 import {theme} from "../../../styles/theme";
+
 
 const HeaderContainer = () => {
     const navigate = useNavigate()
@@ -54,6 +55,8 @@ const HeaderContainer = () => {
         </Header>
     )
 }
+
+export default HeaderContainer
 
 const Header = styled.header`
   width: 100%;
@@ -100,5 +103,3 @@ const LogoTitle = styled.div`
   color: var(${({temp}) => theme[temp].white });
   margin-left: 20px;
 `
-
-export default HeaderContainer

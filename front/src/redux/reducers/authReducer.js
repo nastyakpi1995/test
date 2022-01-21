@@ -3,6 +3,7 @@ const types = {
     setMessageDataType: 'setMessageDataType',
     setMessageDataDefaultType: 'setMessageDataDefaultType',
     setTempThemeType: 'setTempThemeType',
+    setMenuActiveType: 'setMenuActiveType',
 }
 
 const initState = {
@@ -11,7 +12,8 @@ const initState = {
         message: '',
         type: 'success'
     },
-    tempTheme: 'light'
+    tempTheme: 'light',
+    menuActive: 'profiles'
 }
 
 const authReducer = (state= initState, action) => {
@@ -44,6 +46,12 @@ const authReducer = (state= initState, action) => {
                 tempTheme: action.payload
             })
         }
+        case types.setMenuActiveType: {
+            return ({
+                ...state,
+                menuActive: action.payload
+            })
+        }
 
         default: {
             return state
@@ -63,5 +71,8 @@ export const setThemeCreator = (payload) => ({
     type: types.setTempThemeType,
     payload
 })
-
+export const setMenuActiveCreator = (payload) => ({
+    type: types.setMenuActiveType,
+    payload
+})
 export default authReducer

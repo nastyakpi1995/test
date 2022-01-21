@@ -52,7 +52,6 @@ const Text = styled.div`
 `
 
 const WrapImg = styled.div`
-  height: 25px;
-  width: 25px;
+  width: 20px;
   display: flex;
 `

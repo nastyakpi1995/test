@@ -34,6 +34,7 @@ const NewProfileCard = styled(Card)`
   box-shadow: 0 8px 16px rgba(17, 17, 17, 0.04);
   border-radius: 16px;
   margin-bottom: 60px;
+  margin-left: 15px;
   background: var(${({temp}) => theme[temp].white});
   cursor: pointer;
 `;

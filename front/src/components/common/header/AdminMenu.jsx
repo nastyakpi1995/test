@@ -15,7 +15,7 @@ const AdminMenu = ({temp}) => {
     return (
         <Nav>
             {headerListExample(temp).map(el => (
-                <NavList temp={temp} active={isActive(location, el.title)} key={el.title} to={el.to}>
+                <NavList temp={temp} active={isActive(location, el.title).toString()} key={el.title} to={el.to}>
                     <Text temp={temp}>{el.title}</Text>
                     <WrapImg><img src={el.img} alt={el.title}/></WrapImg>
                 </NavList>
@@ -37,7 +37,7 @@ const NavList = styled(Link)`
   display: flex;
   align-items: center;
   padding-bottom: 5px;
-  border-bottom: 4px solid var(${({active, temp}) => active ? theme[temp].white : theme[temp].transparent});
+  border-bottom: 4px solid var(${({active, temp}) => active === 'true' ? theme[temp].white : theme[temp].transparent});
   &:not(:first-child) img {
     vertical-align: baseline;
   }

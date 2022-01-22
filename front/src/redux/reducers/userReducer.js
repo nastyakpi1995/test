@@ -1,19 +1,46 @@
 import {savedUser} from "../../utils/constants";
 
-const SET_USER = 'SET_USER'
+export const userTypes = {
+    setUserType: 'setUserType',
+    getUsersType: 'getUsersType',
+    successUsersType: 'successUsersType',
+    errorUsersType: 'errorUsersType',
+}
 
 const initialState = {
-    user: JSON.parse(localStorage.getItem(savedUser))
+    user: JSON.parse(localStorage.getItem(savedUser)),
+    loading: false,
+    users: []
 }
 
 const userReducer = (state= initialState, action) => {
     switch (action.type) {
-        case SET_USER: {
+        case userTypes.setUserType: {
             return {
                 ...state,
-                user: action.payload,
+                user: action.payload
             }
         }
+        case userTypes.getUsersType: {
+            return {
+                ...state,
+                loading: true
+            }
+        }
+        case userTypes.successUsersType: {
+            return {
+                ...state,
+                users: action.payload,
+                loading: false
+            }
+        }
+        case userTypes.errorUsersType: {
+            return {
+                ...state,
+                loading: false
+            }
+        }
+
         default: {
             return state
         }
@@ -21,8 +48,18 @@ const userReducer = (state= initialState, action) => {
 }
 
 export const setUserCreator = (user) => ({
-    type: SET_USER,
+    type: userTypes.setUserType,
     payload: user
+})
+export const getUsersCreator = () => ({
+    type: userTypes.getUsersType,
+})
+export const successUsersCreator = (users) => ({
+    type: userTypes.successUsersType,
+    payload: users
+})
+export const errorUsersCreator = (users) => ({
+    type: userTypes.errorUsersType
 })
 
 export default userReducer

@@ -59,6 +59,7 @@ const authReducer = (state= initState, action) => {
     }
 }
 
+export default authReducer
 export const setMessageDataCreator = (messageData) => ({
     type: types.setMessageDataType,
     messageData,
@@ -75,4 +76,3 @@ export const setMenuActiveCreator = (payload) => ({
     type: types.setMenuActiveType,
     payload
 })
-export default authReducer

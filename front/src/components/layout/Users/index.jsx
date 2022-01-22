@@ -1,8 +1,8 @@
 import React, {useEffect, useState} from "react";
 import HeaderWrapper from "../../common/header/HeaderWrapper";
-import {deleteUserAxiosRequest, usersAxiosRequest} from "../../../utils/apiCaller";
+import {deleteUserAxiosRequest} from "../../../utils/apiCaller";
 import {setMessageDataCreator} from "../../../redux/reducers/authReducer";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {useNavigate} from "react-router-dom";
 import styled from "styled-components";
 
@@ -10,34 +10,27 @@ import User from "./User";
 import EditModalUser from "./EditModalUser";
 import {initialUserValues, links, prepareMessageDataFailed} from "../../../utils/constants";
 import UserByIdProfiles from "./UserByIdProfiles";
+import {getUsersCreator} from "../../../redux/reducers/userReducer";
 
 const Users = () => {
-    const [users, setUsers] = useState(null);
-    const [isLoader, setIsLoader] = useState(false)
+    // const [users, setUsers] = useState(null);
+    // const [isLoader, setIsLoader] = useState(false)
     const [isModalVisible, setIsModalVisible] = useState(false)
     const [activeEditUser, setActiveEditUser] = useState(initialUserValues)
     const [chooseUserId, setChooseUserId] = useState(false)
     const navigator = useNavigate()
-
+    const users = useSelector(state => state.user.users)
+    const loadingUser = useSelector(state => state.user.loading)
     const dispatch = useDispatch()
-
+debugger
     useEffect(() => {
-        if (isLoader) {
-            usersAxiosRequest().then(({data}) => {
-                setUsers(data.users)
-            }).catch((data) => {
-                dispatch(setMessageDataCreator(prepareMessageDataFailed))
-            })
-            setIsLoader(false)
+        if (loadingUser) {
+            dispatch(getUsersCreator())
         }
-    }, [isLoader])
+    }, [loadingUser])
 
     useEffect(() => {
-        usersAxiosRequest().then(({data}) => {
-            setUsers(data.users)
-        }).catch((data) => {
-            dispatch(setMessageDataCreator(prepareMessageDataFailed))
-        })
+        dispatch(getUsersCreator())
     }, [])
 
     const onEditUser = (user) => {

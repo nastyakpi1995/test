@@ -32,25 +32,33 @@ function parserJSON(response) {
 }
 
 
-const checkStatus = (response) => {
-    if (response.status >= 200 && response.status < 300) {
+const checkStatus = (response, method) => {
+    if (response.status >= 200) {
+        if (method !== 'get') {
+            return notification.success({
+                message: response.data.message
+            })
+        }
        return response
     }
+
     const error = new Error(response.statusText)
     error.response = response
     throw error
 }
 
-export const request = (url, method) => {
+export const request = (url, method, values) => {
     const options = {
         headers: getHeaders(),
-        method
+        method,
+        data: values
     }
     return requestAxios({
         url,
         ...options
-    }).then(checkStatus).catch(parserJSON)
+    }).then((data) => checkStatus(data, method)).catch(parserJSON)
 }
+
 export const registerAxiosRequest = (values) => {
     return axios.post(`${baseUrl}/api/user/register`, {...values}).then(({data}) => {
         return data
@@ -110,10 +118,6 @@ export const adminDashboardAxiosRequest = () => {
 }
 export const getUserDataById = (userId) => {
     return axios.get(`${baseUrl}/admin/user/${userId}`, {headers: getHeaders()})
-}
-
-export const editUserAxiosRequest = (values, userId) => {
-    return axios.put(`${baseUrl}/admin/user/${userId}`,{...values}, {headers: getHeaders()})
 }
 
 export const deleteUserAxiosRequest = (id) => {

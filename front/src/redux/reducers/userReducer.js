@@ -2,15 +2,22 @@ import {savedUser} from "../../utils/constants";
 
 export const userTypes = {
     setUserType: 'setUserType',
+    setUsersLoadingType: 'getUsersLoadingType',
     getUsersType: 'getUsersType',
-    successUsersType: 'successUsersType',
-    errorUsersType: 'errorUsersType',
+    successGetUsersType: 'successGetUsersType',
+    errorGetUsersType: 'errorGetUsersType',
+    putUserType: 'putUserType',
+    successPutUserType: 'successPutUserType',
+    errorPutUserType: 'errorPutUserType',
+    toggleUserModalType: 'toggleUserModalType'
 }
 
 const initialState = {
     user: JSON.parse(localStorage.getItem(savedUser)),
-    loading: false,
-    users: []
+    loadingGetUsers: false,
+    loadingPutUser: false,
+    users: [],
+    isModalVisible: false
 }
 
 const userReducer = (state= initialState, action) => {
@@ -21,25 +28,61 @@ const userReducer = (state= initialState, action) => {
                 user: action.payload
             }
         }
+
+        // get users
         case userTypes.getUsersType: {
             return {
                 ...state,
-                loading: true
+                loadingGetUsers: true,
             }
         }
-        case userTypes.successUsersType: {
+        case userTypes.successGetUsersType: {
             return {
                 ...state,
                 users: action.payload,
-                loading: false
+                loadingGetUsers: false
             }
         }
-        case userTypes.errorUsersType: {
+        case userTypes.errorGetUsersType: {
             return {
                 ...state,
-                loading: false
+                loadingGetUsers: false
             }
         }
+
+        // put user
+        case userTypes.putUserType: {
+            return {
+                ...state,
+                loadingPutUser: true
+            }
+        }
+        case userTypes.successPutUserType: {
+            return {
+                ...state,
+                loadingPutUser: false,
+                loadingGetUsers: true,
+                isModalVisible: !state.isModalVisible
+            }
+        }
+        case userTypes.errorPutUserType: {
+            return {
+                ...state,
+                loadingPutUser: false,
+            }
+        }
+        // Loading
+        case userTypes.setUsersLoadingType: {
+            return {
+                ...state,
+                loadingGetUsers: false
+            }
+        }
+        case userTypes.toggleUserModalType:
+            return {
+                ...state,
+                isModalVisible: !state.isModalVisible
+            }
 
         default: {
             return state
@@ -51,15 +94,39 @@ export const setUserCreator = (user) => ({
     type: userTypes.setUserType,
     payload: user
 })
+export const setUsersLoadingCreator = () => ({
+    type: userTypes.setUsersLoadingType,
+})
+
+// modal user
+export const toggleModalUser = () => ({
+    type: userTypes.toggleUserModalType
+})
+
+// get users
 export const getUsersCreator = () => ({
     type: userTypes.getUsersType,
 })
-export const successUsersCreator = (users) => ({
-    type: userTypes.successUsersType,
+export const successGetUsersCreator = (users) => ({
+    type: userTypes.successGetUsersType,
     payload: users
 })
-export const errorUsersCreator = (users) => ({
-    type: userTypes.errorUsersType
+export const errorGetUsersCreator = () => ({
+    type: userTypes.errorGetUsersType
+})
+
+// put user
+export const putUserCreator = (values, id) => ({
+    type: userTypes.putUserType,
+    values,
+    id
+})
+export const successPutUserCreator = (user) => ({
+    type: userTypes.successPutUserType,
+    payload: user
+})
+export const errorPutUserCreator = (users) => ({
+    type: userTypes.errorPutUserType
 })
 
 export default userReducer

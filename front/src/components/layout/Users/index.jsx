@@ -8,35 +8,37 @@ import styled from "styled-components";
 
 import User from "./User";
 import EditModalUser from "./EditModalUser";
-import {initialUserValues, links, prepareMessageDataFailed} from "../../../utils/constants";
+import {initialUserValues, links} from "../../../utils/constants";
 import UserByIdProfiles from "./UserByIdProfiles";
-import {getUsersCreator} from "../../../redux/reducers/userReducer";
+import {getUsersCreator, setUsersLoadingCreator, toggleModalUser} from "../../../redux/reducers/userReducer";
 
 const Users = () => {
-    // const [users, setUsers] = useState(null);
-    // const [isLoader, setIsLoader] = useState(false)
-    const [isModalVisible, setIsModalVisible] = useState(false)
     const [activeEditUser, setActiveEditUser] = useState(initialUserValues)
     const [chooseUserId, setChooseUserId] = useState(false)
+
     const navigator = useNavigate()
-    const users = useSelector(state => state.user.users)
-    const loadingUser = useSelector(state => state.user.loading)
     const dispatch = useDispatch()
-debugger
+
+    const users = useSelector(state => state.user.users)
+    const loadingGetUsers = useSelector(state => state.user.loadingGetUsers)
+    const isModalVisible = useSelector(state => state.user.isModalVisible)
+
     useEffect(() => {
-        if (loadingUser) {
+        if (loadingGetUsers) {
             dispatch(getUsersCreator())
+            dispatch(setUsersLoadingCreator())
         }
-    }, [loadingUser])
+    }, [loadingGetUsers])
 
     useEffect(() => {
         dispatch(getUsersCreator())
     }, [])
 
     const onEditUser = (user) => {
-        setIsModalVisible(true)
+        dispatch(toggleModalUser())
         setActiveEditUser(user)
     }
+
     const onDeleteUser = (id) => {
         deleteUserAxiosRequest(id).then(data => {
             dispatch(setMessageDataCreator(data))
@@ -47,7 +49,6 @@ debugger
     }
     return <HeaderWrapper>
         <EditModalUser isVisible={isModalVisible}
-                       setIsVisible={setIsModalVisible}
                        activeEditUser={activeEditUser}
                        setActiveEditUser={setActiveEditUser} />
         <UserWrap>

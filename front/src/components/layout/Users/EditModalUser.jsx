@@ -1,51 +1,37 @@
-import React, {useEffect, useState} from "react";
+import React, {useEffect} from "react";
 import {Checkbox, Form} from "antd";
 import {useDispatch, useSelector} from "react-redux";
-import {setMessageDataCreator} from "../../../redux/reducers/authReducer";
-import {toggleLoaderProfileCreator} from "../../../redux/reducers/profileReducer";
 import {initialUserValues} from "../../../utils/constants";
-import {editUserAxiosRequest} from "../../../utils/apiCaller";
 import Drawer from "../../common/Drawer";
 import {ButtonSubmit, SFormItemModal, SFormModal, SInputModal, STitleModal} from "../../../styles/common";
 import styled from "styled-components";
 import {getTheme} from "../../../redux/selects/auth";
+import {putUserCreator, toggleModalUser} from "../../../redux/reducers/userReducer";
 
-const EditModalUser = ({activeEditUser, isVisible, setIsVisible, setActiveEditUser}) => {
-    const [confirmLoading, setConfirmLoading] = useState(false)
+const EditModalUser = ({activeEditUser, setActiveEditUser}) => {
     const [form] = Form.useForm()
     const dispatch = useDispatch();
     const tempTheme = useSelector(state => getTheme(state))
+    const isModalVisible = useSelector(state => state.user.isModalVisible)
+    const loadingPutUser = useSelector(state => state.user.loadingPutUser)
 
-    const onDataSuccess = (data) => {
-        dispatch(setMessageDataCreator(data))
-        if (data.success) {
-            dispatch(toggleLoaderProfileCreator())
-            setIsVisible(false)
-            form.setFieldsValue(initialUserValues)
-        }
-    }
+
     useEffect(() => {
         form.setFieldsValue(activeEditUser)
     }, [activeEditUser])
 
     const handleCancel = () => {
         form.setFieldsValue(initialUserValues)
-        setIsVisible(false)
+        dispatch(toggleModalUser())
         setActiveEditUser(initialUserValues)
     }
 
     const onFinish = (values) => {
-        setConfirmLoading(true)
-
-        editUserAxiosRequest(values, activeEditUser.id).then(data => {
-            onDataSuccess(data.data)
-            dispatch(toggleLoaderProfileCreator())
-            setConfirmLoading(false)
-        })
+        dispatch(putUserCreator(values, activeEditUser.id))
     }
 
     return (
-        <Drawer visible={isVisible}  onClose={handleCancel}>
+        <Drawer visible={isModalVisible}  onClose={handleCancel}>
             <STitleModal temp={tempTheme}>Edit {activeEditUser.username} profile</STitleModal>
             <SFormModal name={'user'}
                   initialValues={activeEditUser}
@@ -88,7 +74,7 @@ const EditModalUser = ({activeEditUser, isVisible, setIsVisible, setActiveEditUs
                     <Checkbox />
                 </SFormItem>
                 <SFormItem temp={tempTheme}>
-                    <ButtonSubmit loading={confirmLoading} htmlType='submit'>
+                    <ButtonSubmit loading={loadingPutUser} htmlType='submit'>
                         Submit
                     </ButtonSubmit>
                 </SFormItem>

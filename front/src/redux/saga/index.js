@@ -1,9 +1,9 @@
 import {all} from 'redux-saga/effects'
-import usersAsync from "./userSaga";
+import userAsync from "./userSaga";
 
  function* rootSaga() {
     yield all([
-        usersAsync(),
+        userAsync(),
     ])
 }
 

@@ -13,8 +13,8 @@ function* getUsersAsync() {
 }
 
 
-function* getUsersAsync() {
+function* usersAsync() {
     yield takeEvery(userTypes.getUsersType, getUsersAsync)
 }
 
-export default getUsersAsync
+export default usersAsync

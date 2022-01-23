@@ -1,4 +1,4 @@
-import React, { useEffect} from "react";
+import React, {useCallback, useEffect} from "react";
 import HeaderWrapper from "../../common/header/HeaderWrapper";
 import NewProfile from "./NewProfile";
 import ProfileCard from "../../common/ProfileCard";
@@ -38,13 +38,17 @@ const Profiles = () => {
         dispatch(getProfilesCreator())
     }, [])
 
-    if (loadingGetProfiles) return <div>loader</div>
+    const onEditProfile = useCallback((profile) => {
+        dispatch(setIsOpenModalCreator(true))
+        dispatch(setActiveProfileCreator(profile))
+    }, [])
 
+    if (loadingGetProfiles) return <div>loader</div>
     return (
         <HeaderWrapper>
             <ProfilesContainer>
                 {profiles.length >= 0 ? profiles.map((profile, idx) => (
-                    <ProfileCard key={idx} profile={profile}/>
+                    <ProfileCard key={idx} profile={profile} onEditProfile={() => onEditProfile(profile)}/>
                 )) : null}
                 <NewProfile showModal={onCreateProfile} />
             </ProfilesContainer>

@@ -6,7 +6,7 @@ import {
     getUserDataByIdCreator,
     setActiveProfileCreator,
     setIsOpenModalCreator,
-    toggleLoaderProfileCreator
+    setLoaderProfileCreator
 } from "../../../redux/reducers/profileReducer";
 import styled from "styled-components";
 import NewProfile from "../Profiles/NewProfile";
@@ -28,7 +28,7 @@ const UserByIdProfiles = ({userId}) => {
     useEffect(() => {
         if (loadingProfile) {
             fetchGetUserDataById()
-            dispatch(toggleLoaderProfileCreator())
+            dispatch(setLoaderProfileCreator())
         }
     }, [loadingProfile])
 

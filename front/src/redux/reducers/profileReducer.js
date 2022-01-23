@@ -1,7 +1,7 @@
 import {initialProfileValues} from "../../utils/constants";
 
 export const profileTypes = {
-    toggleLoaderProfileType: 'toggleLoaderProfileType',
+    SET_LOADER_PROFILE_TYPE: 'SET_LOADER_PROFILE_TYPE',
     SET_OPEN_MODAL_PROFILE_TYPE: 'SET_OPEN_MODAL_PROFILE_TYPE',
     setActiveProfileType: 'setActiveProfileType',
 
@@ -47,10 +47,11 @@ const profileReducer = (state= initialState, action) => {
                 activeProfile: action.payload
             }
         }
-        case profileTypes.toggleLoaderProfileType: {
+        case profileTypes.SET_LOADER_PROFILE_TYPE: {
             return {
                 ...state,
-                loadingGetProfiles: !state.loadingGetProfiles
+                loadingGetProfiles: false,
+                loadingProfile: false
             }
         }
 
@@ -140,8 +141,8 @@ export const setActiveProfileCreator = (profile) => ({
     type: profileTypes.setActiveProfileType,
     payload: profile
 })
-export const toggleLoaderProfileCreator = () => ({
-    type: profileTypes.toggleLoaderProfileType,
+export const setLoaderProfileCreator = () => ({
+    type: profileTypes.SET_LOADER_PROFILE_TYPE,
 })
 
 // get Profiles

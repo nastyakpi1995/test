@@ -37,8 +37,8 @@ function* getUserDataByIdRequestAsync ({userId}) {
 
 function* profileAsync () {
     yield all([
-        takeEvery(profileTypes.getProfilesType, getProfilesRequestAsync),
-        takeEvery(profileTypes.profileType, profileRequestAsync),
+        takeEvery(profileTypes.GET_PROFILES_TYPE, getProfilesRequestAsync),
+        takeEvery(profileTypes.PROFILE_TYPE, profileRequestAsync),
         takeEvery(profileTypes.GET_USER_DATA_BY_ID, getUserDataByIdRequestAsync),
     ])
 }

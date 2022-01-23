@@ -1,9 +1,8 @@
-
 const types = {
-    setMessageDataType: 'setMessageDataType',
-    setMessageDataDefaultType: 'setMessageDataDefaultType',
-    setTempThemeType: 'setTempThemeType',
-    setMenuActiveType: 'setMenuActiveType',
+    SET_MESSAGE_DATA_TYPE: 'SET_MESSAGE_DATA_TYPE',
+    SET_MESSAGE_DATA_DEFAULT_TYPE: 'SET_MESSAGE_DATA_DEFAULT_TYPE',
+    SET_TEMP_THEME_TYPE: 'SET_TEMP_THEME_TYPE',
+    SET_MENU_ACTIVE_TYPE: 'SET_MENU_ACTIVE_TYPE'
 }
 
 const initState = {
@@ -18,7 +17,7 @@ const initState = {
 
 const authReducer = (state= initState, action) => {
     switch (action.type) {
-        case types.setMessageDataType: {
+        case types.SET_MESSAGE_DATA_TYPE: {
             const {message, success} = action.messageData
             return {
                 ...state,
@@ -29,7 +28,7 @@ const authReducer = (state= initState, action) => {
                 }
             }
         }
-        case types.setMessageDataDefaultType: {
+        case types.SET_MESSAGE_DATA_DEFAULT_TYPE: {
             return {
                 ...state,
                 messageData: {
@@ -40,13 +39,13 @@ const authReducer = (state= initState, action) => {
             }
         }
 
-        case types.setTempThemeType: {
+        case types.SET_TEMP_THEME_TYPE: {
             return ({
                 ...state,
                 tempTheme: action.payload
             })
         }
-        case types.setMenuActiveType: {
+        case types.SET_MENU_ACTIVE_TYPE: {
             return ({
                 ...state,
                 menuActive: action.payload
@@ -59,20 +58,21 @@ const authReducer = (state= initState, action) => {
     }
 }
 
-export default authReducer
+export default authReducer;
+
 export const setMessageDataCreator = (messageData) => ({
-    type: types.setMessageDataType,
+    type: types.SET_MESSAGE_DATA_TYPE,
     messageData,
 })
 export const setMessageDataDefaultCreator = (typeData) => ({
-    type: types.setMessageDataDefaultType,
+    type: types.SET_MESSAGE_DATA_DEFAULT_TYPE,
     typeData
 })
 export const setThemeCreator = (payload) => ({
-    type: types.setTempThemeType,
+    type: types.SET_TEMP_THEME_TYPE,
     payload
 })
 export const setMenuActiveCreator = (payload) => ({
-    type: types.setMenuActiveType,
+    type: types.SET_MENU_ACTIVE_TYPE,
     payload
 })

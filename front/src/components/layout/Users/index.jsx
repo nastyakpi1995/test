@@ -1,7 +1,6 @@
 import React, {useEffect, useState} from "react";
 import HeaderWrapper from "../../common/header/HeaderWrapper";
 import {useDispatch, useSelector} from "react-redux";
-import {useNavigate} from "react-router-dom";
 import styled from "styled-components";
 
 import User from "./User";

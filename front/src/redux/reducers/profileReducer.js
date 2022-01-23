@@ -3,15 +3,18 @@ import {initialProfileValues} from "../../utils/constants";
 export const profileTypes = {
     SET_LOADER_PROFILE_TYPE: 'SET_LOADER_PROFILE_TYPE',
     SET_OPEN_MODAL_PROFILE_TYPE: 'SET_OPEN_MODAL_PROFILE_TYPE',
-    setActiveProfileType: 'setActiveProfileType',
+    SET_ACTIVE_PROFILE_TYPE: 'SET_ACTIVE_PROFILE_TYPE',
 
-    getProfilesType: 'getProfilesType',
-    successGetProfilesType: 'successGetProfilesType',
-    errorGetProfilesType: 'errorGetProfilesType',
+    // GET PROFILES
+    GET_PROFILES_TYPE: 'GET_PROFILES_TYPE',
+    SUCCESS_GET_PROFILES_TYPE: 'SUCCESS_GET_PROFILES_TYPE',
+    ERROR_GET_PROFILES_TYPE: 'ERROR_GET_PROFILES_TYPE',
 
+    // PROFILE
     profileType: 'profileType',
-    successProfileType: 'successProfileType',
-    errorProfileType: 'errorProfileType',
+    PROFILE_TYPE: 'PROFILE_TYPE',
+    SUCCESS_PROFILE_TYPE: 'SUCCESS_PROFILE_TYPE',
+    ERROR_PROFILE_TYPE: 'ERROR_PROFILE_TYPE',
 
     // get user Data by id
     GET_USER_DATA_BY_ID: 'GET_USER_DATA_BY_ID',
@@ -41,7 +44,7 @@ const profileReducer = (state= initialState, action) => {
                 isOpenModalProfile: action.payload
             }
         }
-        case profileTypes.setActiveProfileType: {
+        case profileTypes.SET_ACTIVE_PROFILE_TYPE: {
             return {
                 ...state,
                 activeProfile: action.payload
@@ -56,13 +59,13 @@ const profileReducer = (state= initialState, action) => {
         }
 
         // get profiles
-        case profileTypes.getProfilesType: {
+        case profileTypes.GET_PROFILES_TYPE: {
             return {
                 ...state,
                 loadingGetProfiles: true
             }
         }
-        case profileTypes.successGetProfilesType: {
+        case profileTypes.SUCCESS_GET_PROFILES_TYPE: {
             return {
                 ...state,
                 loadingGetProfiles: false,
@@ -70,7 +73,7 @@ const profileReducer = (state= initialState, action) => {
                 loadingProfile: false,
             }
         }
-        case profileTypes.errorGetProfilesType: {
+        case profileTypes.ERROR_GET_PROFILES_TYPE: {
             return {
                 ...state,
                 loadingGetProfiles: false,
@@ -79,21 +82,21 @@ const profileReducer = (state= initialState, action) => {
         }
 
         // put profile
-        case profileTypes.profileType: {
+        case profileTypes.PROFILE_TYPE: {
             return {
                 ...state,
                 loadingProfile: true
             }
         }
 
-        case profileTypes.successProfileType: {
+        case profileTypes.SUCCESS_PROFILE_TYPE: {
             return {
                 ...state,
                 isOpenModalProfile: false,
                 activeProfile: initialProfileValues
             }
         }
-        case profileTypes.errorProfileType: {
+        case profileTypes.ERROR_PROFILE_TYPE: {
             return {
                 ...state,
                 loadingProfile: false
@@ -138,7 +141,7 @@ export const setIsOpenModalCreator = (payload) => ({
 })
 
 export const setActiveProfileCreator = (profile) => ({
-    type: profileTypes.setActiveProfileType,
+    type: profileTypes.SET_ACTIVE_PROFILE_TYPE,
     payload: profile
 })
 export const setLoaderProfileCreator = () => ({
@@ -147,28 +150,28 @@ export const setLoaderProfileCreator = () => ({
 
 // get Profiles
 export const getProfilesCreator = () => ({
-    type: profileTypes.getProfilesType
+    type: profileTypes.GET_PROFILES_TYPE
 })
 export const successGetProfilesCreator = (profiles) => ({
-    type: profileTypes.successGetProfilesType,
+    type: profileTypes.SUCCESS_GET_PROFILES_TYPE,
     payload: profiles
 })
 export const errorGetProfilesCreator = () => ({
-    type: profileTypes.errorGetProfilesType
+    type: profileTypes.ERROR_GET_PROFILES_TYPE
 })
 
 // put Profiles
 export const profileCreator = (values) => ({
-    type: profileTypes.profileType,
+    type: profileTypes.PROFILE_TYPE,
     values
 })
 
 export const successProfileCreator = () => ({
-    type: profileTypes.successProfileType,
+    type: profileTypes.SUCCESS_PROFILE_TYPE,
 })
 
 export const errorProfileCreator = () => ({
-    type: profileTypes.errorProfileType
+    type: profileTypes.ERROR_PROFILE_TYPE
 })
 
 

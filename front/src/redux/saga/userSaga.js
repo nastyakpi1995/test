@@ -27,8 +27,8 @@ function* userRequestAsync({id, values}) {
 
 function* userAsync() {
     yield all([
-        takeEvery(userTypes.getUsersType, getUsersRequestAsync),
-        takeEvery(userTypes.userType, userRequestAsync)
+        takeEvery(userTypes.GET_USERS_TYPE, getUsersRequestAsync),
+        takeEvery(userTypes.USER_TYPE, userRequestAsync)
     ])
 }
 

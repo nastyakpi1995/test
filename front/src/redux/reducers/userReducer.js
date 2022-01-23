@@ -2,18 +2,19 @@ import {savedUser} from "../../utils/constants";
 
 export const userTypes = {
     setUserType: 'setUserType',
-    setUsersLoadingType: 'getUsersLoadingType',
-    toggleUserModalType: 'toggleUserModalType',
+    SET_USER_TYPE: 'SET_USER_TYPE',
+    SET_USERS_LOADING_TYPE: 'SET_USERS_LOADING_TYPE',
+    TOGGLE_USER_MODAL_TYPE: 'TOGGLE_USER_MODAL_TYPE',
 
     // get Users
-    getUsersType: 'getUsersType',
-    successGetUsersType: 'successGetUsersType',
-    errorGetUsersType: 'errorGetUsersType',
+    GET_USERS_TYPE: 'GET_USERS_TYPE',
+    SUCCESS_GET_USERS_TYPE: 'SUCCESS_GET_USERS_TYPE',
+    ERROR_GET_USERS_TYPE: 'ERROR_GET_USERS_TYPE',
 
     // put user
-    userType: 'putUserType',
-    successUserType: 'successPutUserType',
-    errorUserType: 'errorPutUserType',
+    USER_TYPE: 'USER_TYPE',
+    SUCCESS_USER_TYPE: 'SUCCESS_USER_TYPE',
+    ERROR_USER_TYPE: 'ERROR_USER_TYPE'
 }
 
 const initialState = {
@@ -34,20 +35,20 @@ const userReducer = (state= initialState, action) => {
         }
 
         // get users
-        case userTypes.getUsersType: {
+        case userTypes.GET_USERS_TYPE: {
             return {
                 ...state,
                 loadingGetUsers: true,
             }
         }
-        case userTypes.successGetUsersType: {
+        case userTypes.SUCCESS_GET_USERS_TYPE: {
             return {
                 ...state,
                 users: action.payload,
                 loadingGetUsers: false
             }
         }
-        case userTypes.errorGetUsersType: {
+        case userTypes.ERROR_GET_USERS_TYPE: {
             return {
                 ...state,
                 loadingGetUsers: false
@@ -55,33 +56,33 @@ const userReducer = (state= initialState, action) => {
         }
 
         // put user
-        case userTypes.userType: {
+        case userTypes.USER_TYPE: {
             return {
                 ...state,
                 loadingPutUser: true
             }
         }
-        case userTypes.successUserType: {
+        case userTypes.SUCCESS_USER_TYPE: {
             return {
                 ...state,
                 loadingPutUser: false,
                 isModalVisible: !state.isModalVisible
             }
         }
-        case userTypes.errorUserType: {
+        case userTypes.ERROR_USER_TYPE: {
             return {
                 ...state,
                 loadingPutUser: false,
             }
         }
         // Loading
-        case userTypes.setUsersLoadingType: {
+        case userTypes.SET_USERS_LOADING_TYPE: {
             return {
                 ...state,
                 loadingGetUsers: false
             }
         }
-        case userTypes.toggleUserModalType:
+        case userTypes.TOGGLE_USER_MODAL_TYPE:
             return {
                 ...state,
                 isModalVisible: !state.isModalVisible
@@ -98,37 +99,37 @@ export const setUserCreator = (user) => ({
     payload: user
 })
 export const setUsersLoadingCreator = () => ({
-    type: userTypes.setUsersLoadingType,
+    type: userTypes.SET_USERS_LOADING_TYPE,
 })
 
 // modal user
 export const toggleModalUser = () => ({
-    type: userTypes.toggleUserModalType
+    type: userTypes.TOGGLE_USER_MODAL_TYPE
 })
 
 // get users
 export const getUsersCreator = () => ({
-    type: userTypes.getUsersType,
+    type: userTypes.GET_USERS_TYPE,
 })
 export const successGetUsersCreator = (users) => ({
-    type: userTypes.successGetUsersType,
+    type: userTypes.SUCCESS_GET_USERS_TYPE,
     payload: users
 })
 export const errorGetUsersCreator = () => ({
-    type: userTypes.errorGetUsersType
+    type: userTypes.ERROR_GET_USERS_TYPE
 })
 
 // put user
 export const userCreator = (values, id) => ({
-    type: userTypes.userType,
+    type: userTypes.USER_TYPE,
     values,
     id
 })
 export const successUserCreator = () => ({
-    type: userTypes.successUserType,
+    type: userTypes.SUCCESS_USER_TYPE,
 })
-export const errorUserCreator = (users) => ({
-    type: userTypes.errorUserType
+export const errorUserCreator = () => ({
+    type: userTypes.ERROR_USER_TYPE
 })
 
 export default userReducer

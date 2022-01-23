@@ -7,6 +7,7 @@ import deleteImgWhiteIcon from "../../images/icons/deleteImgWhiteIcon.svg"
 import edit from "../../images/icons/editIcon.svg"
 import editWhiteIcon from "../../images/icons/editWhiteIcon.svg"
 import {
+    profileCreator,
     setActiveProfileCreator,
     toggleIsOpenModalCreator,
     toggleLoaderProfileCreator
@@ -15,6 +16,7 @@ import {CardInfo, CardTitle, CardTop, MyCard} from "../../styles/common";
 import styled from "styled-components";
 import {getTheme} from "../../redux/selects/auth";
 import {theme} from "../../styles/theme";
+import moment from "moment";
 
 const buttonDataExample = (tempTheme, onDeleteProfile, onEditProfile) => {
     const isDark = tempTheme === 'dark';
@@ -33,13 +35,16 @@ const ProfileCardInner = ({profile}) => {
         dispatch(toggleIsOpenModalCreator())
         dispatch(setActiveProfileCreator(profile))
     }, [])
+
+
     const onDeleteProfile = useCallback(()  => {
-        deleteProfileAxiosRequest(id).then(data => {
-            dispatch(setMessageDataCreator(data))
-            if (data.success) {
-                dispatch(toggleLoaderProfileCreator())
-            }
-        })
+        const prepareValues = {
+            id,
+            method: 'delete',
+            url: 'delete'
+        }
+
+        dispatch(profileCreator(prepareValues))
     }, [])
 
 

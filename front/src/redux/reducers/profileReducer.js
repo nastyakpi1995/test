@@ -77,7 +77,7 @@ const profileReducer = (state= initialState, action) => {
         case profileTypes.successProfileType: {
             return {
                 ...state,
-                isOpenModalProfile: !state.isOpenModalProfile,
+                isOpenModalProfile: false,
                 activeProfile: initialProfileValues
             }
         }

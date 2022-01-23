@@ -1,35 +1,18 @@
-import React, {useEffect, useState} from "react";
+import React, {useEffect} from "react";
 import HeaderWrapper from "../../common/header/HeaderWrapper";
-import {adminDashboardAxiosRequest} from "../../../utils/apiCaller";
-import {useDispatch} from "react-redux";
-import {setMessageDataCreator} from "../../../redux/reducers/authReducer";
+import {useDispatch, useSelector} from "react-redux";
 import styled from "styled-components";
-import { Row} from "antd";
+import {Row} from "antd";
 import DashboardCard from "./DashboardCard";
-
-const getCurrentTitle = (name) => {
-    switch (name) {
-        case "users":
-            return "Users: "
-        case "profiles":
-            return "Profiles: "
-        case "adult":
-            return "Profiles over 18 years old: "
-        default:
-            return ''
-    }
-}
+import {getDashboardDataCreator} from "../../../redux/reducers/dashboardReducer";
+import {getCurrentTitle} from "../../../utils/constants";
 
 const Dashboard = () => {
-    const [dashboard,setDashboard] = useState([])
     const dispatch = useDispatch();
+    const dashboard = useSelector(state => state.dashboard.dashboardData)
 
     useEffect(() => {
-        adminDashboardAxiosRequest().then(({data}) => {
-            setDashboard(data.data)
-        }).catch(({response}) => {
-            dispatch(setMessageDataCreator(response.data))
-        })
+        dispatch(getDashboardDataCreator())
     }, [])
 
     return (

@@ -7,6 +7,7 @@ import {theme} from "../../../styles/theme";
 
 const DashboardCard = ({name, count}) => {
     const tempTheme = useSelector((state) => getTheme(state))
+
     return (
         <SDashboard temp={tempTheme}>
             <SCard>

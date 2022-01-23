@@ -6,11 +6,10 @@ import styled from "styled-components";
 
 import User from "./User";
 import EditModalUser from "./EditModalUser";
-import {initialUserValues, links} from "../../../utils/constants";
+import {initialUserValues} from "../../../utils/constants";
 import UserByIdProfiles from "./UserByIdProfiles";
 import {
     getUsersCreator,
-    setUsersLoadingCreator,
     toggleModalUser,
     userCreator
 } from "../../../redux/reducers/userReducer";
@@ -18,8 +17,6 @@ import {
 const Users = () => {
     const [activeEditUser, setActiveEditUser] = useState(initialUserValues)
     const [chooseUserId, setChooseUserId] = useState(false)
-
-    const navigator = useNavigate()
     const dispatch = useDispatch()
 
     const users = useSelector(state => state.user.users)

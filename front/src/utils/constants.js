@@ -35,3 +35,16 @@ export const prepareMessageData = {
     message: 'you log out successfully',
     success: 'success'
 }
+
+export const getCurrentTitle = (name) => {
+    switch (name) {
+        case "users":
+            return "Users: "
+        case "profiles":
+            return "Profiles: "
+        case "adult":
+            return "Profiles over 18 years old: "
+        default:
+            return ''
+    }
+}

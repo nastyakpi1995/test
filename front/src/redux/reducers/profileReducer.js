@@ -1,37 +1,93 @@
 import {initialProfileValues} from "../../utils/constants";
 
-const types = {
+export const profileTypes = {
     toggleLoaderProfileType: 'toggleLoaderProfileType',
     toggleOpenModalProfileType: 'toggleOpenModalProfile',
-    setActiveProfileType: 'setActiveProfileType'
+    setActiveProfileType: 'setActiveProfileType',
+
+    getProfilesType: 'getProfilesType',
+    successGetProfilesType: 'successGetProfilesType',
+    errorGetProfilesType: 'errorGetProfilesType',
+
+    profileType: 'profileType',
+    successProfileType: 'successProfileType',
+    errorProfileType: 'errorProfileType'
 }
 
 const initialState = {
     isOpenModalProfile: false,
     activeProfile: initialProfileValues,
-    isLoader: false
+    loadingGetProfiles: false,
+    loadingProfile: false,
+    profiles: []
 }
 
 const profileReducer = (state= initialState, action) => {
     switch (action.type) {
-        case types.toggleOpenModalProfileType: {
+        case profileTypes.toggleOpenModalProfileType: {
             return {
                 ...state,
                 isOpenModalProfile: !state.isOpenModalProfile
             }
         }
-        case types.setActiveProfileType: {
+        case profileTypes.setActiveProfileType: {
             return {
                 ...state,
                 activeProfile: action.payload
             }
         }
-        case types.toggleLoaderProfileType: {
+        case profileTypes.toggleLoaderProfileType: {
             return {
                 ...state,
-                isLoader: !state.isLoader
+                loadingGetProfiles: !state.loadingGetProfiles
             }
         }
+
+        // get profiles
+        case profileTypes.getProfilesType: {
+            return {
+                ...state,
+                loadingGetProfiles: true
+            }
+        }
+        case profileTypes.successGetProfilesType: {
+            return {
+                ...state,
+                loadingGetProfiles: false,
+                profiles: action.payload,
+                loadingProfile: false,
+            }
+        }
+        case profileTypes.errorGetProfilesType: {
+            return {
+                ...state,
+                loadingGetProfiles: false,
+                loadingProfile: false,
+            }
+        }
+
+        // put profile
+        case profileTypes.profileType: {
+            return {
+                ...state,
+                loadingProfile: true
+            }
+        }
+
+        case profileTypes.successProfileType: {
+            return {
+                ...state,
+                isOpenModalProfile: !state.isOpenModalProfile,
+                activeProfile: initialProfileValues
+            }
+        }
+        case profileTypes.errorProfileType: {
+            return {
+                ...state,
+                loadingProfile: false
+            }
+        }
+
         default: {
             return state
         }
@@ -39,15 +95,41 @@ const profileReducer = (state= initialState, action) => {
 }
 
 export const toggleIsOpenModalCreator = () => ({
-    type: types.toggleOpenModalProfileType,
+    type: profileTypes.toggleOpenModalProfileType,
 })
 
 export const setActiveProfileCreator = (profile) => ({
-    type: types.setActiveProfileType,
+    type: profileTypes.setActiveProfileType,
     payload: profile
 })
 export const toggleLoaderProfileCreator = () => ({
-    type: types.toggleLoaderProfileType,
+    type: profileTypes.toggleLoaderProfileType,
+})
+
+// get Profiles
+export const getProfilesCreator = () => ({
+    type: profileTypes.getProfilesType
+})
+export const successGetProfilesCreator = (profiles) => ({
+    type: profileTypes.successGetProfilesType,
+    payload: profiles
+})
+export const errorGetProfilesCreator = () => ({
+    type: profileTypes.errorGetProfilesType
+})
+
+// put Profiles
+export const profileCreator = (values) => ({
+    type: profileTypes.profileType,
+    values
+})
+
+export const successProfileCreator = () => ({
+    type: profileTypes.successProfileType,
+})
+
+export const errorProfileCreator = () => ({
+    type: profileTypes.errorProfileType
 })
 
 export default profileReducer

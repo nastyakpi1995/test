@@ -3,9 +3,13 @@ import {savedUser} from "../../utils/constants";
 export const userTypes = {
     setUserType: 'setUserType',
     setUsersLoadingType: 'getUsersLoadingType',
+
+    // get Users
     getUsersType: 'getUsersType',
     successGetUsersType: 'successGetUsersType',
     errorGetUsersType: 'errorGetUsersType',
+
+    // put user
     putUserType: 'putUserType',
     successPutUserType: 'successPutUserType',
     errorPutUserType: 'errorPutUserType',
@@ -61,7 +65,6 @@ const userReducer = (state= initialState, action) => {
             return {
                 ...state,
                 loadingPutUser: false,
-                loadingGetUsers: true,
                 isModalVisible: !state.isModalVisible
             }
         }
@@ -121,9 +124,8 @@ export const putUserCreator = (values, id) => ({
     values,
     id
 })
-export const successPutUserCreator = (user) => ({
+export const successPutUserCreator = () => ({
     type: userTypes.successPutUserType,
-    payload: user
 })
 export const errorPutUserCreator = (users) => ({
     type: userTypes.errorPutUserType

@@ -20,15 +20,15 @@ const Users = () => {
     const dispatch = useDispatch()
 
     const users = useSelector(state => state.user.users)
+    const loadingPutUser = useSelector(state => state.user.loadingPutUser)
     const loadingGetUsers = useSelector(state => state.user.loadingGetUsers)
     const isModalVisible = useSelector(state => state.user.isModalVisible)
 
     useEffect(() => {
-        if (loadingGetUsers) {
+        if (loadingPutUser) {
             dispatch(getUsersCreator())
-            dispatch(setUsersLoadingCreator())
         }
-    }, [loadingGetUsers])
+    }, [loadingPutUser])
 
     useEffect(() => {
         dispatch(getUsersCreator())
@@ -47,6 +47,8 @@ const Users = () => {
             }
         })
     }
+
+    if (loadingGetUsers) return <div>loader users</div>
     return <HeaderWrapper>
         <EditModalUser isVisible={isModalVisible}
                        activeEditUser={activeEditUser}

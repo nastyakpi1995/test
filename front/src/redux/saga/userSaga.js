@@ -6,8 +6,7 @@ import {
 } from "../reducers/userReducer";
 import {request} from "../../utils/apiCaller";
 
-
-function* getUsersAsync() {
+function* getUsersRequestAsync() {
     try {
         const users = yield call(request, '/admin/users', 'get')
         yield put(successGetUsersCreator(users.data.users))
@@ -16,11 +15,10 @@ function* getUsersAsync() {
     }
 }
 
-function* putUserAsync({id, values}) {
+function* putUserRequestAsync({id, values}) {
     try {
-       const user = yield call(request, `/admin/user/${id}`, 'put', values)
-
-        yield put(successPutUserCreator(user))
+        yield call(request, `/admin/user/${id}`, 'put', values)
+        yield put(successPutUserCreator())
     } catch (e) {
         yield put(errorPutUserCreator())
     }
@@ -29,8 +27,8 @@ function* putUserAsync({id, values}) {
 
 function* userAsync() {
     yield all([
-        takeEvery(userTypes.getUsersType, getUsersAsync),
-        takeEvery(userTypes.putUserType, putUserAsync)
+        takeEvery(userTypes.getUsersType, getUsersRequestAsync),
+        takeEvery(userTypes.putUserType, putUserRequestAsync)
     ])
 }
 

@@ -1,12 +1,10 @@
 import React, {useCallback, useEffect, useMemo, useState} from "react";
 import {Form} from "antd";
 import {useDispatch, useSelector} from "react-redux";
-import {createProfilesAxiosRequest, editProfileAxiosRequest} from "../../../../utils/apiCaller";
-import {setMessageDataCreator} from "../../../../redux/reducers/authReducer";
 import {
+    profileCreator,
     setActiveProfileCreator,
     toggleIsOpenModalCreator,
-    toggleLoaderProfileCreator
 } from "../../../../redux/reducers/profileReducer";
 import moment from "moment";
 import {initialProfileValues} from "../../../../utils/constants";
@@ -18,32 +16,18 @@ const getTitle = (id, name) => {
 }
 
 const ContainerProfileModal = () => {
-    const [confirmLoading, setConfirmLoading] = useState(false)
     const isOpenModalProfile = useSelector(state => state.profile.isOpenModalProfile)
     const activeProfile = useSelector(state => state.profile.activeProfile)
-    const title = useMemo(() => getTitle(activeProfile.id, activeProfile.name), [activeProfile])
+    const loadingProfile = useSelector(state => state.profile.loadingProfile)
+    const title = useMemo(() => getTitle(activeProfile.id, activeProfile.name),[activeProfile])
 
     const [form] = Form.useForm()
     const dispatch = useDispatch();
-
-    const onDataSuccess = useCallback((data) => {
-        dispatch(setMessageDataCreator(data))
-        if (data.success) {
-            dispatch(toggleIsOpenModalCreator())
-            dispatch(toggleLoaderProfileCreator())
-            dispatch(setActiveProfileCreator(initialProfileValues))
-            form.setFieldsValue(activeProfile)
-        }
-        setConfirmLoading(false)
-    }, [])
 
     useEffect(() => {
         if (activeProfile) {
             const formatDate = {...activeProfile, birthdate:getFormatedData(activeProfile.birthdate)}
             form.setFieldsValue(formatDate)
-        }
-        return () => {
-            setConfirmLoading(false)
         }
     }, [activeProfile])
 
@@ -51,29 +35,26 @@ const ContainerProfileModal = () => {
         dispatch(setActiveProfileCreator(initialProfileValues))
         form.setFieldsValue(activeProfile)
         dispatch(toggleIsOpenModalCreator())
-
     }, [])
 
-    const applyUserAction = (onActionFunction, values) => {
-        onActionFunction(values).then(data => {
-            onDataSuccess(data)
-        })
-    }
     const onFinish = (values) => {
         const prepareValues = {
             ...values,
             birthdate: moment(new Date(values.birthdate)).format("DD.MM.YYYY"),
-            userId: activeProfile.currentUserId
+            id: activeProfile.currentUserId,
+            method: 'post',
+            url: 'create'
         }
-        setConfirmLoading(true)
         if (!activeProfile.id) {
-            applyUserAction(createProfilesAxiosRequest, prepareValues)
+            dispatch(profileCreator(prepareValues))
         } else {
             const prepareData = {
                 ...prepareValues,
-                id: activeProfile.id
+                id: activeProfile.id,
+                method: 'put',
+                url: 'edit'
             }
-            applyUserAction(editProfileAxiosRequest, prepareData)
+            dispatch(profileCreator(prepareData))
         }
     }
 
@@ -86,7 +67,7 @@ const ContainerProfileModal = () => {
     return (
         <ProfileModal
             title={title}
-            confirmLoading={confirmLoading}
+            confirmLoading={loadingProfile}
             isOpenModalProfile={isOpenModalProfile}
             handleCancel={handleCancel}
             activeProfile={activeProfile}

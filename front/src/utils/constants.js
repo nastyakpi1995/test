@@ -29,11 +29,7 @@ export const links = {
 }
 
 export const SLIDING_TIMEOUT = 8000;
-
-export const prepareMessageDataFailed = {
-    message: 'you server not start',
-    success: false
-}
+export const BASE_URL = 'http://localhost:4002'
 
 export const prepareMessageData = {
     message: 'you log out successfully',

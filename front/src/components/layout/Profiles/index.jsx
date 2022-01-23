@@ -1,12 +1,11 @@
-import React, { useEffect, useState} from "react";
+import React, { useEffect} from "react";
 import HeaderWrapper from "../../common/header/HeaderWrapper";
 import NewProfile from "./NewProfile";
 import ProfileCard from "../../common/ProfileCard";
-import {getProfilesAxiosRequest} from "../../../utils/apiCaller";
 import {
+    getProfilesCreator,
     setActiveProfileCreator,
     toggleIsOpenModalCreator,
-    toggleLoaderProfileCreator
 } from "../../../redux/reducers/profileReducer";
 import {useDispatch, useSelector} from "react-redux";
 import styled from "styled-components";
@@ -16,6 +15,10 @@ import ContainerProfileModal from "./ProfileModal/ContianerProfileModal";
 const Profiles = () => {
     const dispatch = useDispatch();
     const userId = useSelector((state) => state.user.user.id)
+    const profiles = useSelector((state) => state.profile.profiles)
+    const loadingGetProfiles = useSelector(state => state.profile.loadingGetProfiles)
+    const loadingProfile = useSelector(state => state.profile.loadingProfile)
+
     const onCreateProfile = () => {
         const prepareActiveProfile = {
             ...initialProfileValues,
@@ -25,25 +28,17 @@ const Profiles = () => {
         dispatch(toggleIsOpenModalCreator())
     }
 
-    const isLoader = useSelector(state => state.profile.isLoader)
-    const [profiles, setProfiles] = useState([])
-
     useEffect(() => {
-        if (isLoader) {
-            getProfilesAxiosRequest().then(({data}) => {
-                setProfiles(data)
-                dispatch(toggleLoaderProfileCreator())
-            })
+        if (loadingProfile) {
+            dispatch(getProfilesCreator())
         }
-    }, [isLoader])
+    }, [loadingProfile])
 
     useEffect(() => {
-        getProfilesAxiosRequest().then(({data}) => {
-            setProfiles(data)
-        })
+        dispatch(getProfilesCreator())
     }, [])
 
-    if (isLoader) return <div>loader</div>
+    if (loadingGetProfiles) return <div>loader</div>
 
     return (
         <HeaderWrapper>

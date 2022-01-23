@@ -1,10 +1,10 @@
 import axios from "axios";
-import {authToken, savedUser} from "./constants";
+import {authToken, BASE_URL, savedUser} from "./constants";
 import {notification} from "antd";
-const baseUrl = 'http://localhost:4002'
+
 
 const requestAxios = axios.create({
-    baseURL: baseUrl,
+    baseURL: BASE_URL,
 });
 
 const getHeaders = () => {
@@ -53,6 +53,7 @@ export const request = (url, method, values) => {
         method,
         data: values
     }
+
     return requestAxios({
         url,
         ...options
@@ -60,7 +61,7 @@ export const request = (url, method, values) => {
 }
 
 export const registerAxiosRequest = (values) => {
-    return axios.post(`${baseUrl}/api/user/register`, {...values}).then(({data}) => {
+    return axios.post(`${BASE_URL}/api/user/register`, {...values}).then(({data}) => {
         return data
     }).catch((data) => {
         const prepareData = {
@@ -73,7 +74,7 @@ export const registerAxiosRequest = (values) => {
 }
 
 export const loginAxiosRequest = (body) => {
-    return axios.post(`${baseUrl}/api/user/login`, {...body}).then(data => {
+    return axios.post(`${BASE_URL}/api/user/login`, {...body}).then(data => {
         if (data.data.token) {
             localStorage.setItem(savedUser, JSON.stringify(data.data.user))
             localStorage.setItem(authToken, data.data.token)
@@ -89,39 +90,20 @@ export const loginAxiosRequest = (body) => {
     })
 }
 
-export const createProfilesAxiosRequest = (body) => {
-    return axios.post(`${baseUrl}/private/profile/create/${body.userId}`, {...body}, {headers: getHeaders()}).then(data => {
-        return data.data
-    }).catch(({response}) =>  response.data)
-}
-
-export const getProfilesAxiosRequest = () => {
-    return axios.get(`${baseUrl}/private/profiles`,  {headers: getHeaders()}).then(data => {
-        return data.data
-    }).catch(data => {
-        console.log(data)
-    })
-}
-
-export const editProfileAxiosRequest = (body) => {
-    return axios.put(`${baseUrl}/private/profile/edit/${body.id}`, {...body}, {headers: getHeaders()}).then(data => {
-        return data.data
-    }).catch(({response}) =>  response.data)
-}
 export const deleteProfileAxiosRequest = (id) => {
-    return axios.delete(`${baseUrl}/private/profile/delete/${id}`, {headers: getHeaders()}).then(data => {
+    return axios.delete(`${BASE_URL}/private/profile/delete/${id}`, {headers: getHeaders()}).then(data => {
         return data.data
     }).catch((response) =>  response.data)
 }
 export const adminDashboardAxiosRequest = () => {
-    return axios.get(`${baseUrl}/admin/dashboard`, {headers: getHeaders()})
+    return axios.get(`${BASE_URL}/admin/dashboard`, {headers: getHeaders()})
 }
 export const getUserDataById = (userId) => {
-    return axios.get(`${baseUrl}/admin/user/${userId}`, {headers: getHeaders()})
+    return axios.get(`${BASE_URL}/admin/user/${userId}`, {headers: getHeaders()})
 }
 
 export const deleteUserAxiosRequest = (id) => {
-    return axios.delete(`${baseUrl}/admin/user/${id}`, {headers: getHeaders()}).then(data => {
+    return axios.delete(`${BASE_URL}/admin/user/${id}`, {headers: getHeaders()}).then(data => {
         return data.data
     }).catch((response) =>  response.data)
 }

@@ -7,20 +7,14 @@ import editWhiteIcon from "../../images/icons/editWhiteIcon.svg"
 import {
     profileCreator,
     setActiveProfileCreator,
-    toggleIsOpenModalCreator,
+    setIsOpenModalCreator,
 } from "../../redux/reducers/profileReducer";
 import {CardInfo, CardTitle, CardTop, MyCard} from "../../styles/common";
 import styled from "styled-components";
 import {getTheme} from "../../redux/selects/auth";
 import {theme} from "../../styles/theme";
+import {buttonDataExample} from "../../utils/constants";
 
-const buttonDataExample = (tempTheme, onDeleteProfile, onEditProfile) => {
-    const isDark = tempTheme === 'dark';
-
-    return [
-        {onClick: onDeleteProfile, id: 1, title: 'delete', icon: isDark ? deleteImgWhiteIcon :  deleteImg },
-        {onClick: onEditProfile, id: 2, title: 'edit', icon: isDark ? editWhiteIcon : edit}]
-}
 const ProfileCardInner = ({profile}) => {
     const { name, gender, birthdate, id } = profile;
     const dispatch = useDispatch()
@@ -28,7 +22,7 @@ const ProfileCardInner = ({profile}) => {
     const tempTheme = useSelector(state => getTheme(state))
 
     const onEditProfile = useCallback(() => {
-        dispatch(toggleIsOpenModalCreator())
+        dispatch(setIsOpenModalCreator(true))
         dispatch(setActiveProfileCreator(profile))
     }, [])
 

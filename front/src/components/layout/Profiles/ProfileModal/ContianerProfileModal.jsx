@@ -3,8 +3,7 @@ import {Form} from "antd";
 import {useDispatch, useSelector} from "react-redux";
 import {
     profileCreator,
-    setActiveProfileCreator, setIsClearFormCreator,
-    toggleIsOpenModalCreator,
+    setActiveProfileCreator, setIsOpenModalCreator,
 } from "../../../../redux/reducers/profileReducer";
 import moment from "moment";
 import {initialProfileValues} from "../../../../utils/constants";
@@ -16,7 +15,6 @@ const getTitle = (id, name) => {
 }
 
 const ContainerProfileModal = () => {
-    const isOpenModalProfile = useSelector(state => state.profile.isOpenModalProfile)
     const activeProfile = useSelector(state => state.profile.activeProfile)
     const loadingProfile = useSelector(state => state.profile.loadingProfile)
     const title = useMemo(() => getTitle(activeProfile.id, activeProfile.name),[activeProfile])
@@ -34,7 +32,7 @@ const ContainerProfileModal = () => {
     const handleCancel = useCallback(() => {
         dispatch(setActiveProfileCreator(initialProfileValues))
         form.setFieldsValue(activeProfile)
-        dispatch(toggleIsOpenModalCreator())
+        dispatch(setIsOpenModalCreator(false))
     }, [])
 
     const onFinish = (values) => {
@@ -67,7 +65,6 @@ const ContainerProfileModal = () => {
         <ProfileModal
             title={title}
             confirmLoading={loadingProfile}
-            isOpenModalProfile={isOpenModalProfile}
             handleCancel={handleCancel}
             activeProfile={activeProfile}
             onFinish={onFinish}

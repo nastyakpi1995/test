@@ -5,7 +5,7 @@ import {initialProfileValues} from "../../../utils/constants";
 import {
     getUserDataByIdCreator,
     setActiveProfileCreator,
-    toggleIsOpenModalCreator,
+    setIsOpenModalCreator,
     toggleLoaderProfileCreator
 } from "../../../redux/reducers/profileReducer";
 import styled from "styled-components";
@@ -37,7 +37,7 @@ const UserByIdProfiles = ({userId}) => {
             currentUserId: userId
         }
         dispatch(setActiveProfileCreator(prepareActiveProfile))
-        dispatch(toggleIsOpenModalCreator())
+        dispatch(setIsOpenModalCreator(true))
     }, [dispatch])
 
 

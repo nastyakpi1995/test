@@ -7,9 +7,10 @@ import {useSelector} from "react-redux";
 import {getTheme} from "../../../../redux/selects/auth";
 
 const ProfileModalInner = ({
-    confirmLoading, isOpenModalProfile, handleCancel, activeProfile, onFinish, form, onChange, title
+    confirmLoading, handleCancel, activeProfile, onFinish, form, onChange, title
 }) => {
     const tempTheme = useSelector(state => getTheme(state))
+    const isOpenModalProfile = useSelector(state => state.profile.isOpenModalProfile)
 
     return (
         <Drawer visible={isOpenModalProfile} onClose={handleCancel}>

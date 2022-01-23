@@ -5,7 +5,7 @@ import ProfileCard from "../../common/ProfileCard";
 import {
     getProfilesCreator,
     setActiveProfileCreator,
-    toggleIsOpenModalCreator,
+    setIsOpenModalCreator,
 } from "../../../redux/reducers/profileReducer";
 import {useDispatch, useSelector} from "react-redux";
 import styled from "styled-components";
@@ -25,7 +25,7 @@ const Profiles = () => {
             currentUserId: userId
         }
         dispatch(setActiveProfileCreator(prepareActiveProfile))
-        dispatch(toggleIsOpenModalCreator())
+        dispatch(setIsOpenModalCreator(true))
     }
 
     useEffect(() => {

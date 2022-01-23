@@ -1,6 +1,4 @@
 import React, {useCallback} from "react";
-import {deleteProfileAxiosRequest} from "../../utils/apiCaller";
-import {setMessageDataCreator} from "../../redux/reducers/authReducer";
 import {useDispatch, useSelector} from "react-redux";
 import deleteImg from "../../images/icons/DeleteIcon.svg"
 import deleteImgWhiteIcon from "../../images/icons/deleteImgWhiteIcon.svg"
@@ -10,13 +8,11 @@ import {
     profileCreator,
     setActiveProfileCreator,
     toggleIsOpenModalCreator,
-    toggleLoaderProfileCreator
 } from "../../redux/reducers/profileReducer";
 import {CardInfo, CardTitle, CardTop, MyCard} from "../../styles/common";
 import styled from "styled-components";
 import {getTheme} from "../../redux/selects/auth";
 import {theme} from "../../styles/theme";
-import moment from "moment";
 
 const buttonDataExample = (tempTheme, onDeleteProfile, onEditProfile) => {
     const isDark = tempTheme === 'dark';

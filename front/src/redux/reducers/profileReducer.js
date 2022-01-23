@@ -11,7 +11,15 @@ export const profileTypes = {
 
     profileType: 'profileType',
     successProfileType: 'successProfileType',
-    errorProfileType: 'errorProfileType'
+    errorProfileType: 'errorProfileType',
+
+    // get user Data by id
+    GET_USER_DATA_BY_ID: 'GET_USER_DATA_BY_ID',
+    SUCCESS_GET_USER_DATA_BY_ID: 'SUCCESS_GET_USER_DATA_BY_ID',
+    ERROR_GET_USER_DATA_BY_ID: 'SUCCESS_GET_USER_DATA_BY_ID',
+
+    // clear form
+    SET_CLEAR_FORM: 'SET_CLEAR_FORM'
 }
 
 const initialState = {
@@ -19,7 +27,10 @@ const initialState = {
     activeProfile: initialProfileValues,
     loadingGetProfiles: false,
     loadingProfile: false,
-    profiles: []
+    isClearForm: false,
+
+    profiles: [],
+    userDataById: []
 }
 
 const profileReducer = (state= initialState, action) => {
@@ -88,6 +99,32 @@ const profileReducer = (state= initialState, action) => {
             }
         }
 
+        // user profile by id
+        case profileTypes.GET_USER_DATA_BY_ID: {
+            return {
+                ...state,
+                // loadingProfile: true
+            }
+        }
+        case profileTypes.SUCCESS_GET_USER_DATA_BY_ID: {
+            return {
+                ...state,
+                loadingProfile: false,
+                userDataById: action.payload
+            }
+        }
+        case profileTypes.ERROR_GET_USER_DATA_BY_ID: {
+            return {
+                ...state,
+                loadingProfile: false
+            }
+        }
+        case profileTypes.SET_CLEAR_FORM: {
+            return {
+                ...state,
+                isClearForm: false
+            }
+        }
         default: {
             return state
         }
@@ -131,5 +168,22 @@ export const successProfileCreator = () => ({
 export const errorProfileCreator = () => ({
     type: profileTypes.errorProfileType
 })
+
+
+// get user Data by id
+export const getUserDataByIdCreator = (userId) => ({
+    type: profileTypes.GET_USER_DATA_BY_ID,
+    userId
+})
+
+export const successGetUserDataByIdCreator = (usersData) => ({
+    type: profileTypes.SUCCESS_GET_USER_DATA_BY_ID,
+    payload: usersData
+})
+
+export const errorGetUserDataByIdCreator = () => ({
+    type: profileTypes.ERROR_GET_USER_DATA_BY_ID
+})
+
 
 export default profileReducer

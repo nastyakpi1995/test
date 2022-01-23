@@ -1,9 +1,9 @@
-import React, {useState, useEffect, useCallback} from 'react';
+import React, {useEffect, useCallback} from 'react';
 import ProfileCard from "../../common/ProfileCard";
-import { getUserDataById} from "../../../utils/apiCaller";
 import {useDispatch, useSelector} from "react-redux";
 import {initialProfileValues} from "../../../utils/constants";
 import {
+    getUserDataByIdCreator,
     setActiveProfileCreator,
     toggleIsOpenModalCreator,
     toggleLoaderProfileCreator
@@ -13,25 +13,23 @@ import NewProfile from "../Profiles/NewProfile";
 import ContainerProfileModal from "../Profiles/ProfileModal/ContianerProfileModal";
 
 const UserByIdProfiles = ({userId}) => {
-    const [userData, setUserData] = useState({})
-    const isLoader = useSelector(state => state.profile.isLoader)
+    const loadingProfile = useSelector(state => state.profile.loadingProfile)
+    const userDataById = useSelector(state => state.profile.userDataById)
 
     const dispatch = useDispatch()
     const fetchGetUserDataById = () => {
-        getUserDataById(userId).then(({data}) => {
-            setUserData(data.userData)
-        })
+        dispatch(getUserDataByIdCreator(userId))
     }
     useEffect(() => {
         fetchGetUserDataById()
     }, [userId])
 
     useEffect(() => {
-        if (isLoader) {
+        if (loadingProfile) {
             fetchGetUserDataById()
             dispatch(toggleLoaderProfileCreator())
         }
-    }, [isLoader])
+    }, [loadingProfile])
 
     const onCreateProfile = useCallback(() => {
         const prepareActiveProfile = {
@@ -46,9 +44,8 @@ const UserByIdProfiles = ({userId}) => {
     return (
         <SProfiles>
             <ProfilesWrap>
-                {userData.userProfiles?.length >= 0 ? userData.userProfiles.map((profile, idx) => (
-                    <ProfileCard key={idx}
-                                 profile={profile}/>
+                {userDataById.userProfiles?.length >= 0 ? userDataById.userProfiles.map((profile, idx) => (
+                    <ProfileCard key={idx} profile={profile}/>
                 )) : null}
                 <NewProfile showModal={onCreateProfile} />
             </ProfilesWrap>

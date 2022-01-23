@@ -47,11 +47,11 @@ const checkStatus = (response, method) => {
     throw error
 }
 
-export const request = (url, method, values) => {
+export const request = (url, method, data) => {
     const options = {
         headers: getHeaders(),
         method,
-        data: values
+        data
     }
 
     return requestAxios({
@@ -90,6 +90,3 @@ export const loginAxiosRequest = (body) => {
     })
 }
 
-export const getUserDataById = (userId) => {
-    return axios.get(`${BASE_URL}/admin/user/${userId}`, {headers: getHeaders()})
-}

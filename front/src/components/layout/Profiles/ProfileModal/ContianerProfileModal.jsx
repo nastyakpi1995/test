@@ -3,7 +3,7 @@ import {Form} from "antd";
 import {useDispatch, useSelector} from "react-redux";
 import {
     profileCreator,
-    setActiveProfileCreator,
+    setActiveProfileCreator, setIsClearFormCreator,
     toggleIsOpenModalCreator,
 } from "../../../../redux/reducers/profileReducer";
 import moment from "moment";
@@ -62,7 +62,6 @@ const ContainerProfileModal = () => {
         const value = e.target.value;
         form.setFieldsValue({'name': value})
     }
-
 
     return (
         <ProfileModal

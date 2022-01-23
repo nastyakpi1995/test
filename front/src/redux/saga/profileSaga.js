@@ -1,8 +1,8 @@
 import {all, call, takeEvery, put} from "redux-saga/effects";
 import {
-    errorGetProfilesCreator, errorProfileCreator,
+    errorGetProfilesCreator, errorGetUserDataByIdCreator, errorProfileCreator,
     profileTypes,
-    successGetProfilesCreator, successProfileCreator,
+    successGetProfilesCreator, successGetUserDataByIdCreator, successProfileCreator,
 } from "../reducers/profileReducer";
 import {request} from "../../utils/apiCaller";
 
@@ -25,10 +25,21 @@ function* getProfilesRequestAsync () {
         yield put(errorGetProfilesCreator())
     }
 }
+function* getUserDataByIdRequestAsync ({userId}) {
+    try {
+        const userDataById = yield call(request, `/admin/user/${userId}`, 'get')
+
+        yield put(successGetUserDataByIdCreator(userDataById.data.userData))
+    } catch (e) {
+        yield put(errorGetUserDataByIdCreator())
+    }
+}
+
 function* profileAsync () {
     yield all([
         takeEvery(profileTypes.getProfilesType, getProfilesRequestAsync),
-        takeEvery(profileTypes.profileType, profileRequestAsync)
+        takeEvery(profileTypes.profileType, profileRequestAsync),
+        takeEvery(profileTypes.GET_USER_DATA_BY_ID, getUserDataByIdRequestAsync),
     ])
 }
 export default profileAsync

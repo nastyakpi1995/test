@@ -43,6 +43,7 @@ const ContainerProfileModal = () => {
             method: 'post',
             url: 'create'
         }
+
         if (!activeProfile.id) {
             dispatch(profileCreator(prepareValues))
         } else {

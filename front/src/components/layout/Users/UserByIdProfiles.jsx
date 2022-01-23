@@ -16,7 +16,8 @@ const UserByIdProfiles = ({userId}) => {
     const loadingProfile = useSelector(state => state.profile.loadingProfile)
     const userDataById = useSelector(state => state.profile.userDataById)
 
-    const dispatch = useDispatch()
+    const dispatch = useDispatch();
+
     const fetchGetUserDataById = () => {
         dispatch(getUserDataByIdCreator(userId))
     }
@@ -36,16 +37,22 @@ const UserByIdProfiles = ({userId}) => {
             ...initialProfileValues,
             currentUserId: userId
         }
+
         dispatch(setActiveProfileCreator(prepareActiveProfile))
         dispatch(setIsOpenModalCreator(true))
     }, [dispatch])
 
+    const onEditProfile = useCallback((profile) => {
+        dispatch(setIsOpenModalCreator(true))
+        dispatch(setActiveProfileCreator(profile))
+    }, [])
 
+    const a = userDataById.userProfiles
     return (
         <SProfiles>
             <ProfilesWrap>
                 {userDataById.userProfiles?.length >= 0 ? userDataById.userProfiles.map((profile, idx) => (
-                    <ProfileCard key={idx} profile={profile}/>
+                    <ProfileCard key={idx} profile={profile} onEditProfile={() => onEditProfile(profile)}/>
                 )) : null}
                 <NewProfile showModal={onCreateProfile} />
             </ProfilesWrap>

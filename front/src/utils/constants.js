@@ -52,10 +52,3 @@ export const getCurrentTitle = (name) => {
             return ''
     }
 }
-export const buttonDataExample = (tempTheme, onDeleteProfile, onEditProfile) => {
-    const isDark = tempTheme === 'dark';
-
-    return [
-        {onClick: onDeleteProfile, id: 1, title: 'delete', icon: isDark ? deleteImgWhiteIcon :  deleteImg },
-        {onClick: onEditProfile, id: 2, title: 'edit', icon: isDark ? editWhiteIcon : edit}]
-}

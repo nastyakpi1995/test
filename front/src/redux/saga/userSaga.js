@@ -1,7 +1,7 @@
 import {takeEvery, call, put, all} from 'redux-saga/effects'
 import {
-    errorGetUsersCreator, errorPutUserCreator,
-    successGetUsersCreator, successPutUserCreator,
+    errorGetUsersCreator, errorUserCreator,
+    successGetUsersCreator, successUserCreator,
     userTypes
 } from "../reducers/userReducer";
 import {request} from "../../utils/apiCaller";
@@ -15,12 +15,12 @@ function* getUsersRequestAsync() {
     }
 }
 
-function* putUserRequestAsync({id, values}) {
+function* userRequestAsync({id, values}) {
     try {
-        yield call(request, `/admin/user/${id}`, 'put', values)
-        yield put(successPutUserCreator())
+        yield call(request, `/admin/user/${id}`, values.method, values)
+        yield put(successUserCreator())
     } catch (e) {
-        yield put(errorPutUserCreator())
+        yield put(errorUserCreator())
     }
 }
 
@@ -28,7 +28,7 @@ function* putUserRequestAsync({id, values}) {
 function* userAsync() {
     yield all([
         takeEvery(userTypes.getUsersType, getUsersRequestAsync),
-        takeEvery(userTypes.putUserType, putUserRequestAsync)
+        takeEvery(userTypes.userType, userRequestAsync)
     ])
 }
 

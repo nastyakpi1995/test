@@ -3,6 +3,7 @@ import {savedUser} from "../../utils/constants";
 export const userTypes = {
     setUserType: 'setUserType',
     setUsersLoadingType: 'getUsersLoadingType',
+    toggleUserModalType: 'toggleUserModalType',
 
     // get Users
     getUsersType: 'getUsersType',
@@ -10,10 +11,9 @@ export const userTypes = {
     errorGetUsersType: 'errorGetUsersType',
 
     // put user
-    putUserType: 'putUserType',
-    successPutUserType: 'successPutUserType',
-    errorPutUserType: 'errorPutUserType',
-    toggleUserModalType: 'toggleUserModalType'
+    userType: 'putUserType',
+    successUserType: 'successPutUserType',
+    errorUserType: 'errorPutUserType',
 }
 
 const initialState = {
@@ -55,20 +55,20 @@ const userReducer = (state= initialState, action) => {
         }
 
         // put user
-        case userTypes.putUserType: {
+        case userTypes.userType: {
             return {
                 ...state,
                 loadingPutUser: true
             }
         }
-        case userTypes.successPutUserType: {
+        case userTypes.successUserType: {
             return {
                 ...state,
                 loadingPutUser: false,
                 isModalVisible: !state.isModalVisible
             }
         }
-        case userTypes.errorPutUserType: {
+        case userTypes.errorUserType: {
             return {
                 ...state,
                 loadingPutUser: false,
@@ -119,16 +119,16 @@ export const errorGetUsersCreator = () => ({
 })
 
 // put user
-export const putUserCreator = (values, id) => ({
-    type: userTypes.putUserType,
+export const userCreator = (values, id) => ({
+    type: userTypes.userType,
     values,
     id
 })
-export const successPutUserCreator = () => ({
-    type: userTypes.successPutUserType,
+export const successUserCreator = () => ({
+    type: userTypes.successUserType,
 })
-export const errorPutUserCreator = (users) => ({
-    type: userTypes.errorPutUserType
+export const errorUserCreator = (users) => ({
+    type: userTypes.errorUserType
 })
 
 export default userReducer

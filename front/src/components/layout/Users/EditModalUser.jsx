@@ -6,7 +6,7 @@ import Drawer from "../../common/Drawer";
 import {ButtonSubmit, SFormItemModal, SFormModal, SInputModal, STitleModal} from "../../../styles/common";
 import styled from "styled-components";
 import {getTheme} from "../../../redux/selects/auth";
-import {putUserCreator, toggleModalUser} from "../../../redux/reducers/userReducer";
+import {userCreator, toggleModalUser} from "../../../redux/reducers/userReducer";
 
 const EditModalUser = ({activeEditUser, setActiveEditUser}) => {
     const [form] = Form.useForm()
@@ -26,8 +26,13 @@ const EditModalUser = ({activeEditUser, setActiveEditUser}) => {
         setActiveEditUser(initialUserValues)
     }
 
-    const onFinish = (values) => {
-        dispatch(putUserCreator(values, activeEditUser.id))
+    const onFinish = async (values) => {
+        const prepareValues = {
+            ...values,
+            method: 'put'
+        }
+
+        dispatch(userCreator(prepareValues, activeEditUser.id))
     }
 
     return (

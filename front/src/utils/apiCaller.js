@@ -90,17 +90,10 @@ export const loginAxiosRequest = (body) => {
     })
 }
 
-
 export const adminDashboardAxiosRequest = () => {
     return axios.get(`${BASE_URL}/admin/dashboard`, {headers: getHeaders()})
 }
 
 export const getUserDataById = (userId) => {
     return axios.get(`${BASE_URL}/admin/user/${userId}`, {headers: getHeaders()})
-}
-
-export const deleteUserAxiosRequest = (id) => {
-    return axios.delete(`${BASE_URL}/admin/user/${id}`, {headers: getHeaders()}).then(data => {
-        return data.data
-    }).catch((response) =>  response.data)
 }

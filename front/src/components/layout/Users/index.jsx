@@ -1,7 +1,5 @@
 import React, {useEffect, useState} from "react";
 import HeaderWrapper from "../../common/header/HeaderWrapper";
-import {deleteUserAxiosRequest} from "../../../utils/apiCaller";
-import {setMessageDataCreator} from "../../../redux/reducers/authReducer";
 import {useDispatch, useSelector} from "react-redux";
 import {useNavigate} from "react-router-dom";
 import styled from "styled-components";
@@ -10,7 +8,12 @@ import User from "./User";
 import EditModalUser from "./EditModalUser";
 import {initialUserValues, links} from "../../../utils/constants";
 import UserByIdProfiles from "./UserByIdProfiles";
-import {getUsersCreator, setUsersLoadingCreator, toggleModalUser} from "../../../redux/reducers/userReducer";
+import {
+    getUsersCreator,
+    setUsersLoadingCreator,
+    toggleModalUser,
+    userCreator
+} from "../../../redux/reducers/userReducer";
 
 const Users = () => {
     const [activeEditUser, setActiveEditUser] = useState(initialUserValues)
@@ -39,13 +42,12 @@ const Users = () => {
         setActiveEditUser(user)
     }
 
-    const onDeleteUser = (id) => {
-        deleteUserAxiosRequest(id).then(data => {
-            dispatch(setMessageDataCreator(data))
-            if (data.success) {
-                navigator(links.users)
-            }
-        })
+    const onDeleteUser = async (id) => {
+        const options = {
+            method: 'delete'
+        }
+
+        dispatch(userCreator(options, id))
     }
 
     if (loadingGetUsers) return <div>loader users</div>

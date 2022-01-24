@@ -61,16 +61,3 @@ export const request = (url, method, data) => {
     }).then((data) => checkStatus(data, method)).catch(parserJSON)
 }
 
-export const registerAxiosRequest = (values) => {
-    return axios.post(`${BASE_URL}/api/user/register`, {...values}).then(({data}) => {
-        return data
-    }).catch((data) => {
-        const prepareData = {
-            data,
-            success: false,
-            message: data.response ? data.response.data.message : 'You can not login, server did not run'
-        }
-        return prepareData
-    })
-}
-

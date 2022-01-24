@@ -1,26 +1,25 @@
-import React, {useState} from "react";
+import React, {useEffect} from "react";
 import {Form, Checkbox} from "antd";
-import {registerAxiosRequest} from "../../../utils/apiCaller";
 import {useNavigate} from 'react-router-dom'
-import {useDispatch} from "react-redux";
-import {setMessageDataCreator} from "../../../redux/reducers/stateReducer";
+import {useDispatch, useSelector} from "react-redux";
 import {ButtonSubmit, ContainerForm, LinkToRegister, MyTitle, SForm, SInput, SInputPassport} from "../../../styles/common";
 import {links} from "../../../utils/constants";
+import {registerCreator, setIsSuccessRegister} from "../../../redux/reducers/authReducer";
 
 let Registration = () => {
     const dispatch = useDispatch()
     const navigate = useNavigate()
-    const [isLoader, setIsLoader] = useState(false)
+    const loadingRegister = useSelector((state) => state.auth.loadingRegister)
+    const isSuccessRegister = useSelector((state) => state.auth.isSuccessRegister)
 
+    useEffect(() => {
+        if (isSuccessRegister) {
+            navigate(links.login)
+            dispatch(setIsSuccessRegister())
+        }
+    }, [isSuccessRegister])
     const onFinish = async (values) => {
-        setIsLoader(true)
-        registerAxiosRequest(values).then((data) => {
-            dispatch(setMessageDataCreator(data))
-            setIsLoader(false)
-            if (data.success) {
-                navigate(links.login)
-            }
-        })
+        dispatch(registerCreator(values))
     };
 
     return (
@@ -65,7 +64,7 @@ let Registration = () => {
                 </Form.Item>
 
                 <Form.Item type="flex" justify="center">
-                    <ButtonSubmit loading={isLoader} className={'btnLogin'} htmlType="submit" >
+                    <ButtonSubmit loading={loadingRegister} className={'btnLogin'} htmlType="submit" >
                         Sign Up
                     </ButtonSubmit>
                 </Form.Item>

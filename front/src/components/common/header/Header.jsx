@@ -1,8 +1,8 @@
 import React, {useCallback} from "react";
 
-import {Link, useLocation, useNavigate} from "react-router-dom";
-import {authToken, links, prepareMessageData, savedUser} from "../../../utils/constants";
-import {setMessageDataCreator, setThemeCreator} from "../../../redux/reducers/stateReducer";
+import {Link, useNavigate} from "react-router-dom";
+import {authToken, links, savedUser} from "../../../utils/constants";
+import {setThemeCreator} from "../../../redux/reducers/stateReducer";
 import {useDispatch, useSelector} from "react-redux";
 import {setUserCreator} from "../../../redux/reducers/userReducer";
 import styled from "styled-components";
@@ -20,9 +20,8 @@ const HeaderContainer = () => {
 
     const currentUser = useSelector(state => state.user.user)
     const tempTheme = useSelector(state => getTheme(state))
-
+debugger
     const handleLogOut = useCallback(() => {
-        dispatch(setMessageDataCreator(prepareMessageData))
         localStorage.setItem(authToken, '')
         localStorage.removeItem(savedUser)
         dispatch(setUserCreator(null))

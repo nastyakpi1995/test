@@ -35,11 +35,6 @@ export const links = {
 export const SLIDING_TIMEOUT = 8000;
 export const BASE_URL = 'http://localhost:4002'
 
-export const prepareMessageData = {
-    message: 'you log out successfully',
-    success: 'success'
-}
-
 export const getCurrentTitle = (name) => {
     switch (name) {
         case "users":

@@ -24,7 +24,6 @@ function* userRequestAsync({id, values}) {
     }
 }
 
-
 function* userAsync() {
     yield all([
         takeEvery(userTypes.GET_USERS_TYPE, getUsersRequestAsync),

@@ -1,14 +1,16 @@
 import {applyMiddleware, combineReducers, createStore} from "redux";
-import authReducer from "./reducers/authReducer";
+import stateReducer from "./reducers/stateReducer";
 import profileReducer from "./reducers/profileReducer";
 import userReducer from "./reducers/userReducer";
 import createSagaMiddleware from 'redux-saga'
 import rootSaga from "./saga";
 import dashboardReducer from "./reducers/dashboardReducer";
+import authReducer from "./reducers/authReducer";
 
 const sagaMiddleware = createSagaMiddleware()
 
 const reducer = combineReducers({
+    state: stateReducer,
     auth: authReducer,
     profile: profileReducer,
     user: userReducer,

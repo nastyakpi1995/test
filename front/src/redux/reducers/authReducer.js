@@ -1,78 +1,71 @@
-const types = {
-    SET_MESSAGE_DATA_TYPE: 'SET_MESSAGE_DATA_TYPE',
-    SET_MESSAGE_DATA_DEFAULT_TYPE: 'SET_MESSAGE_DATA_DEFAULT_TYPE',
-    SET_TEMP_THEME_TYPE: 'SET_TEMP_THEME_TYPE',
-    SET_MENU_ACTIVE_TYPE: 'SET_MENU_ACTIVE_TYPE'
+import {initialProfileValues} from "../../utils/constants";
+
+export const authTypes = {
+    // LOGIN
+    LOGIN_TYPE: 'LOGIN_TYPE',
+    SUCCESS_LOGIN_TYPE: 'SUCCESS_LOGIN_TYPE',
+    ERROR_LOGIN_TYPE: 'ERROR_LOGIN_TYPE',
+
+    // is Success
+    SET_IS_SUCCESS_LOGIN_TYPE: 'SET_IS_SUCCESS_LOGIN_TYPE',
 }
 
-const initState = {
-    messageData: {
-        isVisible: false,
-        message: '',
-        type: 'success'
-    },
-    tempTheme: 'light',
-    menuActive: 'profiles'
+const initialState = {
+    loadingLogin: false,
+    isSuccessLogin: false
 }
 
-const authReducer = (state= initState, action) => {
+const authReducer = (state= initialState, action) => {
     switch (action.type) {
-        case types.SET_MESSAGE_DATA_TYPE: {
-            const {message, success} = action.messageData
+        // get profiles
+        case authTypes.LOGIN_TYPE: {
             return {
                 ...state,
-                messageData: {
-                    isVisible: true,
-                    message,
-                    type: success ? 'success' : 'error'
-                }
+                loadingLogin: true
             }
         }
-        case types.SET_MESSAGE_DATA_DEFAULT_TYPE: {
+        case authTypes.SUCCESS_LOGIN_TYPE: {
             return {
                 ...state,
-                messageData: {
-                    isVisible: false,
-                    message: '',
-                    type: action.typeData
-                }
+                loadingLogin: false,
+                isSuccessLogin: true
             }
         }
-
-        case types.SET_TEMP_THEME_TYPE: {
-            return ({
+        case authTypes.ERROR_LOGIN_TYPE: {
+            return {
                 ...state,
-                tempTheme: action.payload
-            })
+                loadingLogin: false
+            }
         }
-        case types.SET_MENU_ACTIVE_TYPE: {
-            return ({
+        case authTypes.SET_IS_SUCCESS_LOGIN_TYPE: {
+            return {
                 ...state,
-                menuActive: action.payload
-            })
+                isSuccessLogin: false
+            }
         }
-
         default: {
             return state
         }
     }
 }
 
-export default authReducer;
+// get Profiles
+export const loginCreator = (body) => ({
+    type: authTypes.LOGIN_TYPE,
+    body
+})
+export const successLoginCreator = (profiles) => ({
+    type: authTypes.SUCCESS_LOGIN_TYPE,
+    payload: profiles
+})
+export const errorLoginCreator = () => ({
+    type: authTypes.ERROR_LOGIN_TYPE
+})
 
-export const setMessageDataCreator = (messageData) => ({
-    type: types.SET_MESSAGE_DATA_TYPE,
-    messageData,
+// is success login
+export const setIsSuccessLogin = () => ({
+    type: authTypes.SET_IS_SUCCESS_LOGIN_TYPE,
 })
-export const setMessageDataDefaultCreator = (typeData) => ({
-    type: types.SET_MESSAGE_DATA_DEFAULT_TYPE,
-    typeData
-})
-export const setThemeCreator = (payload) => ({
-    type: types.SET_TEMP_THEME_TYPE,
-    payload
-})
-export const setMenuActiveCreator = (payload) => ({
-    type: types.SET_MENU_ACTIVE_TYPE,
-    payload
-})
+
+
+export default authReducer

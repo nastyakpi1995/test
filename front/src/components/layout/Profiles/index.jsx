@@ -14,7 +14,7 @@ import ContainerProfileModal from "./ProfileModal/ContianerProfileModal";
 
 const Profiles = () => {
     const dispatch = useDispatch();
-    const userId = useSelector((state) => state.user.user.id)
+    const userId = useSelector((state) => state.user.user && state.user.user.id)
     const profiles = useSelector((state) => state.profile.profiles)
     const loadingGetProfiles = useSelector(state => state.profile.loadingGetProfiles)
     const loadingProfile = useSelector(state => state.profile.loadingProfile)

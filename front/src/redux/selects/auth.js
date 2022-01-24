@@ -1,6 +1,6 @@
 export const getMessageBoxSelect = (state) => {
-    return state.auth.messageData
+    return state.state.messageData
 }
 export const getTheme = (state) => {
-    return state.auth.tempTheme
+    return state.state.tempTheme
 }

@@ -2,7 +2,7 @@ import React, {useCallback} from "react";
 
 import {Link, useLocation, useNavigate} from "react-router-dom";
 import {authToken, links, prepareMessageData, savedUser} from "../../../utils/constants";
-import {setMessageDataCreator, setThemeCreator} from "../../../redux/reducers/authReducer";
+import {setMessageDataCreator, setThemeCreator} from "../../../redux/reducers/stateReducer";
 import {useDispatch, useSelector} from "react-redux";
 import {setUserCreator} from "../../../redux/reducers/userReducer";
 import styled from "styled-components";

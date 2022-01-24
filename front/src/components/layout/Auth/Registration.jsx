@@ -3,7 +3,7 @@ import {Form, Checkbox} from "antd";
 import {registerAxiosRequest} from "../../../utils/apiCaller";
 import {useNavigate} from 'react-router-dom'
 import {useDispatch} from "react-redux";
-import {setMessageDataCreator} from "../../../redux/reducers/authReducer";
+import {setMessageDataCreator} from "../../../redux/reducers/stateReducer";
 import {ButtonSubmit, ContainerForm, LinkToRegister, MyTitle, SForm, SInput, SInputPassport} from "../../../styles/common";
 import {links} from "../../../utils/constants";
 

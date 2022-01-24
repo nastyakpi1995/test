@@ -1,35 +1,33 @@
 import React, {useEffect, useRef, useState} from "react";
 import { Form } from "antd";
-import {loginAxiosRequest} from "../../../utils/apiCaller";
 import {useNavigate} from "react-router-dom";
-import {useDispatch} from "react-redux";
-import {setMessageDataCreator} from "../../../redux/reducers/authReducer";
-import {setUserCreator} from "../../../redux/reducers/userReducer";
+import {useDispatch, useSelector} from "react-redux";
 import {ButtonSubmit, ContainerForm, LinkToRegister, MyTitle, SForm, SInput, SInputPassport} from "../../../styles/common";
 import {links} from "../../../utils/constants";
+import {loginCreator, setIsSuccessLogin} from "../../../redux/reducers/authReducer";
 
 let Login = () => {
     const dispatch = useDispatch()
     const navigate = useNavigate()
-    const [isLoader, setIsLoader] = useState(false)
     const inputRef = useRef(null)
+    const loadingLogin = useSelector((state) => state.auth.loadingLogin)
+    const isSuccessLogin = useSelector((state) => state.auth.isSuccessLogin)
+
+    useEffect(() => {
+        if (isSuccessLogin) {
+            navigate(links.profiles)
+            dispatch(setIsSuccessLogin())
+        }
+    }, [isSuccessLogin])
 
     const onFinish = (values) => {
-        setIsLoader(true)
-        loginAxiosRequest(values).then(data => {
-            setIsLoader(false)
-
-            dispatch(setMessageDataCreator(data))
-            if (data?.success) {
-                dispatch(setUserCreator(data.user))
-                navigate(links.profiles)
-            }
-        })
+        dispatch(loginCreator(values))
     };
 
     useEffect(() => {
         inputRef.current.focus()
     }, [])
+
     return (
         <ContainerForm>
             <div>
@@ -57,7 +55,7 @@ let Login = () => {
                     <SInputPassport />
                 </Form.Item>
                 <Form.Item wrapperCol={{ offset: 25 }}>
-                    <ButtonSubmit loading={isLoader} htmlType="submit">
+                    <ButtonSubmit loading={loadingLogin} htmlType="submit">
                         Sign In
                     </ButtonSubmit>
                 </Form.Item>

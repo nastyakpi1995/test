@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {setMessageDataDefaultCreator} from "../../../redux/reducers/authReducer";
+import {setMessageDataDefaultCreator} from "../../../redux/reducers/stateReducer";
 import MessageBox from "./MessageBox";
 import {getMessageBoxSelect} from "../../../redux/selects/auth";
 import {SLIDING_TIMEOUT} from "../../../utils/constants";

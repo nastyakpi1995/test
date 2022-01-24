@@ -1,5 +1,5 @@
 import axios from "axios";
-import {authToken, BASE_URL, savedUser} from "./constants";
+import {authToken, BASE_URL} from "./constants";
 import {notification} from "antd";
 
 
@@ -35,9 +35,10 @@ function parserJSON(response) {
 const checkStatus = (response, method) => {
     if (response.status >= 200) {
         if (method !== 'get') {
-            return notification.success({
+             notification.success({
                 message: response.data.message
             })
+            return response
         }
        return response
     }
@@ -67,24 +68,7 @@ export const registerAxiosRequest = (values) => {
         const prepareData = {
             data,
             success: false,
-            message: data.response ? data.response.data.message : 'Yo can not login, server did not run'
-        }
-        return prepareData
-    })
-}
-
-export const loginAxiosRequest = (body) => {
-    return axios.post(`${BASE_URL}/api/user/login`, {...body}).then(data => {
-        if (data.data.token) {
-            localStorage.setItem(savedUser, JSON.stringify(data.data.user))
-            localStorage.setItem(authToken, data.data.token)
-        }
-        return data.data
-    }).catch((data) => {
-        const prepareData = {
-            data,
-            success: false,
-            message: data.response ? data.response.data.message : 'Yo can not login, server did not run'
+            message: data.response ? data.response.data.message : 'You can not login, server did not run'
         }
         return prepareData
     })

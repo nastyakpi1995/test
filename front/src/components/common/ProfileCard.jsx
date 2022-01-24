@@ -1,29 +1,15 @@
-import React, {useCallback} from "react";
-import {useDispatch, useSelector} from "react-redux";
+import React from "react";
+import {useSelector} from "react-redux";
 
-import {
-    profileCreator,
-} from "../../redux/reducers/profileReducer";
 import {CardInfo, CardTitle, CardTop, MyCard} from "../../styles/common";
 import styled from "styled-components";
 import {getTheme} from "../../redux/selects/auth";
 import {theme} from "../../styles/theme";
 import {buttonDataExample} from "../../utils/constants";
 
-const ProfileCardInner = ({profile, onEditProfile}) => {
+const ProfileCardInner = ({profile, onEditProfile, onDeleteProfile}) => {
     const { name, gender, birthdate, id } = profile;
-    const dispatch = useDispatch()
     const tempTheme = useSelector(state => getTheme(state))
-
-    const onDeleteProfile = useCallback(()  => {
-        const prepareValues = {
-            id,
-            method: 'delete',
-            url: 'delete'
-        }
-
-        dispatch(profileCreator(prepareValues))
-    }, [])
 
     return (
             <MyCard hoverable temp={tempTheme}>
@@ -43,9 +29,9 @@ const ProfileCardInner = ({profile, onEditProfile}) => {
     )
 }
 
-// const ProfileCard = React.memo(ProfileCardInner)
+const ProfileCard = React.memo(ProfileCardInner)
 
-export default ProfileCardInner
+export default ProfileCard
 
 const Button = styled.button`
   width: 50%;

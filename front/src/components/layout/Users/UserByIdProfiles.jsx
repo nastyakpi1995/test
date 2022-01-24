@@ -3,7 +3,7 @@ import ProfileCard from "../../common/ProfileCard";
 import {useDispatch, useSelector} from "react-redux";
 import {initialProfileValues} from "../../../utils/constants";
 import {
-    getUserDataByIdCreator,
+    getUserDataByIdCreator, profileCreator,
     setActiveProfileCreator,
     setIsOpenModalCreator,
     setLoaderProfileCreator
@@ -46,13 +46,20 @@ const UserByIdProfiles = ({userId}) => {
         dispatch(setIsOpenModalCreator(true))
         dispatch(setActiveProfileCreator(profile))
     }, [])
+    const onDeleteProfile = useCallback((id)  => {
+        const prepareValues = {
+            id,
+            method: 'delete',
+            url: 'delete'
+        }
 
-    const a = userDataById.userProfiles
+        dispatch(profileCreator(prepareValues))
+    }, [])
     return (
         <SProfiles>
             <ProfilesWrap>
                 {userDataById.userProfiles?.length >= 0 ? userDataById.userProfiles.map((profile, idx) => (
-                    <ProfileCard key={idx} profile={profile} onEditProfile={() => onEditProfile(profile)}/>
+                    <ProfileCard key={idx} profile={profile} onEditProfile={() => onEditProfile(profile)} onDeleteProfile={() => onDeleteProfile(profile.id)}/>
                 )) : null}
                 <NewProfile showModal={onCreateProfile} />
             </ProfilesWrap>

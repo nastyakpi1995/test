@@ -20,7 +20,7 @@ const HeaderContainer = () => {
 
     const currentUser = useSelector(state => state.user.user)
     const tempTheme = useSelector(state => getTheme(state))
-debugger
+
     const handleLogOut = useCallback(() => {
         localStorage.setItem(authToken, '')
         localStorage.removeItem(savedUser)

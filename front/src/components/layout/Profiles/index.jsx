@@ -3,7 +3,7 @@ import HeaderWrapper from "../../common/header/HeaderWrapper";
 import NewProfile from "./NewProfile";
 import ProfileCard from "../../common/ProfileCard";
 import {
-    getProfilesCreator,
+    getProfilesCreator, profileCreator,
     setActiveProfileCreator,
     setIsOpenModalCreator,
 } from "../../../redux/reducers/profileReducer";
@@ -42,13 +42,21 @@ const Profiles = () => {
         dispatch(setIsOpenModalCreator(true))
         dispatch(setActiveProfileCreator(profile))
     }, [])
+    const onDeleteProfile = useCallback((id)  => {
+        const prepareValues = {
+            id,
+            method: 'delete',
+            url: 'delete'
+        }
 
+        dispatch(profileCreator(prepareValues))
+    }, [])
     if (loadingGetProfiles) return <div>loader</div>
     return (
         <HeaderWrapper>
             <ProfilesContainer>
                 {profiles.length >= 0 ? profiles.map((profile, idx) => (
-                    <ProfileCard key={idx} profile={profile} onEditProfile={() => onEditProfile(profile)}/>
+                    <ProfileCard key={idx} profile={profile} onEditProfile={() => onEditProfile(profile)} onDeleteProfile={() => onDeleteProfile(profile.id)}/>
                 )) : null}
                 <NewProfile showModal={onCreateProfile} />
             </ProfilesContainer>
